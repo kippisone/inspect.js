@@ -1,0 +1,11 @@
+{
+  "name": "inspect.js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "inspections.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
