@@ -521,510 +521,647 @@ Inspect.prototype.isClass = function(arg) {
 };
 
 /**
- * [description]
+ * Inspects whether input is a function
  *
- * @method 
+ * @method isFunction
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(function).isFunction();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isFunction = function(arg) {
-    //TODO implement method
+Inspect.prototype.isFunction = function(message) {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (type !== 'function') {
+        throw new InspectionError(this, message || ('Typeof input should be a function. But current type is ' + type));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is not function
  *
- * @method 
+ * @method isNotFunction
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(true).isNotFunction();
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isFunction = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotFunction = function(message) {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (type === 'function') {
+        throw new InspectionError(this, message || ('Typeof input should not be a function. But it is function!'));    
+    }
+    
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is a generator function
  *
- * @method 
+ * This test will pass on environments without generator support if type of input value is `function`!
+ *
+ * @method isGenerator
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(generator function).isGenerator();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGenerator = function(arg) {
-    //TODO implement method
+Inspect.prototype.isGenerator = function(message) {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (type !== 'function' || type === 'function' && this.inspectValue.isGenerator && this.inspectValue.isGenerator()) {
+        throw new InspectionError(this, message || ('Typeof input should be a generator function. But current type is ' + type));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is not generator function
  *
- * @method 
+ * @method isNotGenerator
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(true).isNotGenerator();
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGenerator = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotGenerator = function(message) {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (type === 'function' && this.inspectValue.isGenerator && !this.inspectValue.isGenerator()) {
+        throw new InspectionError(this, message || ('Typeof input should not be a generator function. But it is generator function!'));    
+    }
+    
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is a promise.
  *
- * @method 
+ * A promise is identified if input type is an object and if input has a then and a catch method
+ *
+ * @method isPromise
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * var promise = new Promise(function(resolve, reject) {
+ *     
+ * });
+ * 
+ * inspect(promise).isPromise();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isPromise = function(arg) {
-    //TODO implement method
+Inspect.prototype.isPromise = function(message) {
+    if (!utils.isPromise(this.inspectValue)) {
+        throw new InspectionError(this, message || ('Typeof input should be a promise. But current type is ' + type));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is not promise
  *
- * @method 
+ * @method isNotPromise
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(true).isNotPromise();
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isPromise = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotPromise = function(message) {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (type === 'function') {
+        throw new InspectionError(this, message || ('Typeof input should not be a promise. But it is promise!'));    
+    }
+    
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is one of any types.
  *
- * @method 
+ * `types` could be all what `utils.getTypeOf` is supporting 
+ *
+ * @method isAny
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string|array}  types  Types array or csv list.
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isAny = function(arg) {
-    //TODO implement method
+Inspect.prototype.isAny = function(types) {
+    if (typeof types === 'string') {
+        types = types.split(',').map(String.trim);
+    }
+
+    var type = utils.getTypeOf(this.inspectValue);
+    if (types.indexOf(type) === -1) {
+        throw new InspectionError(this, message || ('Typeof input should not be any of ' + types.join(', ') + '. But it is promise!'));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is not one of any types.
  *
- * @method 
+ * `types` could be all what `utils.getTypeOf` is supporting 
+ *
+ * @method isNotAny
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string|array}  types  Types array or csv list.
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isAny = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotAny = function(types) {
+    if (typeof types === 'string') {
+        types = types.split(',').map(String.trim);
+    }
+
+    var type = utils.getTypeOf(this.inspectValue);
+    if (types.indexOf(type) === -1) {
+        throw new InspectionError(this, message || ('Typeof input should not be any of ' + types.join(', ') + '. But it is promise!'));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is truthy
  *
- * @method 
+ * This tests passes if value is not `0` `""` `null` or `undefined`
+ *
+ * @method isTruthy
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect('Foo').isTruthy();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isTruthy = function(arg) {
-    //TODO implement method
+Inspect.prototype.isTruthy = function(message) {
+    if (!!this.inspectValue) {
+        throw new InspectionError(this, message || ('Typeof input should be truthy. But current type is ' + utils.getTypeOf(this.inspectValue)));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is falsy
  *
- * @method 
+ * This tests passes if value is one of `0` `""` `null` or `undefined`
+ *
+ * @method isFalys
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect('Foo').isFalys();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isTruthy = function(arg) {
-    //TODO implement method
+Inspect.prototype.isFalys = function(message) {
+    if (!this.inspectValue) {
+        throw new InspectionError(this, message || ('Typeof input should be falsy. But current type is ' + utils.getTypeOf(this.inspectValue)));    
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is empty
  *
- * @method 
+ * This tests passes if value is one of `""` `[]` or `{}`
+ *
+ * @method isEmpty
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect('').isEmpty();
+ * inspect({}).isEmpty();
+ * inspect([]).isEmpty();
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isFalsy = function(arg) {
-    //TODO implement method
+Inspect.prototype.isEmpty = function(message) {
+    if (utils.isEmpty(this.inspectValue)) {
+        throw new InspectionError(this, message || ('Input should be empty. But it is not empty!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is not empty
  *
- * @method 
+ * This tests passes if value is other than `""` `[]` or `{}`
+ *
+ * @method isNotEmpty
  * @chainable
  * 
- * @param  {any}  arg  description
  * @param  {string} message Custom error message
  * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isFalsy = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * [description]
+ * @example {js}
+ * inspect('foo').isNotEmpty();
+ * inspect({ foo: 'bar' }).isNotEmpty();
+ * inspect(['foo', 'bar']).isNotEmpty();
  *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isEmpty = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotEmpty = function(message) {
+    if (utils.isNotEmpty(this.inspectValue)) {
+        throw new InspectionError(this, message || ('Input should not be empty. But it is empty!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isEmpty = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * Inspects whether an object is an instance of a specific constructor
+ * Inspects whether input is an instance of a specific prototype or class
  *
  * @method isInstanceOf
- * @param  {Function}  constuctFn  Constructor method
+ * @chainable
+ * 
+ * @param  {function} proto The prototype or class object
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ * inspect(foo).isInstanceOf(Foo);
+ *
+ * @returns {object} Returns `this` value
  */
-Inspect.prototype.isInstanceOf = function(constructFn) {
-        if (!utils.isInstanceOf(constructFn)) {
-                throw new InspectionError(this, 'Inspected object is not an instance of spcified constructor!');
-        }
+Inspect.prototype.isInstanceOf = function(proto, message) {
+    if (!utils.isInstanceOf(this.inspectValue, proto)) {
+        throw new InspectionError(this, message || ('Input is not an instance of a specific Prototype or Class!'));
+    }
 
-        return this;
+    return this;
 };
 
 /**
- * Inspects whether an object is not an instance of a specific constructor
+ * Inspects whether input is not an instance of a specific prototype or class
  *
  * @method isNotInstanceOf
- * @param  {Function}  constuctFn  Constructor method
- */
-Inspect.prototype.isNotInstanceOf = function(constructFn) {
-        if (utils.isInstanceOf(constructFn)) {
-                throw new InspectionError(this, 'Inspected object should not be an instance of specified constructor!');
-        }
-
-        return this;
-};
-
-/**
- * [description]
- *
- * @method 
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {function} proto The prototype or class object
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(foo).isNotInstanceOf(Foo);
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.toMatch = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotInstanceOf = function(proto, message) {
+    if (!utils.isNotInstanceOf(this.inspectValue, proto)) {
+        throw new InspectionError(this, message || ('Input should not be an instance of a specific Prototype or Class. But it is!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input is an instance of a specific prototype or class
  *
- * @method 
+ * @method isInstanceOf
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {function} proto The prototype or class object
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(foo).isInstanceOf(Foo);
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.toMatch = function(arg) {
-    //TODO implement method
+Inspect.prototype.isInstanceOf = function(proto, message) {
+    if (!utils.isInstanceOf(this.inspectValue, proto)) {
+        throw new InspectionError(this, message || ('Input is not an instance of a specific Prototype or Class!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input matches against a regular expression
  *
- * @method 
+ * @method doesMatch
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {regexp} reg The RegExp
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(/[a-z]+/).doesMatch('foo');
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGreaterThan = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesMatch = function(reg, message) {
+    var type = utils.getTypeOf(reg);
+    if (type !== 'regexp') {
+        throw new InputError(this, 'First arg must be a RegExp!', reg);
+    }
+
+    if (!reg.test(this.inspectValue)) {
+        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input does not matche against a regular expression
  *
- * @method 
+ * @method doesNotMatch
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {regexp} reg The RegExp
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * inspect(/[a-z]+/).doesNotMatch('foo');
+ *
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGreaterThan = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesNotMatch = function(reg, message) {
+    var type = utils.getTypeOf(reg);
+    if (type !== 'regexp') {
+        throw new InputError(this, 'First arg must be a RegExp!', reg);
+    }
+
+    if (reg.test(this.inspectValue)) {
+        throw new InspectionError(this, message || ('Input does match against a regular expression. But it should not!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether a number is greater than value
  *
- * @method 
+ * @method isGreaterThan
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparsion number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3).isGreaterThan(2);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGreaterOrEqual = function(arg) {
-    //TODO implement method
+Inspect.prototype.isGreaterThan = function(num) {
+    if (this.inspectValue > num) {
+        throw new InspectionError(this, message || ('Input must be greater than ' + num + '! But input is ' + this.inspectValue));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` is greater than or equal to  `num`
  *
- * @method 
+ * @method isGreaterThan
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3).isGreaterThan(3);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isGreaterOrEqual = function(arg) {
-    //TODO implement method
+Inspect.prototype.isGreaterThan = function(num) {
+    if (this.inspectValue >= num) {
+        throw new InspectionError(this, message || ('Input must be greater than or equal ' + num + '! But input is ' + this.inspectValue));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` is lesser than `num`
  *
- * @method 
+ * @method isLesserThan
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3).isLesserThan(3);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isLesserThan = function(arg) {
-    //TODO implement method
+Inspect.prototype.isLesserThan = function(num) {
+    if (this.inspectValue < num) {
+        throw new InspectionError(this, message || ('Input must be lesser than ' + num + '! But input is ' + this.inspectValue));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` is lesser than or equal to  `num`
  *
- * @method 
+ * @method isLesserOrEqual
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3).isLesserOrEqual(3);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isLesserThan = function(arg) {
-    //TODO implement method
+Inspect.prototype.isLesserOrEqual = function(num) {
+    if (this.inspectValue >= num) {
+        throw new InspectionError(this, message || ('Input must be lesser than or equal ' + num + '! But input is ' + this.inspectValue));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` has a specific key
  *
- * @method 
+ * @method hasKey
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  key  Comparison number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasKey('foo');
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isLesserOrEqual = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasKey = function(key) {
+    if (!utils.hasKeys(this.inspectValue, [key])) {
+        throw new InspectionError(this, message || ('Input does not have any ' + key + ' property'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` doesn't has a specific key
  *
- * @method 
+ * @method hasNotKey
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string}  key  Comparison number
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasNotKey('blub');
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isLesserOrEqual = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasNotKey = function(key) {
+    if (utils.hasKeys(this.inspectValue, [key])) {
+        throw new InspectionError(this, message || ('Input does have a ' + key + ' property, but it should not!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` has all of this keys
  *
- * @method 
+ * @method hasKeys
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasKeys(['foo', 'bar']);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasKey = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasKeys = function(keys) {
+    if (!utils.hasKeys(this.inspectValue, key)) {
+        throw new InspectionError(this, message || ('Input does not have any ' + key + ' property'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` has none of this keys
  *
- * @method 
+ * @method hasNotKeys
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasNotKeys(['foo', 'bar']);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasKey = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasNotKeys = function(keys) {
+    if (utils.hasKeys(this.inspectValue, key)) {
+        throw new InspectionError(this, message || ('Input does not have any ' + key + ' property'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` has any of these keys
  *
- * @method 
+ * @method hasAnyKeys
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasAnyKeys(['foo', 'bar']);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasKeys = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasAnyKeys = function(keys) {
+    if (!utils.hasAnyKeys(this.inspectValue, key)) {
+        throw new InspectionError(this, message || ('Input does not have any of this keys `' + keys.join(', ') + '` property'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether `input` should not has any of these keys
  *
- * @method 
+ * @method hasNotAnyKeys
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasNotAnyKeys(['blub', 'blab']);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasKeys = function(arg) {
-    //TODO implement method
-    return this;
-};
+Inspect.prototype.hasNotAnyKeys = function(keys) {
+    if (!utils.hasAnyKeys(this.inspectValue, key)) {
+        throw new InspectionError(this, message || ('Input has any of this keys `' + keys.join(', ') + '` properties, but it shoud has none of them!'));
+    }
 
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.hasAnyKey = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.hasAnyKey = function(arg) {
-    //TODO implement method
     return this;
 };
 
@@ -1125,57 +1262,70 @@ Inspect.prototype.hasProperty = function(arg) {
 };
 
 /**
- * [description]
+ * Inspects whether input has a specific length
  *
- * @method 
+ * Accepts arrays or strings as input values
+ *
+ * @method hasLength
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasLength = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasLength = function(len) {
+    if (this.inspectValue.length !== len) {
+        throw new InspectionError(this, message || ('Input should hav a length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+    }
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input has a specific min length
  *
- * @method 
+ * Accepts arrays or strings as input values
+ *
+ * @method hasMinLength
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasLength = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasMinLength = function(len) {
+    if (this.inspectValue.length < len) {
+        throw new InspectionError(this, message || ('Input should hav a minimum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+    }
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether input has a specific max length
  *
- * @method 
+ * Accepts arrays or strings as input values
+ *
+ * @method hasMaxLength
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasValues = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasMaxLength = function(len) {
+    if (this.inspectValue.length > len) {
+        throw new InspectionError(this, message || ('Input should hav a maximum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+    }
+    
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an array has all of these value(s)
  *
- * @method 
+ * @method hasValues
  * @chainable
  * 
  * @param  {any}  arg  description
@@ -1183,15 +1333,18 @@ Inspect.prototype.hasValues = function(arg) {
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasValues = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasValues = function(values) {
+    if (!utils.hasValues(this.inspectValue, values)) {
+        throw new ComparisonError(this, message || ('Input has not all of these values!', this.inspectValue, values));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an array has none of these values
  *
- * @method 
+ * @method hasNotValues
  * @chainable
  * 
  * @param  {any}  arg  description
@@ -1199,58 +1352,33 @@ Inspect.prototype.hasValues = function(arg) {
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasSameValues = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasNotValues = function(values) {
+    if (!utils.hasValues(this.inspectValue, values)) {
+        throw new ComparisonError(this, message || ('Input has any of these values, but it shoud have none of them!', this.inspectValue, values));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an array has any of these value(s)
  *
- * @method 
+ * @method hasAnyValues
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  values  Haystack values
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.hasSameValues = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasAnyValues = function(values) {
+    if (!utils.hasAnyValues(this.inspectValue, values)) {
+        throw new ComparisonError(this, message || ('Input has not any of these values!', this.inspectValue, values));
+    }
+
     return this;
 };
 
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isTypeOf = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isTypeOf = function(arg) {
-    //TODO implement method
-    return this;
-};
 /**
  * [description]
  *
@@ -1468,66 +1596,92 @@ Inspect.prototype.doesContainSubset = function(arg) {
     //TODO implement method
     return this;
 };
+
 /**
- * [description]
+ * Inspects whether a number is close to num by a given range
  *
- * @method 
+ * @method isCloseTo
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparsion number
+ * @param  {number}  range  Allowed range
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3.001).isCloseTo(3, 0.1);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesExist = function(arg) {
-    //TODO implement method
+Inspect.prototype.isCloseTo = function(num, range, message) {
+    var min = Math.min(num - range, num + range);
+    var max = Math.max(num - range, num + range);
+
+    if (this.inspectValue < min || this.inspectValue > max) {
+        throw new InspectionError(this, message || ('Input is not within the allowed range!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether a number is close to num by a given range
  *
- * @method 
+ * @method isNotCloseTo
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  num  Comparsion number
+ * @param  {number}  range  Allowed range
  * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * inspect(3.001).isNotCloseTo(2, 0.1);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesExist = function(arg) {
-    //TODO implement method
-    return this;
-};
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isCloseTo = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotCloseTo = function(num, range, message) {
+    var min = Math.min(num - range, num + range);
+    var max = Math.max(num - range, num + range);
+
+    if (this.inspectValue >= min && this.inspectValue <= max) {
+        throw new InspectionError(this, message || ('Input is not outside of the allowed range!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Calls input as a function with args
  *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
+ * @method withArgs
+ * @param  {any}  args...  Call with this args
  */
-Inspect.prototype.isCloseTo = function(arg) {
-    //TODO implement method
+Inspect.prototype.withArgs = function() {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (typeof this.inspectValue !== 'function') {
+        throw new InspectionError(this, 'Could not call `input` as a function. Input is type of ' + type + '!');
+    }
+
+    this.fn = this.inspectValue;
+    this.args = Array.prototype.slice.call(arguments);
+    this.inspectValue = this.fn.apply(null, this.args);
+    return this;
+};
+
+/**
+ * Calls input as a function with args
+ *
+ * @method withArgs
+ * @param  {any}  args...  Call with this args
+ */
+Inspect.prototype.withArgsOn = function() {
+    var type = utils.getTypeOf(this.inspectValue);
+    if (typeof this.inspectValue !== 'function') {
+        throw new InspectionError(this, 'Could not call `input` as a function. Input is type of ' + type + '!');
+    }
+
+    this.fn = this.inspectValue;
+    this.args = Array.prototype.slice.call(arguments);
+    this.inspectValue = this.fn.apply(null, this.args);
     return this;
 };
 
