@@ -1,15 +1,42 @@
 {
   "name": "inspect.js",
   "version": "0.0.0",
-  "description": "",
-  "main": "inspections.js",
+  "description": "Powerful test inspection library",
+  "main": "inspect.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Andi Heinkelein <andifeind@noname-media.com>",
   "license": "ISC",
   "dependencies": {
     "cli-color": "^1.1.0",
     "diff": "^2.2.1"
-  }
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-release": "^0.13.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Andifeind/inspect.js.git"
+  },
+  "keywords": [
+    "inspect",
+    "expect",
+    "test",
+    "inspect.js",
+    "expect.js",
+    "mocha",
+    "unittest",
+    "testing",
+    "assert",
+    "assertion"
+  ],
+  "bugs": {
+    "url": "https://github.com/Andifeind/inspect.js/issues"
+  },
+  "homepage": "https://github.com/Andifeind/inspect.js#readme"
 }
