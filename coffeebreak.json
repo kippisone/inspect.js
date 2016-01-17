@@ -1,0 +1,12 @@
+{
+    "project": "inspect-js",
+    "browser": false,
+    "libs": "",
+    "files": "",
+    "tests": "tests/*.spec.js",
+    "watch": [
+        "lib/*.js",
+        "tests/*.js",
+        "inspect.js"
+    ]
+}
