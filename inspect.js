@@ -21,7 +21,7 @@ var Inspect = function(input) {
  * @method isString
  * @chainable
  * 
- * @param  {string} message Custom error message
+ * @param  {string} [message] Custom error message
  * 
  * @example {js}
  * inspect('Foo').isString();
@@ -43,7 +43,7 @@ Inspect.prototype.isString = function(message) {
  * @method isNotString
  * @chainable
  * 
- * @param  {string} message Custom error message
+ * @param  {string} [message] Custom error message
  *
  * @example {js}
  * inspect(123).isNotString();
