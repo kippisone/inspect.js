@@ -150,7 +150,7 @@ Inspects whether input is not undefined
 inspect(true).isNotUndefined();
 ```
 
-## isBoolean()
+## isBoolean([message])
 
 Inspects whether input is a boolean
 
@@ -165,7 +165,7 @@ Inspects whether input is a boolean
 inspect('Foo').isBoolean();
 ```
 
-## isNotBoolean()
+## isNotBoolean([message])
 
 Inspects whether input is not a boolean
 
@@ -180,7 +180,7 @@ Inspects whether input is not a boolean
 inspect(123).isNotBoolean();
 ```
 
-## isTrue()
+## isTrue([message])
 
 Inspects whether input is true
 
@@ -195,7 +195,7 @@ Inspects whether input is true
 inspect('Foo').isTrue();
 ```
 
-## isNotBoolean()
+## isNotBoolean([message])
 
 Inspects whether input is not a boolean
 
@@ -210,7 +210,7 @@ Inspects whether input is not a boolean
 inspect(123).isNotBoolean();
 ```
 
-## isFalse()
+## isFalse([message])
 
 Inspects whether input is false
 
@@ -225,7 +225,7 @@ Inspects whether input is false
 inspect('Foo').isFalse();
 ```
 
-## isNotFalse()
+## isNotFalse([message])
 
 Inspects whether input is not false
 
@@ -240,7 +240,7 @@ Inspects whether input is not false
 inspect(123).isNotFalse();
 ```
 
-## isRegExp()
+## isRegExp([message])
 
 Inspects whether input is a regexp
 
@@ -255,7 +255,7 @@ Inspects whether input is a regexp
 inspect(/.+/).isRegExp();
 ```
 
-## isNotRegExp()
+## isNotRegExp([message])
 
 Inspects whether input is not a regexp
 
@@ -270,7 +270,7 @@ Inspects whether input is not a regexp
 inspect('.*').isNotRegExp();
 ```
 
-## isNumber()
+## isNumber([message])
 
 Inspects whether input is a number
 
@@ -285,7 +285,7 @@ Inspects whether input is a number
 inspect('Foo').isNumber();
 ```
 
-## isNotNumber()
+## isNotNumber([message])
 
 Inspects whether input is not a number
 
@@ -300,7 +300,7 @@ Inspects whether input is not a number
 inspect(123).isNotNumber();
 ```
 
-## isNaN()
+## isNaN([message])
 
 Inspects whether input is NaN
 
@@ -315,7 +315,7 @@ Inspects whether input is NaN
 inspect('Foo').isNaN();
 ```
 
-## isNotNaN()
+## isNotNaN([message])
 
 Inspects whether input is not a NaN
 
@@ -330,22 +330,15 @@ Inspects whether input is not a NaN
 inspect(123).isNotNaN();
 ```
 
-## isClass()
+## isClass([message])
 
 [description]
 
 ### Params:
 
-arg any 
-description
 *string* `message` Custom error message
 
-
-
-
-```
-
-## isFunction()
+## isFunction([message])
 
 Inspects whether input is a function
 
@@ -360,7 +353,7 @@ Inspects whether input is a function
 inspect(function).isFunction();
 ```
 
-## isNotFunction()
+## isNotFunction([message])
 
 Inspects whether input is not function
 
@@ -375,7 +368,7 @@ Inspects whether input is not function
 inspect(true).isNotFunction();
 ```
 
-## isGenerator()
+## isGenerator([message])
 
 Inspects whether input is a generator function
 This test will pass on environments without generator support if type of input value is function!
@@ -391,7 +384,7 @@ This test will pass on environments without generator support if type of input v
 inspect(generator function).isGenerator();
 ```
 
-## isNotGenerator()
+## isNotGenerator([message])
 
 Inspects whether input is not generator function
 
@@ -406,7 +399,7 @@ Inspects whether input is not generator function
 inspect(true).isNotGenerator();
 ```
 
-## isPromise()
+## isPromise([message])
 
 Inspects whether input is a promise.
 A promise is identified if input type is an object and if input has a then and a catch method
@@ -426,7 +419,7 @@ var promise = new Promise(function(resolve, reject) {
 inspect(promise).isPromise();
 ```
 
-## isNotPromise()
+## isNotPromise([message])
 
 Inspects whether input is not promise
 
@@ -441,7 +434,7 @@ Inspects whether input is not promise
 inspect(true).isNotPromise();
 ```
 
-## isAny()
+## isAny([message])
 
 Inspects whether input is one of these types.
 types could be string number array null object boolean true false function promise class or undefined
@@ -457,7 +450,7 @@ Types array or csv list.
 
 ```
 
-## isNotAny()
+## isNotAny([message])
 
 Inspects whether input is not one of any types.
 types could be all what utils.getTypeOf is supporting
@@ -473,7 +466,7 @@ Types array or csv list.
 
 ```
 
-## isTruthy()
+## isTruthy([message])
 
 Inspects whether input is truthy
 This tests passes if value is not 0 "" null NaN or undefined
@@ -489,7 +482,7 @@ This tests passes if value is not 0 "" null NaN or undefined
 inspect('Foo').isTruthy();
 ```
 
-## isFalsy()
+## isFalsy([message])
 
 Inspects whether input is falsy
 This tests passes if value is one of 0 "" null NaN or undefined
@@ -505,7 +498,7 @@ This tests passes if value is one of 0 "" null NaN or undefined
 inspect('Foo').isFalys();
 ```
 
-## isEmpty()
+## isEmpty([message])
 
 Inspects whether input is empty
 This tests passes if value is one of "" [] or {}
@@ -523,7 +516,7 @@ inspect({}).isEmpty();
 inspect([]).isEmpty();
 ```
 
-## isNotEmpty()
+## isNotEmpty([message])
 
 Inspects whether input is not empty
 This tests passes if value is other than "" [] or {}
@@ -541,7 +534,7 @@ inspect({ foo: 'bar' }).isNotEmpty();
 inspect(['foo', 'bar']).isNotEmpty();
 ```
 
-## isInstanceOf()
+## isInstanceOf([message])
 
 Inspects whether input is an instance of a specific prototype or class
 
@@ -558,7 +551,7 @@ The prototype or class object
 inspect(foo).isInstanceOf(Foo);
 ```
 
-## isNotInstanceOf()
+## isNotInstanceOf([message])
 
 Inspects whether input is not an instance of a specific prototype or class
 
@@ -575,7 +568,7 @@ The prototype or class object
 inspect(foo).isNotInstanceOf(Foo);
 ```
 
-## doesMatch()
+## doesMatch([message])
 
 Inspects whether input matches against a regular expression
 
@@ -592,7 +585,7 @@ The RegExp
 inspect(/[a-z]+/).doesMatch('foo');
 ```
 
-## doesNotMatch()
+## doesNotMatch(reg, [message])
 
 Inspects whether input does not matche against a regular expression
 
@@ -609,7 +602,7 @@ The RegExp
 inspect(/[a-z]+/).doesNotMatch('foo');
 ```
 
-## isGreaterThan()
+## isGreaterThan(num, [message])
 
 Inspects whether a number is greater than value
 
@@ -626,7 +619,7 @@ Comparsion number
 inspect(3).isGreaterThan(2);
 ```
 
-## isGreaterOrEqual()
+## isGreaterOrEqual(num, [message])
 
 Inspects whether input is greater than or equal to num
 
@@ -643,7 +636,7 @@ Comparison number
 inspect(3).isGreaterOrEqual(3);
 ```
 
-## isLesserThan()
+## isLesserThan(num, [message])
 
 Inspects whether input is lesser than num
 
@@ -660,7 +653,7 @@ Comparison number
 inspect(3).isLesserThan(4);
 ```
 
-## isLesserOrEqual()
+## isLesserOrEqual(num, [message])
 
 Inspects whether input is lesser than or equal to num
 
@@ -677,7 +670,7 @@ Comparison number
 inspect(3).isLesserOrEqual(3);
 ```
 
-## hasKey()
+## hasKey(key, [message])
 
 Inspects whether input has a specific key
 
@@ -697,7 +690,7 @@ inspect({
 }).hasKey('foo');
 ```
 
-## hasNotKey()
+## hasNotKey(key, [message])
 
 Inspects whether input doesn't has a specific key
 
@@ -717,7 +710,7 @@ inspect({
 }).hasNotKey('blub');
 ```
 
-## hasKeys()
+## hasKeys(keys, [message])
 
 Inspects whether input has all of this keys
 
@@ -737,7 +730,7 @@ inspect({
 }).hasKeys(['foo', 'bar']);
 ```
 
-## hasNotKeys()
+## hasNotKeys(keys, [message])
 
 Inspects whether input has none of this keys
 
@@ -757,7 +750,7 @@ inspect({
 }).hasNotKeys(['foo', 'bar']);
 ```
 
-## hasAnyKeys()
+## hasAnyKeys(keys, [message])
 
 Inspects whether input has any of these keys
 
@@ -777,7 +770,7 @@ inspect({
 }).hasAnyKeys(['foo', 'bar']);
 ```
 
-## hasNotAnyKeys()
+## hasNotAnyKeys(keys, [message])
 
 Inspects whether input should not has any of these keys
 
@@ -797,7 +790,7 @@ inspect({
 }).hasNotAnyKeys(['blub', 'blab']);
 ```
 
-## hasProps()
+## hasProps(props, [message])
 
 Inspects whether input has all of this properties
 
@@ -817,7 +810,7 @@ inspect({
 }).hasProps(['foo', 'bar']);
 ```
 
-## hasProp()
+## hasProp(prop, value, [message])
 
 Inspects whether input has a property with a specified value
 
@@ -837,7 +830,7 @@ inspect({
 }).hasProp('foo', true);
 ```
 
-## hasNotProp()
+## hasNotProp(prop, value, [message])
 
 Inspects whether input has not a property with a specified value
 
@@ -857,7 +850,7 @@ inspect({
 }).hasNotProp('foo', true);
 ```
 
-## hasLength()
+## hasLength(len, [message])
 
 Inspects whether input has a specific length
 Accepts arrays or strings as input values
@@ -868,12 +861,9 @@ len number
 Expected length
 *string* `message` Custom error message
 
-
-
-
 ```
 
-## hasMinLength()
+## hasMinLength(len, [message])
 
 Inspects whether input has a specific min length
 Accepts arrays or strings as input values
@@ -889,7 +879,7 @@ Expected length
 
 ```
 
-## hasMaxLength()
+## hasMaxLength(len, [message])
 
 Inspects whether input has a specific max length
 Accepts arrays or strings as input values
@@ -905,35 +895,26 @@ Expected length
 
 ```
 
-## hasValue()
+## hasValue(value, [message])
 
 Inspects whether an array has a specific value
 
 ### Params:
 
-arg any 
+*any* `value` Search for item
 description
 *string* `message` Custom error message
 
 
-
-
-```
-
-## hasNotValue()
+## hasNotValue(value, [message])
 
 Inspects whether an array has not a specific value
 
 ### Params:
 
-arg any 
+*any* `value` Search for item
 description
 *string* `message` Custom error message
-
-
-
-
-```
 
 ## hasValues()
 
@@ -941,14 +922,10 @@ Inspects whether an array has all of these value(s)
 
 ### Params:
 
-arg any 
-description
 *string* `message` Custom error message
 
 
 
-
-```
 
 ## hasNotValues()
 
@@ -956,14 +933,10 @@ Inspects whether an array has none of these values
 
 ### Params:
 
-arg any 
-description
 *string* `message` Custom error message
 
 
 
-
-```
 
 ## hasAnyValues()
 
@@ -978,8 +951,6 @@ Haystack values
 
 
 
-```
-
 ## hasNotAnyValues()
 
 Inspects whether an array has not any of these values
@@ -990,275 +961,3 @@ values  array
 Haystack values
 *string* `message` Custom error message
 
-
-
-
-```
-
-## doesChange()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## toChange()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## toIncrease()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## toIncrease()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## toDecrease()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## toDecrease()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## isWithin()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## isWithin()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesThrow()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesThrow()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesContain()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesContain()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesContainSubset()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## doesContainSubset()
-
-[description]
-
-### Params:
-
-arg any 
-description
-*string* `message` Custom error message
-
-
-
-
-```
-
-## isCloseTo()
-
-Inspects whether a number is close to num by a given range
-
-### Params:
-
-num number  
-Comparsion number
-range   number  
-Allowed range
-*string* `message` Custom error message
-
-
-
-
-```js
-inspect(3.001).isCloseTo(3, 0.1);
-```
-
-## isNotCloseTo()
-
-Inspects whether a number is close to num by a given range
-
-### Params:
-
-num number  
-Comparsion number
-range   number  
-Allowed range
-*string* `message` Custom error message
-
-
-
-
-```js
-inspect(3.001).isNotCloseTo(2, 0.1);
-```
-
-## withArgs()
-
-Calls input as a function with args
-
-### Params:
-
-args... any 
-Call with this args
-```
-
-## withArgs()
-
-Calls input as a function with args
-
-### Params:
-
-args... any 
-Call with this args
-```
