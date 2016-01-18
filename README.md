@@ -446,10 +446,6 @@ Types array or csv list.
 *string* `message` Custom error message
 
 
-
-
-```
-
 ## isNotAny([message])
 
 Inspects whether input is not one of any types.
@@ -462,9 +458,6 @@ Types array or csv list.
 *string* `message` Custom error message
 
 
-
-
-```
 
 ## isTruthy([message])
 
@@ -534,14 +527,13 @@ inspect({ foo: 'bar' }).isNotEmpty();
 inspect(['foo', 'bar']).isNotEmpty();
 ```
 
-## isInstanceOf([message])
+## isInstanceOf(proto, [message])
 
 Inspects whether input is an instance of a specific prototype or class
 
 ### Params:
 
-proto   function    
-The prototype or class object
+*function* `proto` The prototype or class object
 *string* `message` Custom error message
 
 
@@ -551,14 +543,13 @@ The prototype or class object
 inspect(foo).isInstanceOf(Foo);
 ```
 
-## isNotInstanceOf([message])
+## isNotInstanceOf(proto, [message])
 
 Inspects whether input is not an instance of a specific prototype or class
 
 ### Params:
 
-proto   function    
-The prototype or class object
+*function* `proto` The prototype or class object
 *string* `message` Custom error message
 
 
@@ -568,14 +559,13 @@ The prototype or class object
 inspect(foo).isNotInstanceOf(Foo);
 ```
 
-## doesMatch([message])
+## doesMatch(reg, [message])
 
 Inspects whether input matches against a regular expression
 
 ### Params:
 
-reg regexp  
-The RegExp
+*regexp* `reg` Regular expression
 *string* `message` Custom error message
 
 
@@ -591,8 +581,7 @@ Inspects whether input does not matche against a regular expression
 
 ### Params:
 
-reg regexp  
-The RegExp
+*regexp* `reg` Regular expression
 *string* `message` Custom error message
 
 
@@ -857,11 +846,9 @@ Accepts arrays or strings as input values
 
 ### Params:
 
-len number  
-Expected length
+*number* `len` Expected length
 *string* `message` Custom error message
 
-```
 
 ## hasMinLength(len, [message])
 
@@ -870,14 +857,10 @@ Accepts arrays or strings as input values
 
 ### Params:
 
-len number  
-Expected length
+*number* `len` Expected length
 *string* `message` Custom error message
 
 
-
-
-```
 
 ## hasMaxLength(len, [message])
 
@@ -886,14 +869,10 @@ Accepts arrays or strings as input values
 
 ### Params:
 
-len number  
-Expected length
+*number* `len` Expected length
 *string* `message` Custom error message
 
 
-
-
-```
 
 ## hasValue(value, [message])
 
@@ -902,7 +881,6 @@ Inspects whether an array has a specific value
 ### Params:
 
 *any* `value` Search for item
-description
 *string* `message` Custom error message
 
 
@@ -913,7 +891,6 @@ Inspects whether an array has not a specific value
 ### Params:
 
 *any* `value` Search for item
-description
 *string* `message` Custom error message
 
 ## hasValues()
