@@ -1449,4 +1449,36 @@ describe('Inspect', function() {
         it('Should inspect that num is within a range of -4 and -2', shouldFail('isNotWithin', -3, -2, -4));
         it('Should inspect that num is within a range of -6 and -4', shouldPass('isNotWithin', -3, -4, -6));
     });
+
+    describe('doesThrow', function() {
+        var fn = function() {
+            throw new Error('Test error');
+        };
+
+        var fn2 = function() {
+        };
+        
+        it('Should throw an exception', shouldPass('doesThrow', fn));
+        it('Should throw an exception', shouldFail('doesThrow', fn2));
+        it('Should throw an exception', shouldPass('doesThrow', fn, 'Test error'));
+        it('Should throw an exception', shouldFail('doesThrow', fn, 'Test exception'));
+        it('Should throw an exception', shouldFail('doesThrow', fn2, 'Test exception'));
+        it('Should throw an exception', shouldPass('doesThrow', fn, /error/));
+        it('Should throw an exception', shouldFail('doesThrow', fn2, /error/));
+    });
+
+    describe('doesNotThrow', function() {
+        var fn = function() {
+        };
+
+        var fn2 = function() {
+            throw new Error('Test error');
+        };
+        
+        it('Should not throw any exception', shouldPass('doesNotThrow', fn));
+        it('Should not throw a `Test error` exception', shouldPass('doesNotThrow', fn, 'Test error'));
+        it('Should not throw a `/error/` exception', shouldPass('doesNotThrow', fn, /error/));
+        it('Should not throw a `/error/` exception', shouldFail('doesNotThrow', fn2, /error/));
+        it('Should not throw any exception', shouldPass('doesNotThrow', fn2, 'Test exception'));
+    });
 });

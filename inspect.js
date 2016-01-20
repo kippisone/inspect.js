@@ -1410,6 +1410,187 @@ Inspect.prototype.hasNotAnyValues = function(values, message) {
 };
 
 /**
+ * Inspects whether a number is within a specivic range
+ *
+ * @method isWithin
+ * @chainable
+ * 
+ * @param  {number}  min  Min value
+ * @param  {number}  max  Max value
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isWithin = function(min, max, message) {
+    this.validateInput('number', min, 'number', max, 'number');
+
+    var a = Math.min(min, max);
+    var b = Math.max(min, max);
+
+    if (this.inspectValue < a || this.inspectValue > b) {
+        throw new InspectionError(this, message || 'Input must be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether a number is not within a specivic range
+ *
+ * @method isNotWithin
+ * @chainable
+ * 
+ * @param  {number}  min  Min value
+ * @param  {number}  max  Max value
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotWithin = function(min, max, message) {
+    this.validateInput('number', min, 'number', max, 'number');
+
+    var a = Math.min(min, max);
+    var b = Math.max(min, max);
+
+    if (this.inspectValue > a && this.inspectValue < b) {
+        throw new InspectionError(this, message || 'Input should not be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether a function throws an exception
+ *
+ * @method doesThrow
+ * @chainable
+ * 
+ * @param  {string|regexp}  [exception] Specific error exception
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesThrow = function(exception, message) {
+   this.callInputAsFunction();
+
+    if (!this.funcCallError) {
+        throw new InspectionError(this, message || 'Input should throw an error, but error wasn\'t thrown!');
+    }
+
+    var type = utils.getTypeOf(exception);
+    if (type === 'string') {
+        if (this.funcCallError.message !== exception) {
+            throw new InspectionError(this, message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
+        }
+    }
+    else if (type === 'regexp') {
+        if (!exception.test(this.funcCallError.message)) {
+            throw new InspectionError(this, message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
+        }
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether a function does not throw an exception
+ *
+ * @method doesNotThrow
+ * @chainable
+ * 
+ * @param  {string|regexp}  [exception] Specific error exception
+ * @param  {string} [message] Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotThrow = function(exception, message) {
+   this.callInputAsFunction();
+
+    if (!exception && this.funcCallError) {
+        throw new InspectionError(this, message || 'Input should not throw an error, but `' + exception + '` was thrown!');
+    }
+
+    if (exception && this.funcCallError) {
+        var type = utils.getTypeOf(exception);
+        if (type === 'string') {
+            if (this.funcCallError.message === exception) {
+                throw new InspectionError(this, message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
+            }
+        }
+        else if (type === 'regexp') {
+            if (exception.test(this.funcCallError.message)) {
+                throw new InspectionError(this, message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
+            }
+        }
+    }
+
+    return this;
+};
+
+/**
+ * [description]
+ *
+ * @method 
+ * @chainable
+ * 
+ * @param  {any}  arg  description
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesContain = function(arg) {
+    //TODO implement method
+    return this;
+};
+
+/**
+ * [description]
+ *
+ * @method 
+ * @chainable
+ * 
+ * @param  {any}  arg  description
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesContain = function(arg) {
+    //TODO implement method
+    return this;
+};
+/**
+ * [description]
+ *
+ * @method 
+ * @chainable
+ * 
+ * @param  {any}  arg  description
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesContainSubset = function(arg) {
+    //TODO implement method
+    return this;
+};
+
+/**
+ * [description]
+ *
+ * @method 
+ * @chainable
+ * 
+ * @param  {any}  arg  description
+ * @param  {string} message Custom error message
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesContainSubset = function(arg) {
+    //TODO implement method
+    return this;
+};
+
+/**
  * [description]
  *
  * @method 
@@ -1499,161 +1680,6 @@ Inspect.prototype.toDecrease = function(arg) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.toDecrease = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * Inspects whether a number is within a specivic range
- *
- * @method isWithin
- * @chainable
- * 
- * @param  {number}  min  Min value
- * @param  {number}  max  Max value
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isWithin = function(min, max, message) {
-    this.validateInput('number', min, 'number', max, 'number');
-
-    var a = Math.min(min, max);
-    var b = Math.max(min, max);
-
-    if (this.inspectValue < a || this.inspectValue > b) {
-        throw new InspectionError(this, message || 'Input must be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
-    }
-
-    return this;
-};
-
-/**
- * Inspects whether a number is not within a specivic range
- *
- * @method isNotWithin
- * @chainable
- * 
- * @param  {number}  min  Min value
- * @param  {number}  max  Max value
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.isNotWithin = function(min, max, message) {
-    this.validateInput('number', min, 'number', max, 'number');
-
-    var a = Math.min(min, max);
-    var b = Math.max(min, max);
-
-    if (this.inspectValue > a && this.inspectValue < b) {
-        throw new InspectionError(this, message || 'Input should not be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
-    }
-
-    return this;
-};
-
-/**
- * Inspects whether a function throws an exception
- *
- * @method doesThrow
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesThrow = function(exception, message) {
-    var threwnException;
-
-    try {
-        this.callInputAsFunction();
-    } catch (err) {
-        threwnException = err;
-    }
-
-    if (!threwnException) {
-        throw new InspectionError(this, message || 'Input ');
-    }
-
-    return this;
-};
-
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesThrow = function(arg) {
-    //TODO implement method
-    return this;
-};
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesContain = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesContain = function(arg) {
-    //TODO implement method
-    return this;
-};
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesContainSubset = function(arg) {
-    //TODO implement method
-    return this;
-};
-
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesContainSubset = function(arg) {
     //TODO implement method
     return this;
 };
