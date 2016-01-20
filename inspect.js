@@ -1528,36 +1528,47 @@ Inspect.prototype.doesNotThrow = function(exception, message) {
 };
 
 /**
- * [description]
+ * Inspects whether a string contains a specific value
  *
- * @method 
+ * @method doesContain
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string}  str  description
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesContain = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesContain = function(str, message) {
+    this.validateInput('string', str, 'string');
+
+    if (this.inspectValue.indexOf(str) === -1) {
+        throw new InspectionError(this, message || ('Input does not contain `' + str + '`!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether a string does not contains a specific value
  *
- * @method 
+ * @method doesNotContain
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string}  str  description
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesContain = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesNotContain = function(str, message) {
+    this.validateInput('string', str, 'string');
+
+    if (this.inspectValue.indexOf(str) !== -1) {
+        throw new InspectionError(this, message || ('Input should not contain `' + str + '`, but it was found!'));
+    }
+
     return this;
 };
+
 /**
  * [description]
  *

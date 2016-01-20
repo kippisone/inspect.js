@@ -1481,4 +1481,16 @@ describe('Inspect', function() {
         it('Should not throw a `/error/` exception', shouldFail('doesNotThrow', fn2, /error/));
         it('Should not throw any exception', shouldPass('doesNotThrow', fn2, 'Test exception'));
     });
+
+    describe('doesContain', function() {
+        var str = 'My football is red';
+        it('Should contain `foo`', shouldPass('doesContain', str, 'foo'));
+        it('Should contain `bar`', shouldFail('doesContain', str, 'bar'));
+    });
+
+    describe('doesNotContain', function() {
+        var str = 'My football is red';
+        it('Should contain `foo`', shouldFail('doesNotContain', str, 'foo'));
+        it('Should contain `bar`', shouldPass('doesNotContain', str, 'bar'));
+    });
 });
