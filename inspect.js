@@ -1502,41 +1502,61 @@ Inspect.prototype.toDecrease = function(arg) {
     //TODO implement method
     return this;
 };
+
 /**
- * [description]
+ * Inspects whether a number is within a specivic range
  *
- * @method 
+ * @method isWithin
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  min  Min value
+ * @param  {number}  max  Max value
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isWithin = function(arg) {
-    //TODO implement method
+Inspect.prototype.isWithin = function(min, max, message) {
+    this.validateInput('number', min, 'number', max, 'number');
+
+    var a = Math.min(min, max);
+    var b = Math.max(min, max);
+
+    if (this.inspectValue < a || this.inspectValue > b) {
+        throw new InspectionError(this, message || 'Input must be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether a number is not within a specivic range
  *
- * @method 
+ * @method isNotWithin
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {number}  min  Min value
+ * @param  {number}  max  Max value
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isWithin = function(arg) {
-    //TODO implement method
+Inspect.prototype.isNotWithin = function(min, max, message) {
+    this.validateInput('number', min, 'number', max, 'number');
+
+    var a = Math.min(min, max);
+    var b = Math.max(min, max);
+
+    if (this.inspectValue > a && this.inspectValue < b) {
+        throw new InspectionError(this, message || 'Input should not be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+    }
+
     return this;
 };
+
 /**
- * [description]
+ * Inspects whether a function throws an exception
  *
- * @method 
+ * @method doesThrow
  * @chainable
  * 
  * @param  {any}  arg  description
@@ -1544,8 +1564,19 @@ Inspect.prototype.isWithin = function(arg) {
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesThrow = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesThrow = function(exception, message) {
+    var threwnException;
+
+    try {
+        this.callInputAsFunction();
+    } catch (err) {
+        threwnException = err;
+    }
+
+    if (!threwnException) {
+        throw new InspectionError(this, message || 'Input ');
+    }
+
     return this;
 };
 
@@ -1786,6 +1817,30 @@ Inspect.prototype.getTypeNames = function(types) {
     str += '`';
 
     return str;
+};
+
+/**
+ * Calls input as a function if it is a function
+ *
+ * @method callInputAsFunction
+ * @param  {object}  thisValue  This value
+ */
+Inspect.prototype.callInputAsFunction = function(thisValue, argsArray) {
+    var fn = this.inspectValue;
+
+    var type = utils.getTypeOf(fn);
+    if (type !== 'function') {
+        throw new InputError('Can\'t call input as a function. Input value is ' + this.getTypeNames(type));
+    }
+
+    try {
+        this.funcCallResult = fn.apply(thisValue, argsArray);
+    }
+    catch (err) {
+        this.funcCallError = err;
+    }
+    
+    return this;
 };
 
 module.exports = function(value) {

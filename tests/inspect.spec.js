@@ -1435,4 +1435,18 @@ describe('Inspect', function() {
         it('Should inspect that array has not any of this values', shouldFail('hasNotAnyValues', arr, ['one', 'zero']));
         it('Should inspect that array has a "{ foo: true }" value', shouldPass('hasNotAnyValues', arr, [{ foo: true }]));
     });
+
+    describe('isWithin', function() {
+        it('Should inspect that num is within a range of 2 and 4', shouldPass('isWithin', 3, 2, 4));
+        it('Should inspect that num is within a range of 4 and 6', shouldFail('isWithin', 3, 4, 6));
+        it('Should inspect that num is within a range of -4 and -2', shouldPass('isWithin', -3, -2, -4));
+        it('Should inspect that num is within a range of -6 and -4', shouldFail('isWithin', -3, -4, -6));
+    });
+
+    describe('isNotWithin', function() {
+        it('Should inspect that num is within a range of 2 and 4', shouldFail('isNotWithin', 3, 2, 4));
+        it('Should inspect that num is within a range of 4 and 6', shouldPass('isNotWithin', 3, 4, 6));
+        it('Should inspect that num is within a range of -4 and -2', shouldFail('isNotWithin', -3, -2, -4));
+        it('Should inspect that num is within a range of -6 and -4', shouldPass('isNotWithin', -3, -4, -6));
+    });
 });
