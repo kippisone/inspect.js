@@ -1570,128 +1570,175 @@ Inspect.prototype.doesNotContain = function(str, message) {
 };
 
 /**
- * [description]
+ * Inspects whether an array contains a subset of an array in the same order
  *
- * @method 
+ * @method hasSubset
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  subset  Search for subset
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesContainSubset = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasSubset = function(subset, message) {
+    this.validateInput('array', subset, 'array');
+
+    if (!utils.hasSubset(this.inspectValue, subset)) {
+        throw new InspectionError(this, message || ('Input should contain a subset, but it was not found!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an array does not contains a subset of an array in the same order
  *
- * @method 
+ * @method hasNotSubset
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {array}  subset  Search for subset
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesContainSubset = function(arg) {
-    //TODO implement method
+Inspect.prototype.hasNotSubset = function(subset, message) {
+    this.validateInput('array', subset, 'array');
+
+    if (utils.hasSubset(this.inspectValue, subset)) {
+        throw new InspectionError(this, message || ('Input should not contain a subset, but it has!'));
+    }
+    
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an function call changes a specific property
  *
- * @method 
+ * @method doesChange
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string}  prop  The property who should be changed
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesChange = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesChange = function(prop, message) {
+    this.validateInput('object', prop, 'string');
+
+    var a = utils.get(this.inspectionValue, prop);
+    this.callInputAsFunction();
+    var b = utils.get(this.inspectionValue, prop);
+
+    if (utils.compareValues(a, b)) {
+        throw new InspectionError(this, message || ('Input should be changed!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an function call changes a specific property
  *
- * @method 
+ * @method doesNotChange
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string}  prop  The property who should be changed
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.toChange = function(arg) {
-    //TODO implement method
-    return this;
-};
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.toIncrease = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesNotChange = function(prop, message) {
+    this.validateInput('object', prop, 'string');
+
+    var a = utils.get(this.inspectionValue, prop);
+    this.callInputAsFunction();
+    var b = utils.get(this.inspectionValue, prop);
+
+    if (!utils.compareValues(a, b)) {
+        throw new InspectionError(this, message || ('Input should be changed!'));
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an function call increases a property
  *
- * @method 
+ * @method doesIncrease
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {obj} prop The property who should be changed
+ * @param  {string} prop The property who should be changed
+ * @param  {num} [num] Increase amount
  * @param  {string} message Custom error message
+ *
+ * @example
+ * var obj = { num: 1 };
+ * inspect(function() {
+ *     obj.num++;
+ * }).doesIncrease(obj, 'num', 1);
+ *
+ * inspect(obj).onCall(fn).doesIncrease('foo', 2);
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.toIncrease = function(arg) {
-    //TODO implement method
-    return this;
-};
-/**
- * [description]
- *
- * @method 
- * @chainable
- * 
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.toDecrease = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesIncrease = function(prop, num, message) {
+    this.validateInput('object', prop, 'string');
+
+    if (isNaN(num)) {
+        message = num;
+        num = null;
+    }
+
+    var a = utils.undotify(this.inspectValue, prop);
+    this.fn();
+    var b = utils.undotify(this.inspectValue, prop);
+
+    if (num) {
+        if ((a + num) !== b) {
+            throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a + num);
+        }
+    }
+    else if (a >= b) {
+        throw new ComparisonError(this, message || ('Input should be increased!'), b, a + 1);
+    }
+
     return this;
 };
 
 /**
- * [description]
+ * Inspects whether an function call increases a property
  *
- * @method 
+ * @method doesDecrease
  * @chainable
  * 
- * @param  {any}  arg  description
+ * @param  {string} prop The property who should be changed
+ * @param  {num} [num] Increase amount
  * @param  {string} message Custom error message
  * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.toDecrease = function(arg) {
-    //TODO implement method
+Inspect.prototype.doesDecrease = function(num, message) {
+    this.validateInput('object');
+
+    if (isNaN(num)) {
+        message = num;
+        num = null;
+    }
+
+    var a = utils.undotify(this.inspectionValue, prop);
+    this.fn();
+    var b = utils.undotify(this.inspectionValue, prop);
+
+    if (num) {
+        if (a - num !== b) {
+            throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
+        }
+    }
+    else if (a >= b) {
+        throw new ComparisonError(this, message || ('Input should be increased!'), b, a - 1);
+    }
+
     return this;
 };
 
@@ -1744,6 +1791,18 @@ Inspect.prototype.isNotCloseTo = function(num, range, message) {
         throw new InspectionError(this, message || ('Input is not outside of the allowed range!'));
     }
 
+    return this;
+};
+
+/**
+ * Cals a function
+ *
+ * @method onCall
+ * @param  {function}  fn  Caller function
+ */
+Inspect.prototype.onCall = function(fn) {
+    this.fn = fn;
+    this.args = Array.prototype.slice.call(arguments, 1);
     return this;
 };
 

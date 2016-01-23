@@ -1493,4 +1493,33 @@ describe('Inspect', function() {
         it('Should contain `foo`', shouldFail('doesNotContain', str, 'foo'));
         it('Should contain `bar`', shouldPass('doesNotContain', str, 'bar'));
     });
+
+    describe.only('doesIncrease', function() {
+        var obj = { num: 1 };
+
+        it('Should increase a number', function() {
+            inspect(obj).onCall(function() {
+                obj.num++;
+            }).doesIncrease('num');
+        });
+
+        it('Should increase a number by 2', function() {
+            inspect(obj).onCall(function() {
+                obj.num += 2;
+            }).doesIncrease('num', 2);
+        });
+
+            
+        it('Should increase a number by 3', function(done) {
+            try {
+                inspect(obj).onCall(function() {
+                    obj.num += 1;
+                }).doesIncrease('num', 3);
+
+                done('Failed!');
+            } catch (err) {
+                done();
+            }
+        });
+    });
 });
