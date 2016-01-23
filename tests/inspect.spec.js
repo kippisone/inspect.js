@@ -1494,7 +1494,7 @@ describe('Inspect', function() {
         it('Should contain `bar`', shouldPass('doesNotContain', str, 'bar'));
     });
 
-    describe.only('doesIncrease', function() {
+    describe('doesIncrease', function() {
         var obj = { num: 1 };
 
         it('Should increase a number', function() {
@@ -1509,7 +1509,6 @@ describe('Inspect', function() {
             }).doesIncrease('num', 2);
         });
 
-            
         it('Should increase a number by 3', function(done) {
             try {
                 inspect(obj).onCall(function() {
@@ -1518,6 +1517,118 @@ describe('Inspect', function() {
 
                 done('Failed!');
             } catch (err) {
+                done();
+            }
+        });
+    });
+
+    describe('doesDecrease', function() {
+        var obj;
+
+        beforeEach(function() {
+            obj = { num: 3 };         
+        });
+
+        it('Should decrease a number', function() {
+            inspect(obj).onCall(function() {
+                obj.num--;
+            }).doesDecrease('num');
+        });
+
+        it('Should decrease a number by 2', function() {
+            inspect(obj).onCall(function() {
+                obj.num -= 2;
+            }).doesDecrease('num', 2);
+        });
+
+        it('Should decrease a number by 3', function(done) {
+            try {
+                inspect(obj).onCall(function() {
+                    obj.num -= 1;
+                }).doesDecrease('num', 3);
+
+                done('Failed!');
+            } catch (err) {
+                done();
+            }
+        });
+    });
+
+    describe('isCloseTo', function() {
+        it('1.001 should be close to by 0.1', shouldPass('isCloseTo', 1, 1.001, 0.1));
+        it('0.91 should be close to by 0.1', shouldPass('isCloseTo', 1, 0.91, 0.1));
+        it('0.9 should be close to by 0.1', shouldPass('isCloseTo', 1, 0.9, 0.1));
+        it('1.1 should be close to by 0.1', shouldPass('isCloseTo', 1, 1.1, 0.1));
+        it('0.89 should be close to by 0.1', shouldFail('isCloseTo', 1, 0.89, 0.1));
+        it('1.11 should be close to by 0.1', shouldFail('isCloseTo', 1, 1.11, 0.1));
+    });
+
+    describe('isNotCloseTo', function() {
+        it('1.001 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 1.001, 0.1));
+        it('0.91 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 0.91, 0.1));
+        it('0.9 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 0.9, 0.1));
+        it('1.1 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 1.1, 0.1));
+        it('0.89 should not be close to by 0.1', shouldPass('isNotCloseTo', 1, 0.89, 0.1));
+        it('1.11 should not be close to by 0.1', shouldPass('isNotCloseTo', 1, 1.11, 0.1));
+    });
+
+    describe('onCall', function() {
+        it('Should call a method', function(done) {
+            var fn = function() {
+                done();
+            };
+
+            var obj = { foo: '' };
+
+            inspect(obj).onCall(fn);
+        });
+    });
+
+    describe('doesChange', function() {
+        it('Should change a property', function() {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.foo = 'bar';
+            };
+
+            inspect(obj).onCall(fn).doesChange('foo');
+        });
+
+        it('Should fail changing a property', function(done) {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.otherfoo = 'bar';
+            };
+
+            try {
+                inspect(obj).onCall(fn).doesChange('foo');
+                done('Failed!');
+            } catch(err) {
+                done();
+            }
+        });
+    });
+
+    describe('doesNotChange', function() {
+        it('Should change a property', function() {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.otherfoo = 'bar';
+            };
+
+            inspect(obj).onCall(fn).doesNotChange('foo');
+        });
+
+        it('Should fail not changing a property', function(done) {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.foo = 'bar';
+            };
+
+            try {
+                inspect(obj).onCall(fn).doesNotChange('foo');
+                done('Failed!');
+            } catch(err) {
                 done();
             }
         });

@@ -250,7 +250,7 @@ describe('Utils', function() {
         });
 
         it('Should not contain a subset with wrong values', function() {
-            var b = ['zwenty', 'sixty'];
+            var b = ['zenty', 'sixty'];
 
             if (utils.hasSubset(a, b)) {
                 throw 'Failed!';
@@ -266,8 +266,8 @@ describe('Utils', function() {
         });
 
         it('Should contain a subset with objects as values', function() {
-            var a = [{ one: true, two: true, three: true, four: true, five: true, six: true, seven: true }];
-            var b = [{ three: true, four: true }];
+            var a = [{ one: true }, { two: true }, { three: true }, { four: true }, { five: true }, { six: true }, { seven: true }];
+            var b = [{ three: true }, { four: true }];
 
             if (!utils.hasSubset(a, b)) {
                 throw 'Failed!';

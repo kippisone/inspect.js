@@ -1612,56 +1612,6 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
 };
 
 /**
- * Inspects whether an function call changes a specific property
- *
- * @method doesChange
- * @chainable
- * 
- * @param  {string}  prop  The property who should be changed
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesChange = function(prop, message) {
-    this.validateInput('object', prop, 'string');
-
-    var a = utils.get(this.inspectionValue, prop);
-    this.callInputAsFunction();
-    var b = utils.get(this.inspectionValue, prop);
-
-    if (utils.compareValues(a, b)) {
-        throw new InspectionError(this, message || ('Input should be changed!'));
-    }
-
-    return this;
-};
-
-/**
- * Inspects whether an function call changes a specific property
- *
- * @method doesNotChange
- * @chainable
- * 
- * @param  {string}  prop  The property who should be changed
- * @param  {string} message Custom error message
- * 
- * @returns {object} Returns `this` value
- */
-Inspect.prototype.doesNotChange = function(prop, message) {
-    this.validateInput('object', prop, 'string');
-
-    var a = utils.get(this.inspectionValue, prop);
-    this.callInputAsFunction();
-    var b = utils.get(this.inspectionValue, prop);
-
-    if (!utils.compareValues(a, b)) {
-        throw new InspectionError(this, message || ('Input should be changed!'));
-    }
-
-    return this;
-};
-
-/**
  * Inspects whether an function call increases a property
  *
  * @method doesIncrease
@@ -1672,11 +1622,11 @@ Inspect.prototype.doesNotChange = function(prop, message) {
  * @param  {num} [num] Increase amount
  * @param  {string} message Custom error message
  *
- * @example
+ * @example {js}
  * var obj = { num: 1 };
- * inspect(function() {
+ * var fn = function() {
  *     obj.num++;
- * }).doesIncrease(obj, 'num', 1);
+ * };
  *
  * inspect(obj).onCall(fn).doesIncrease('foo', 2);
  * 
@@ -1685,13 +1635,16 @@ Inspect.prototype.doesNotChange = function(prop, message) {
 Inspect.prototype.doesIncrease = function(prop, num, message) {
     this.validateInput('object', prop, 'string');
 
+    if (utils.isUndefined(this.inspectValueBefore)) {
+        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+    }
+
     if (isNaN(num)) {
         message = num;
         num = null;
     }
 
-    var a = utils.undotify(this.inspectValue, prop);
-    this.fn();
+    var a = utils.undotify(this.inspectValueBefore, prop);
     var b = utils.undotify(this.inspectValue, prop);
 
     if (num) {
@@ -1707,7 +1660,7 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
 };
 
 /**
- * Inspects whether an function call increases a property
+ * Inspects whether an function call decreases a property
  *
  * @method doesDecrease
  * @chainable
@@ -1716,27 +1669,149 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
  * @param  {num} [num] Increase amount
  * @param  {string} message Custom error message
  * 
+ * @example {js}
+ * var obj = { num: 1 };
+ * var fn = function() {
+ *     obj.num++;
+ * };
+ *
+ * inspect(obj).onCall(fn).doesIncrease('foo', 2);
+ * 
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.doesDecrease = function(num, message) {
-    this.validateInput('object');
+Inspect.prototype.doesDecrease = function(prop, num, message) {
+    this.validateInput('object', prop, 'string');
+
+    if (utils.isUndefined(this.inspectValueBefore)) {
+        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+    }
 
     if (isNaN(num)) {
         message = num;
         num = null;
     }
 
-    var a = utils.undotify(this.inspectionValue, prop);
-    this.fn();
-    var b = utils.undotify(this.inspectionValue, prop);
+    var a = utils.undotify(this.inspectValueBefore, prop);
+    var b = utils.undotify(this.inspectValue, prop);
 
     if (num) {
         if (a - num !== b) {
             throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
         }
     }
-    else if (a >= b) {
+    else if (a <= b) {
         throw new ComparisonError(this, message || ('Input should be increased!'), b, a - 1);
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether an function call changes a property
+ *
+ * @method doesChange
+ * @chainable
+ * 
+ * @param  {obj} prop The property who should be changed
+ * @param  {string} prop The property who should be changed
+ * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * var obj = { foo: '' };
+ * var fn = function() {
+ *     obj.foo = 'bar';
+ * };
+ *
+ * inspect(obj).onCall(fn).doesChange('foo');
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesChange = function(prop, message) {
+    this.validateInput('object', prop, 'string');
+
+    if (utils.isUndefined(this.inspectValueBefore)) {
+        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+    }
+
+    var a = utils.undotify(this.inspectValueBefore, prop);
+    var b = utils.undotify(this.inspectValue, prop);
+
+    if (utils.compareValues(a, b)) {
+        throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'));
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether an function call changes a property
+ *
+ * @method doesNotChange
+ * @chainable
+ * 
+ * @param  {obj} prop The property who should be changed
+ * @param  {string} prop The property who should be changed
+ * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * var obj = { foo: '' };
+ * var fn = function() {
+ *     obj.otherfoo = 'bar';
+ * };
+ *
+ * inspect(obj).onCall(fn).doesNotChange('foo');
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotChange = function(prop, message) {
+    this.validateInput('object', prop, 'string');
+
+    if (utils.isUndefined(this.inspectValueBefore)) {
+        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+    }
+
+    var a = utils.undotify(this.inspectValueBefore, prop);
+    var b = utils.undotify(this.inspectValue, prop);
+
+    if (!utils.compareValues(a, b)) {
+        throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'), b, a);
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether an function call does not change a property
+ *
+ * @method doesNotChange
+ * @chainable
+ * 
+ * @param  {obj} prop The property who should be changed
+ * @param  {string} prop The property who should be changed
+ * @param  {string} message Custom error message
+ *
+ * @example {js}
+ * var obj = { foo: '' };
+ * var fn = function() {
+ *     obj.otherFoo = 'bar';
+ * };
+ *
+ * inspect(obj).onCall(fn).doesNotChange('foo');
+ * 
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotIncrease = function(prop, message) {
+    this.validateInput('object', prop, 'string');
+
+    if (utils.isUndefined(this.inspectValueBefore)) {
+        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+    }
+
+    var a = utils.undotify(this.inspectValueBefore, prop);
+    var b = utils.undotify(this.inspectValue, prop);
+
+    if (!utils.compareValues(a, b)) {
+        throw new ComparisonError(this, message || ('Property `' + prop + '` should not be changed!'), b, a);
     }
 
     return this;
@@ -1801,8 +1876,16 @@ Inspect.prototype.isNotCloseTo = function(num, range, message) {
  * @param  {function}  fn  Caller function
  */
 Inspect.prototype.onCall = function(fn) {
-    this.fn = fn;
-    this.args = Array.prototype.slice.call(arguments, 1);
+    this.inspectValueBefore = utils.clone(this.inspectValue);
+
+    var args = Array.prototype.slice.call(arguments, 1);
+    if (args) {
+        fn.apply(null, args);
+    }
+    else {
+        fn();
+    }
+
     return this;
 };
 
