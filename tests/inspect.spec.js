@@ -1633,4 +1633,28 @@ describe('Inspect', function() {
             }
         });
     });
+
+    describe('doesStartWith', function() {
+        it('Should start with foo', shouldPass('doesStartWith', 'Foo is cool!', 'Foo'));
+        it('Should start with bar', shouldFail('doesStartWith', 'Foo is cool!', 'Bar'));
+        it('Should start with bar', shouldFail('doesStartWith', 'Foo is cool!', 'Match is longer then input'));
+    });
+
+    describe('doesNotStartWith', function() {
+        it('Should not start with foo', shouldPass('doesNotStartWith', 'Foo is cool!', 'Bar'));
+        it('Should not start with bar', shouldFail('doesNotStartWith', 'Foo is cool!', 'Foo'));
+        it('Should not start with bar', shouldPass('doesNotStartWith', 'Foo is cool!', 'Match is longer then input'));
+    });
+
+    describe('doesEndWith', function() {
+        it('Should end with foo', shouldPass('doesEndWith', 'Foo is cool!', 'cool!'));
+        it('Should end with bar', shouldFail('doesEndWith', 'Foo is cool!', 'boring!'));
+        it('Should end with bar', shouldFail('doesEndWith', 'Foo is cool!', 'Match is longer then input!'));
+    });
+
+    describe('doesNotEndWith', function() {
+        it('Should not end with foo', shouldPass('doesNotEndWith', 'Foo is cool!', 'boring!'));
+        it('Should not end with bar', shouldFail('doesNotEndWith', 'Foo is cool!', 'cool!'));
+        it('Should not end with bar', shouldPass('doesNotEndWith', 'Foo is cool!', 'Match is longer then input!'));
+    });
 });

@@ -895,6 +895,102 @@ Inspect.prototype.doesNotMatch = function(reg, message) {
 };
 
 /**
+ * Inspects whether input starts with a specific string
+ *
+ * @method doesStartWith
+ * @chainable
+ * 
+ * @param  {string} match Match string
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ * inspect('Foo is cool').doesStartWith('Foo');
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesStartWith = function(match, message) {
+    this.validateInput('string', match, 'string');
+
+    if (this.inspectValue.substr(0, match.length) !== match) {
+        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input starts not with a specific string
+ *
+ * @method doesNotStartWith
+ * @chainable
+ * 
+ * @param  {string} match Match string
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ * inspect('Foo is cool').doesNotStartWith('bar');
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotStartWith = function(match, message) {
+    this.validateInput('string', match, 'string');
+
+    if (this.inspectValue.substr(0, match.length) === match) {
+        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input ends with a specific string
+ *
+ * @method doesEndWith
+ * @chainable
+ * 
+ * @param  {string} match Match string
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ * inspect('Foo is cool').doesEndWith('Foo');
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesEndWith = function(match, message) {
+    this.validateInput('string', match, 'string');
+
+    if (this.inspectValue.substr(this.inspectValue.length - match.length) !== match) {
+        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input ends not with a specific string
+ *
+ * @method doesNotEndWith
+ * @chainable
+ * 
+ * @param  {string} match Match string
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ * inspect('Foo is cool').doesNotEndWith('bar');
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotEndWith = function(match, message) {
+    this.validateInput('string', match, 'string');
+
+    if (this.inspectValue.substr(this.inspectValue.length - match.length) === match) {
+        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+    }
+
+    return this;
+};
+
+/**
  * Inspects whether a number is greater than value
  *
  * @method isGreaterThan
