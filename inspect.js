@@ -10,6 +10,7 @@ var utils = require('./lib/inspectUtils');
 var InspectionError = require('./lib/errors').InspectionError;
 var InputError = require('./lib/errors').InputError;
 var ComparisonError = require('./lib/errors').ComparisonError;
+var ContainmentError = require('./lib/errors').ContainmentError;
 
 var Inspect = function(input) {
     this.inspectValue = input;
@@ -623,7 +624,9 @@ Inspect.prototype.isNotGenerator = function(message) {
  */
 Inspect.prototype.isPromise = function(message) {
     if (!utils.isPromise(this.inspectValue)) {
-        throw new InspectionError(this, message || ('Typeof input should be a promise. But current type is ' + type));    
+        throw new InspectionError(this, 
+            message || ('Typeof input should be a promise. But current type is ')
+        );
     }
 
     return this;
@@ -644,7 +647,9 @@ Inspect.prototype.isPromise = function(message) {
  */
 Inspect.prototype.isNotPromise = function(message) {
     if (utils.isPromise(this.inspectValue)) {
-        throw new InspectionError(this, message || ('Typeof input should not be a promise. But it is promise!'));    
+        throw new InspectionError(this,
+            message || ('Typeof input should not be a promise. But it is promise!')
+        );
     }
     
     return this;
@@ -669,7 +674,12 @@ Inspect.prototype.isAny = function(types, message) {
     }
 
     if (!utils.isAny(this.inspectValue, types)) {
-        throw new InspectionError(this, message || ('Typeof input should be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
+        throw new InspectionError(this, 
+            message || (
+                'Typeof input should be any of `' + types.join(', ') + '`. But it is ' +
+                utils.getTypeOf(this.inspectValue) + '!'
+            )
+        );
     }
 
     return this;
@@ -695,6 +705,134 @@ Inspect.prototype.isNotAny = function(types, message) {
 
     if (!utils.isAny(this.inspectValue, types)) {
         throw new InspectionError(this, message || ('Typeof input should not be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input is equal to a value.
+ *
+ * This makes a === comparison
+ *
+ * @method isEqual
+ * @chainable
+ * 
+ * @param  {any} value Match value
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ *
+ * var obj = {};
+ * inspect(obj).isEqual(obj);
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isEqual = function(value, message) {
+    if (this.inspectValue !== value) {
+        throw new ComparisonError(this,
+            message || (
+                'Input is not equals to `value`'
+            ),
+            this.inspectValue,
+            value
+        );
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input is not equal to a value.
+ *
+ * This makes a !== comparison
+ *
+ * @method isNotEqual
+ * @chainable
+ * 
+ * @param  {any} value Match value
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ *
+ * var obj = {};
+ * inspect(obj).isNotEqual({});
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotEqual = function(value, message) {
+    if (this.inspectValue !== value) {
+        throw new ComparisonError(this,
+            message || (
+                'Input is equal to `value`, but it should not!'
+            ),
+            this.inspectValue,
+            value
+        );
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input is eql to a value.
+ *
+ * This makes a value comparison.
+ *
+ * @method isEql
+ * @chainable
+ * 
+ * @param  {any} value Match value
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ *
+ * var obj = {};
+ * inspect(obj).isEql({});
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isEql = function(value, message) {
+    if (!utils.compareValues(this.inspectValue, value)) {
+        throw new ComparisonError(this,
+            message || (
+                'Input is not eql to `value`'
+            ),
+            this.inspectValue,
+            value
+        );
+    }
+
+    return this;
+};
+
+/**
+ * Inspects whether input is not eql to a value.
+ *
+ * This makes a value comparison.
+ *
+ * @method isNotEql
+ * @chainable
+ * 
+ * @param  {any} value Match value
+ * @param  {string} message Custom error message
+ * 
+ * @example {js}
+ *
+ * var obj = { bar: '' };
+ * inspect(obj).isNotEql({});
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotEql = function(value, message) {
+    if (utils.compareValues(this.inspectValue, value)) {
+        throw new ComparisonError(this,
+            message || (
+                'Input shouldn\'t be equal to value!'
+            ),
+            this.inspectValue,
+            value
+        );
     }
 
     return this;
@@ -912,7 +1050,11 @@ Inspect.prototype.doesStartWith = function(match, message) {
     this.validateInput('string', match, 'string');
 
     if (this.inspectValue.substr(0, match.length) !== match) {
-        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+        throw new ContainmentError(this,
+            message || 'Input does not start with match!',
+            { pos: 0, len: match.length },
+            match
+        );
     }
 
     return this;
@@ -936,7 +1078,7 @@ Inspect.prototype.doesNotStartWith = function(match, message) {
     this.validateInput('string', match, 'string');
 
     if (this.inspectValue.substr(0, match.length) === match) {
-        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+        throw new InspectionError(this, message || ('Input starts with match, but it should not!'));
     }
 
     return this;
@@ -960,7 +1102,11 @@ Inspect.prototype.doesEndWith = function(match, message) {
     this.validateInput('string', match, 'string');
 
     if (this.inspectValue.substr(this.inspectValue.length - match.length) !== match) {
-        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+        throw new ContainmentError(this,
+            message || 'Input does not end with match!',
+            { pos: this.inspectValue.length - match.length, len: match.length },
+            match
+        );
     }
 
     return this;
@@ -984,7 +1130,7 @@ Inspect.prototype.doesNotEndWith = function(match, message) {
     this.validateInput('string', match, 'string');
 
     if (this.inspectValue.substr(this.inspectValue.length - match.length) === match) {
-        throw new InspectionError(this, message || ('Input does not match against a regular expression!'));
+        throw new InspectionError(this, message || ('Input ends with match, but it should not!'));
     }
 
     return this;
@@ -1259,7 +1405,10 @@ Inspect.prototype.hasNotAnyKeys = function(keys, message) {
 Inspect.prototype.hasProps = function(props, message) {
     this.validateInput('obj-types', props, 'object');
     if (!utils.hasProps(this.inspectValue, props)) {
-        throw new ComparisonError(this, message || ('Property comparison failed!'), JSON.stringify(this.inspectValue), JSON.stringify(props));
+        throw new ComparisonError(this, message || ('Property comparison failed!'),
+            this.inspectValue,
+            props
+        );
     }
 
     return this;
@@ -2120,4 +2269,23 @@ Inspect.prototype.callInputAsFunction = function(thisValue, argsArray) {
 
 module.exports = function(value) {
     return new Inspect(value);
+};
+
+
+
+/**
+ * Prints a string to the console
+ *
+ * @method print
+ * @static
+ * @param  {string}  str  Print str to console
+ */
+module.exports.print = function(str) {
+    str = str.split(/\n/g);
+    var fillLen = String(str.length).length;
+    
+    str.forEach(function(line, index) {
+        var nr = ('      ' + String(index + 1)).slice(-fillLen);
+        console.log(nr + ' | ' + line);
+    });
 };
