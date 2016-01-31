@@ -205,4 +205,73 @@ describe('Utils', function() {
             }
         });
     });
+
+    describe('hasSubset', function() {
+        var a = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+
+        it('Should contain a subset in the middle', function() {
+            var b = ['three', 'four', 'five'];
+
+            if (!utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should contain a subset in the middle, only one', function() {
+            var b = ['five'];
+
+            if (!utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should contain a subset at begin', function() {
+            var b = ['one', 'two'];
+
+            if (!utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should contain a subset at end', function() {
+            var b = ['six', 'seven'];
+
+            if (!utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should not contain a subset with wrong order', function() {
+            var b = ['six', 'five'];
+
+            if (utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should not contain a subset with wrong values', function() {
+            var b = ['zenty', 'sixty'];
+
+            if (utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should not contain a subset with boolean as values', function() {
+            var b = [true, true];
+
+            if (utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+
+        it('Should contain a subset with objects as values', function() {
+            var a = [{ one: true }, { two: true }, { three: true }, { four: true }, { five: true }, { six: true }, { seven: true }];
+            var b = [{ three: true }, { four: true }];
+
+            if (!utils.hasSubset(a, b)) {
+                throw 'Failed!';
+            }
+        });
+    });
 });

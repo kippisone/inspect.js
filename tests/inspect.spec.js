@@ -1435,4 +1435,226 @@ describe('Inspect', function() {
         it('Should inspect that array has not any of this values', shouldFail('hasNotAnyValues', arr, ['one', 'zero']));
         it('Should inspect that array has a "{ foo: true }" value', shouldPass('hasNotAnyValues', arr, [{ foo: true }]));
     });
+
+    describe('isWithin', function() {
+        it('Should inspect that num is within a range of 2 and 4', shouldPass('isWithin', 3, 2, 4));
+        it('Should inspect that num is within a range of 4 and 6', shouldFail('isWithin', 3, 4, 6));
+        it('Should inspect that num is within a range of -4 and -2', shouldPass('isWithin', -3, -2, -4));
+        it('Should inspect that num is within a range of -6 and -4', shouldFail('isWithin', -3, -4, -6));
+    });
+
+    describe('isNotWithin', function() {
+        it('Should inspect that num is within a range of 2 and 4', shouldFail('isNotWithin', 3, 2, 4));
+        it('Should inspect that num is within a range of 4 and 6', shouldPass('isNotWithin', 3, 4, 6));
+        it('Should inspect that num is within a range of -4 and -2', shouldFail('isNotWithin', -3, -2, -4));
+        it('Should inspect that num is within a range of -6 and -4', shouldPass('isNotWithin', -3, -4, -6));
+    });
+
+    describe('doesThrow', function() {
+        var fn = function() {
+            throw new Error('Test error');
+        };
+
+        var fn2 = function() {
+        };
+        
+        it('Should throw an exception', shouldPass('doesThrow', fn));
+        it('Should throw an exception', shouldFail('doesThrow', fn2));
+        it('Should throw an exception', shouldPass('doesThrow', fn, 'Test error'));
+        it('Should throw an exception', shouldFail('doesThrow', fn, 'Test exception'));
+        it('Should throw an exception', shouldFail('doesThrow', fn2, 'Test exception'));
+        it('Should throw an exception', shouldPass('doesThrow', fn, /error/));
+        it('Should throw an exception', shouldFail('doesThrow', fn2, /error/));
+    });
+
+    describe('doesNotThrow', function() {
+        var fn = function() {
+        };
+
+        var fn2 = function() {
+            throw new Error('Test error');
+        };
+        
+        it('Should not throw any exception', shouldPass('doesNotThrow', fn));
+        it('Should not throw a `Test error` exception', shouldPass('doesNotThrow', fn, 'Test error'));
+        it('Should not throw a `/error/` exception', shouldPass('doesNotThrow', fn, /error/));
+        it('Should not throw a `/error/` exception', shouldFail('doesNotThrow', fn2, /error/));
+        it('Should not throw any exception', shouldPass('doesNotThrow', fn2, 'Test exception'));
+    });
+
+    describe('doesContain', function() {
+        var str = 'My football is red';
+        it('Should contain `foo`', shouldPass('doesContain', str, 'foo'));
+        it('Should contain `bar`', shouldFail('doesContain', str, 'bar'));
+    });
+
+    describe('doesNotContain', function() {
+        var str = 'My football is red';
+        it('Should contain `foo`', shouldFail('doesNotContain', str, 'foo'));
+        it('Should contain `bar`', shouldPass('doesNotContain', str, 'bar'));
+    });
+
+    describe('doesIncrease', function() {
+        var obj = { num: 1 };
+
+        it('Should increase a number', function() {
+            inspect(obj).onCall(function() {
+                obj.num++;
+            }).doesIncrease('num');
+        });
+
+        it('Should increase a number by 2', function() {
+            inspect(obj).onCall(function() {
+                obj.num += 2;
+            }).doesIncrease('num', 2);
+        });
+
+        it('Should increase a number by 3', function(done) {
+            try {
+                inspect(obj).onCall(function() {
+                    obj.num += 1;
+                }).doesIncrease('num', 3);
+
+                done('Failed!');
+            } catch (err) {
+                done();
+            }
+        });
+    });
+
+    describe('doesDecrease', function() {
+        var obj;
+
+        beforeEach(function() {
+            obj = { num: 3 };         
+        });
+
+        it('Should decrease a number', function() {
+            inspect(obj).onCall(function() {
+                obj.num--;
+            }).doesDecrease('num');
+        });
+
+        it('Should decrease a number by 2', function() {
+            inspect(obj).onCall(function() {
+                obj.num -= 2;
+            }).doesDecrease('num', 2);
+        });
+
+        it('Should decrease a number by 3', function(done) {
+            try {
+                inspect(obj).onCall(function() {
+                    obj.num -= 1;
+                }).doesDecrease('num', 3);
+
+                done('Failed!');
+            } catch (err) {
+                done();
+            }
+        });
+    });
+
+    describe('isCloseTo', function() {
+        it('1.001 should be close to by 0.1', shouldPass('isCloseTo', 1, 1.001, 0.1));
+        it('0.91 should be close to by 0.1', shouldPass('isCloseTo', 1, 0.91, 0.1));
+        it('0.9 should be close to by 0.1', shouldPass('isCloseTo', 1, 0.9, 0.1));
+        it('1.1 should be close to by 0.1', shouldPass('isCloseTo', 1, 1.1, 0.1));
+        it('0.89 should be close to by 0.1', shouldFail('isCloseTo', 1, 0.89, 0.1));
+        it('1.11 should be close to by 0.1', shouldFail('isCloseTo', 1, 1.11, 0.1));
+    });
+
+    describe('isNotCloseTo', function() {
+        it('1.001 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 1.001, 0.1));
+        it('0.91 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 0.91, 0.1));
+        it('0.9 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 0.9, 0.1));
+        it('1.1 should not be close to by 0.1', shouldFail('isNotCloseTo', 1, 1.1, 0.1));
+        it('0.89 should not be close to by 0.1', shouldPass('isNotCloseTo', 1, 0.89, 0.1));
+        it('1.11 should not be close to by 0.1', shouldPass('isNotCloseTo', 1, 1.11, 0.1));
+    });
+
+    describe('onCall', function() {
+        it('Should call a method', function(done) {
+            var fn = function() {
+                done();
+            };
+
+            var obj = { foo: '' };
+
+            inspect(obj).onCall(fn);
+        });
+    });
+
+    describe('doesChange', function() {
+        it('Should change a property', function() {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.foo = 'bar';
+            };
+
+            inspect(obj).onCall(fn).doesChange('foo');
+        });
+
+        it('Should fail changing a property', function(done) {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.otherfoo = 'bar';
+            };
+
+            try {
+                inspect(obj).onCall(fn).doesChange('foo');
+                done('Failed!');
+            } catch(err) {
+                done();
+            }
+        });
+    });
+
+    describe('doesNotChange', function() {
+        it('Should change a property', function() {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.otherfoo = 'bar';
+            };
+
+            inspect(obj).onCall(fn).doesNotChange('foo');
+        });
+
+        it('Should fail not changing a property', function(done) {
+            var obj = { foo: '' };
+            var fn = function() {
+                obj.foo = 'bar';
+            };
+
+            try {
+                inspect(obj).onCall(fn).doesNotChange('foo');
+                done('Failed!');
+            } catch(err) {
+                done();
+            }
+        });
+    });
+
+    describe('doesStartWith', function() {
+        it('Should start with foo', shouldPass('doesStartWith', 'Foo is cool!', 'Foo'));
+        it('Should start with bar', shouldFail('doesStartWith', 'Foo is cool!', 'Bar'));
+        it('Should start with bar', shouldFail('doesStartWith', 'Foo is cool!', 'Match is longer then input'));
+    });
+
+    describe('doesNotStartWith', function() {
+        it('Should not start with foo', shouldPass('doesNotStartWith', 'Foo is cool!', 'Bar'));
+        it('Should not start with bar', shouldFail('doesNotStartWith', 'Foo is cool!', 'Foo'));
+        it('Should not start with bar', shouldPass('doesNotStartWith', 'Foo is cool!', 'Match is longer then input'));
+    });
+
+    describe('doesEndWith', function() {
+        it('Should end with foo', shouldPass('doesEndWith', 'Foo is cool!', 'cool!'));
+        it('Should end with bar', shouldFail('doesEndWith', 'Foo is cool!', 'boring!'));
+        it('Should end with bar', shouldFail('doesEndWith', 'Foo is cool!', 'Match is longer then input!'));
+    });
+
+    describe('doesNotEndWith', function() {
+        it('Should not end with foo', shouldPass('doesNotEndWith', 'Foo is cool!', 'boring!'));
+        it('Should not end with bar', shouldFail('doesNotEndWith', 'Foo is cool!', 'cool!'));
+        it('Should not end with bar', shouldPass('doesNotEndWith', 'Foo is cool!', 'Match is longer then input!'));
+    });
 });
