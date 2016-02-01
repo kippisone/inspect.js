@@ -2268,6 +2268,7 @@ Inspect.prototype.callInputAsFunction = function(thisValue, argsArray) {
 };
 
 module.exports = function(value) {
+
     return new Inspect(value);
 };
 
@@ -2281,6 +2282,10 @@ module.exports = function(value) {
  * @param  {string}  str  Print str to console
  */
 module.exports.print = function(str) {
+    if (typeof str === 'object') {
+        str = JSON.stringify(str, null, '  ');
+    }
+    
     str = str.split(/\n/g);
     var fillLen = String(str.length).length;
     
@@ -2288,4 +2293,15 @@ module.exports.print = function(str) {
         var nr = ('      ' + String(index + 1)).slice(-fillLen);
         console.log(nr + ' | ' + line);
     });
+};
+
+/**
+ * [description]
+ *
+ * @method method_name
+ * @param  {type}  arg  description
+ */
+module.exports.useSinon = function(sinon) {
+    var sinonInspect = require('./lib/sinonInspect');
+    sinonInspect(Inspect, sinon);
 };
