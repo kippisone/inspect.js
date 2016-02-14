@@ -2282,6 +2282,7 @@ module.exports = function(value) {
  * @param  {string}  str  Print str to console
  */
 module.exports.print = function(str) {
+    console.log(typeof str);
     if (typeof str === 'object') {
         str = JSON.stringify(str, null, '  ');
     }
