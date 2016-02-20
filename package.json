@@ -1,6 +1,6 @@
 {
   "name": "inspect.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Powerful test inspection library",
   "main": "inspect.js",
   "scripts": {
