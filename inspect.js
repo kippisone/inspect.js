@@ -1716,8 +1716,6 @@ Inspect.prototype.isNotWithin = function(min, max, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesThrow = function(exception, message) {
-   this.callInputAsFunction();
-
     if (!this.funcCallError) {
         throw new InspectionError(message || 'Input should throw an error, but error wasn\'t thrown!');
     }
@@ -1749,8 +1747,6 @@ Inspect.prototype.doesThrow = function(exception, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotThrow = function(exception, message) {
-   this.callInputAsFunction();
-
     if (!exception && this.funcCallError) {
         throw new InspectionError(message || 'Input should not throw an error, but `' + exception + '` was thrown!');
     }
@@ -2121,16 +2117,12 @@ Inspect.prototype.isNotCloseTo = function(num, range, message) {
  * @param  {function}  fn  Caller function
  */
 Inspect.prototype.onCall = function(fn) {
-    this.inspectValueBefore = utils.clone(this.inspectValue);
+    if (fn) {
+        this.inspectValueBefore = utils.clone(this.inspectValue);
+    }
 
     var args = Array.prototype.slice.call(arguments, 1);
-    if (args) {
-        fn.apply(null, args);
-    }
-    else {
-        fn();
-    }
-
+    this.callInputAsFunction(fn, null, args);
     return this;
 };
 
@@ -2146,9 +2138,8 @@ Inspect.prototype.withArgs = function() {
         throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
     }
 
-    this.fn = this.inspectValue;
-    this.args = Array.prototype.slice.call(arguments);
-    this.inspectValue = this.fn.apply(null, this.args);
+    var args = Array.prototype.slice.call(arguments);
+    this.callInputAsFunction(null, null, args);
     return this;
 };
 
@@ -2156,17 +2147,17 @@ Inspect.prototype.withArgs = function() {
  * Calls input as a function with args
  *
  * @method withArgs
- * @param  {any}  args...  Call with this args
+ * @param  {object}  ctx  Call function on context
+ * @param  {any}  args...  Call with args
  */
-Inspect.prototype.withArgsOn = function() {
+Inspect.prototype.withArgsOn = function(ctx) {
     var type = utils.getTypeOf(this.inspectValue);
     if (typeof this.inspectValue !== 'function') {
         throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
     }
 
-    this.fn = this.inspectValue;
-    this.args = Array.prototype.slice.call(arguments);
-    this.inspectValue = this.fn.apply(null, this.args);
+    var args = Array.prototype.slice.call(arguments, 1);
+    this.callInputAsFunction(null, ctx, args);
     return this;
 };
 
@@ -2249,8 +2240,8 @@ Inspect.prototype.getTypeNames = function(types) {
  * @method callInputAsFunction
  * @param  {object}  thisValue  This value
  */
-Inspect.prototype.callInputAsFunction = function(thisValue, argsArray) {
-    var fn = this.inspectValue;
+Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
+    fn = fn || this.inspectValue;
 
     var type = utils.getTypeOf(fn);
     if (type !== 'function') {
@@ -2258,7 +2249,7 @@ Inspect.prototype.callInputAsFunction = function(thisValue, argsArray) {
     }
 
     try {
-        this.funcCallResult = fn.apply(thisValue, argsArray);
+        this.funcCallResult = fn.apply(ctx, args);
     }
     catch (err) {
         this.funcCallError = err;
@@ -2294,6 +2285,19 @@ module.exports.print = function(str) {
         var nr = ('      ' + String(index + 1)).slice(-fillLen);
         console.log(nr + ' | ' + line);
     });
+};
+
+/**
+ * Let fail a test
+ *
+ * @method fail
+ * 
+ * @param  {string} message  Error message
+ * @param  {any} actual   Current value
+ * @param  {expected} expected Expected value
+ */
+module.exports.fail = function(message, actual, expected) {
+    throw new InspectionError(message, actual, expected);
 };
 
 /**

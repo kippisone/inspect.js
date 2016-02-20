@@ -1457,14 +1457,112 @@ describe('Inspect', function() {
 
         var fn2 = function() {
         };
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesThrow('Test error');
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesThrow('Test error');
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw another error than expected', function() {
+            var passed = false;
+
+            try {
+                inspect(fn).onCall().doesThrow('Some other');
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesThrow();
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesThrow();
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesThrow(/error/);
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesThrow(/error/);
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw another error than expected', function() {
+            var passed = false;
+
+            try {
+                inspect(fn).onCall().doesThrow(/other/);
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
         
-        it('Should throw an exception', shouldPass('doesThrow', fn));
-        it('Should throw an exception', shouldFail('doesThrow', fn2));
-        it('Should throw an exception', shouldPass('doesThrow', fn, 'Test error'));
-        it('Should throw an exception', shouldFail('doesThrow', fn, 'Test exception'));
-        it('Should throw an exception', shouldFail('doesThrow', fn2, 'Test exception'));
-        it('Should throw an exception', shouldPass('doesThrow', fn, /error/));
-        it('Should throw an exception', shouldFail('doesThrow', fn2, /error/));
+        it('Should throw an error, using withArgs', function() {
+            inspect(fn).withArgs('foo').doesThrow('Test error');
+        });
+
+        it('Should not throw an error, using withArgs', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).withArgs('foo').doesThrow(/error/);
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
     });
 
     describe('doesNotThrow', function() {
@@ -1474,12 +1572,90 @@ describe('Inspect', function() {
         var fn2 = function() {
             throw new Error('Test error');
         };
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesNotThrow('Test error');
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesNotThrow('Test error');
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw another error than expected', function() {
+            inspect(fn2).onCall().doesNotThrow('Some other');
+        });
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesNotThrow();
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesNotThrow();
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw an error', function() {
+            inspect(fn).onCall().doesNotThrow(/error/);
+        });
+
+        it('Should not throw an error', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).onCall().doesNotThrow(/error/);
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
+
+        it('Should throw another error than expected', function() {
+            inspect(fn2).onCall().doesNotThrow(/other/);
+        });
         
-        it('Should not throw any exception', shouldPass('doesNotThrow', fn));
-        it('Should not throw a `Test error` exception', shouldPass('doesNotThrow', fn, 'Test error'));
-        it('Should not throw a `/error/` exception', shouldPass('doesNotThrow', fn, /error/));
-        it('Should not throw a `/error/` exception', shouldFail('doesNotThrow', fn2, /error/));
-        it('Should not throw any exception', shouldPass('doesNotThrow', fn2, 'Test exception'));
+        it('Should throw an error, using withArgs', function() {
+            inspect(fn).withArgs('foo').doesNotThrow('Test error');
+        });
+
+        it('Should not throw an error, using withArgs', function() {
+            var passed = false;
+
+            try {
+                inspect(fn2).withArgs('foo').doesNotThrow(/error/);
+                passed = true;
+            } catch (err) {
+                //Everything is fine :)
+            }
+
+            if (passed) {
+                inspect.fail('Should fail, but it passed!');
+            }
+        });
     });
 
     describe('doesContain', function() {
