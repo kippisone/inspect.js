@@ -1,6 +1,7 @@
 /**
- * Inspect-js test expection library
+ * Inspect.js the next generation test inspection library
  *
+ * @package Inspect
  * @module inspect
  */
 
