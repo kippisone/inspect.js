@@ -62,7 +62,7 @@ var Inspect = function(input) {
  * @fires is.geil
  * @arg {object} req Request object
  * @arg {object} res Response object
- *  
+ *
  * @fires is.geil
  * @arg {object} req Request object
  * @arg {object} res Response object
@@ -72,7 +72,7 @@ var Inspect = function(input) {
  *
  * @example {js}
  * inspect(123).isString();
- * 
+ *
  * @preview
  * <b>Foo</b>
  *
@@ -81,7 +81,7 @@ var Inspect = function(input) {
 Inspect.prototype.isString = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'string') {
-        throw new InspectionError(message || ('Typeof input should be a string. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a string. But current type is ' + type));
     }
 
     return this;
@@ -94,20 +94,20 @@ Inspect.prototype.isString = function(message) {
  * @chainable
  * @version  v0.1.0
  * @protected
- * 
+ *
  * @param  {string} [message] Custom error message
  *
  * @example {js}
  * inspect(123).isNotString();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotString = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'string') {
-        throw new InspectionError(message || ('Typeof input should not be a string. But it is a string!'));    
+        throw new InspectionError(message || ('Typeof input should not be a string. But it is a string!'));
     }
-    
+
     return this;
 };
 
@@ -117,9 +117,9 @@ Inspect.prototype.isNotString = function(message) {
  * @method isArray
  * @chainable
  * @private
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isArray();
  *
@@ -128,7 +128,7 @@ Inspect.prototype.isNotString = function(message) {
 Inspect.prototype.isArray = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'array') {
-        throw new InspectionError(message || ('Typeof input should be an array. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be an array. But current type is ' + type));
     }
 
     return this;
@@ -139,20 +139,20 @@ Inspect.prototype.isArray = function(message) {
  *
  * @method isNotArray
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotArray();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotArray = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'array') {
-        throw new InspectionError(message || ('Typeof input should not be an array. But it is an array!'));    
+        throw new InspectionError(message || ('Typeof input should not be an array. But it is an array!'));
     }
-    
+
     return this;
 };
 
@@ -161,9 +161,9 @@ Inspect.prototype.isNotArray = function(message) {
  *
  * @method isObject
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isObject();
  *
@@ -172,7 +172,7 @@ Inspect.prototype.isNotArray = function(message) {
 Inspect.prototype.isObject = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'object') {
-        throw new InspectionError(message || ('Typeof input should be an object. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be an object. But current type is ' + type));
     }
 
     return this;
@@ -183,20 +183,20 @@ Inspect.prototype.isObject = function(message) {
  *
  * @method isNotObject
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotObject();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotObject = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'object') {
-        throw new InspectionError(message || ('Typeof input should not be an object. But it is an object!'));    
+        throw new InspectionError(message || ('Typeof input should not be an object. But it is an object!'));
     }
-    
+
     return this;
 };
 
@@ -205,9 +205,9 @@ Inspect.prototype.isNotObject = function(message) {
  *
  * @method isNull
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(null).isNull();
  *
@@ -216,7 +216,7 @@ Inspect.prototype.isNotObject = function(message) {
 Inspect.prototype.isNull = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'null') {
-        throw new InspectionError(message || ('Typeof input should be null. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be null. But current type is ' + type));
     }
 
     return this;
@@ -227,20 +227,20 @@ Inspect.prototype.isNull = function(message) {
  *
  * @method isNotNull
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotNull();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNull = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'null') {
-        throw new InspectionError(message || ('Typeof input should not be null. But it is null!'));    
+        throw new InspectionError(message || ('Typeof input should not be null. But it is null!'));
     }
-    
+
     return this;
 };
 
@@ -249,9 +249,9 @@ Inspect.prototype.isNotNull = function(message) {
  *
  * @method isUndefined
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(undefined).isUndefined();
  *
@@ -260,7 +260,7 @@ Inspect.prototype.isNotNull = function(message) {
 Inspect.prototype.isUndefined = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'undefined') {
-        throw new InspectionError(message || ('Typeof input should be undefined. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be undefined. But current type is ' + type));
     }
 
     return this;
@@ -271,20 +271,20 @@ Inspect.prototype.isUndefined = function(message) {
  *
  * @method isNotUndefined
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(true).isNotUndefined();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotUndefined = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'undefined') {
-        throw new InspectionError(message || ('Typeof input should not be undefined. But it is undefined!'));    
+        throw new InspectionError(message || ('Typeof input should not be undefined. But it is undefined!'));
     }
-    
+
     return this;
 };
 
@@ -293,9 +293,9 @@ Inspect.prototype.isNotUndefined = function(message) {
  *
  * @method isBoolean
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isBoolean();
  *
@@ -304,7 +304,7 @@ Inspect.prototype.isNotUndefined = function(message) {
 Inspect.prototype.isBoolean = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'boolean') {
-        throw new InspectionError(message || ('Typeof input should be a boolean. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a boolean. But current type is ' + type));
     }
 
     return this;
@@ -315,20 +315,20 @@ Inspect.prototype.isBoolean = function(message) {
  *
  * @method isNotBoolean
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotBoolean();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotBoolean = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'boolean') {
-        throw new InspectionError(message || ('Typeof input should not be a boolean. But it is a boolean!'));    
+        throw new InspectionError(message || ('Typeof input should not be a boolean. But it is a boolean!'));
     }
-    
+
     return this;
 };
 
@@ -337,9 +337,9 @@ Inspect.prototype.isNotBoolean = function(message) {
  *
  * @method isTrue
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isTrue();
  *
@@ -347,7 +347,7 @@ Inspect.prototype.isNotBoolean = function(message) {
  */
 Inspect.prototype.isTrue = function(message) {
     if (this.inspectValue !== true) {
-        throw new InspectionError(message || ('Typeof input should be true. But current type is ' + utils.getTypeOf(this.inspectValue)));    
+        throw new InspectionError(message || ('Typeof input should be true. But current type is ' + utils.getTypeOf(this.inspectValue)));
     }
 
     return this;
@@ -358,19 +358,19 @@ Inspect.prototype.isTrue = function(message) {
  *
  * @method isNotBoolean
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotBoolean();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotTrue = function(message) {
     if (this.inspectValue === true) {
-        throw new InspectionError(message || ('Typeof input should not be a boolean. But it is true!'));    
+        throw new InspectionError(message || ('Typeof input should not be a boolean. But it is true!'));
     }
-    
+
     return this;
 };
 
@@ -379,9 +379,9 @@ Inspect.prototype.isNotTrue = function(message) {
  *
  * @method isFalse
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isFalse();
  *
@@ -400,19 +400,19 @@ Inspect.prototype.isFalse = function(message) {
  *
  * @method isNotFalse
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotFalse();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotFalse = function(message) {
     if (this.inspectValue === false) {
-        throw new InspectionError(message || ('Typeof input should not be false. But it is false!')); 
+        throw new InspectionError(message || ('Typeof input should not be false. But it is false!'));
     }
-    
+
     return this;
 };
 
@@ -421,9 +421,9 @@ Inspect.prototype.isNotFalse = function(message) {
  *
  * @method isRegExp
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(/.+/).isRegExp();
  *
@@ -432,7 +432,7 @@ Inspect.prototype.isNotFalse = function(message) {
 Inspect.prototype.isRegExp = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'regexp') {
-        throw new InspectionError(message || ('Typeof input should be a regexp. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a regexp. But current type is ' + type));
     }
 
     return this;
@@ -443,20 +443,20 @@ Inspect.prototype.isRegExp = function(message) {
  *
  * @method isNotRegExp
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect('.*').isNotRegExp();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotRegExp = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'regexp') {
-        throw new InspectionError(message || ('Typeof input should not be a regexp. But it is a regexp!'));    
+        throw new InspectionError(message || ('Typeof input should not be a regexp. But it is a regexp!'));
     }
-    
+
     return this;
 };
 
@@ -465,9 +465,9 @@ Inspect.prototype.isNotRegExp = function(message) {
  *
  * @method isNumber
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isNumber();
  *
@@ -476,7 +476,7 @@ Inspect.prototype.isNotRegExp = function(message) {
 Inspect.prototype.isNumber = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'number') {
-        throw new InspectionError(message || ('Typeof input should be a number. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a number. But current type is ' + type));
     }
 
     return this;
@@ -487,20 +487,20 @@ Inspect.prototype.isNumber = function(message) {
  *
  * @method isNotNumber
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotNumber();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNumber = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'number') {
-        throw new InspectionError(message || ('Typeof input should not be a number. But it is a number!'));    
+        throw new InspectionError(message || ('Typeof input should not be a number. But it is a number!'));
     }
-    
+
     return this;
 };
 
@@ -510,9 +510,9 @@ Inspect.prototype.isNotNumber = function(message) {
  *
  * @method isNaN
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isNaN();
  *
@@ -521,7 +521,7 @@ Inspect.prototype.isNotNumber = function(message) {
 Inspect.prototype.isNaN = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'NaN') {
-        throw new InspectionError(message || ('Typeof input should be a NaN. But current type is ' + type + '!'));    
+        throw new InspectionError(message || ('Typeof input should be a NaN. But current type is ' + type + '!'));
     }
 
     return this;
@@ -532,32 +532,32 @@ Inspect.prototype.isNaN = function(message) {
  *
  * @method isNotNaN
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotNaN();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNaN = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'NaN') {
-        throw new InspectionError(message || ('Typeof input should not be a NaN. But it is a NaN!'));    
+        throw new InspectionError(message || ('Typeof input should not be a NaN. But it is a NaN!'));
     }
-    
+
     return this;
 };
 
 /**
  * [description]
  *
- * @method 
+ * @method
  * @chainable
- * 
+ *
  * @param  {any}  arg  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isClass = function(arg) {
@@ -570,9 +570,9 @@ Inspect.prototype.isClass = function(arg) {
  *
  * @method isFunction
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(function).isFunction();
  *
@@ -581,7 +581,7 @@ Inspect.prototype.isClass = function(arg) {
 Inspect.prototype.isFunction = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'function') {
-        throw new InspectionError(message || ('Typeof input should be a function. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a function. But current type is ' + type));
     }
 
     return this;
@@ -592,20 +592,20 @@ Inspect.prototype.isFunction = function(message) {
  *
  * @method isNotFunction
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(true).isNotFunction();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotFunction = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'function') {
-        throw new InspectionError(message || ('Typeof input should not be a function. But it is function!'));    
+        throw new InspectionError(message || ('Typeof input should not be a function. But it is function!'));
     }
-    
+
     return this;
 };
 
@@ -616,9 +616,9 @@ Inspect.prototype.isNotFunction = function(message) {
  *
  * @method isGenerator
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(generator function).isGenerator();
  *
@@ -627,7 +627,7 @@ Inspect.prototype.isNotFunction = function(message) {
 Inspect.prototype.isGenerator = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type !== 'generator') {
-        throw new InspectionError(message || ('Typeof input should be a generator function. But current type is ' + type));    
+        throw new InspectionError(message || ('Typeof input should be a generator function. But current type is ' + type));
     }
 
     return this;
@@ -638,20 +638,20 @@ Inspect.prototype.isGenerator = function(message) {
  *
  * @method isNotGenerator
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(true).isNotGenerator();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotGenerator = function(message) {
     var type = utils.getTypeOf(this.inspectValue);
     if (type === 'generator') {
-        throw new InspectionError(message || ('Typeof input should not be a generator function. But it is generator function!'));    
+        throw new InspectionError(message || ('Typeof input should not be a generator function. But it is generator function!'));
     }
-    
+
     return this;
 };
 
@@ -662,14 +662,14 @@ Inspect.prototype.isNotGenerator = function(message) {
  *
  * @method isPromise
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * var promise = new Promise(function(resolve, reject) {
- *     
+ *
  * });
- * 
+ *
  * inspect(promise).isPromise();
  *
  * @returns {object} Returns `this` value
@@ -689,12 +689,12 @@ Inspect.prototype.isPromise = function(message) {
  *
  * @method isNotPromise
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(true).isNotPromise();
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotPromise = function(message) {
@@ -703,7 +703,7 @@ Inspect.prototype.isNotPromise = function(message) {
             message || ('Typeof input should not be a promise. But it is promise!')
         );
     }
-    
+
     return this;
 };
 
@@ -714,10 +714,10 @@ Inspect.prototype.isNotPromise = function(message) {
  *
  * @method isAny
  * @chainable
- * 
+ *
  * @param  {string|array}  types  Types array or csv list.
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isAny = function(types, message) {
@@ -740,14 +740,14 @@ Inspect.prototype.isAny = function(types, message) {
 /**
  * Inspects whether input is not one of any types.
  *
- * `types` could be all what `utils.getTypeOf` is supporting 
+ * `types` could be all what `utils.getTypeOf` is supporting
  *
  * @method isNotAny
  * @chainable
- * 
+ *
  * @param  {string|array}  types  Types array or csv list.
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotAny = function(types, message) {
@@ -769,10 +769,10 @@ Inspect.prototype.isNotAny = function(types, message) {
  *
  * @method isEqual
  * @chainable
- * 
+ *
  * @param  {any} value Match value
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  *
  * var obj = {};
@@ -801,10 +801,10 @@ Inspect.prototype.isEqual = function(value, message) {
  *
  * @method isNotEqual
  * @chainable
- * 
+ *
  * @param  {any} value Match value
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  *
  * var obj = {};
@@ -833,10 +833,10 @@ Inspect.prototype.isNotEqual = function(value, message) {
  *
  * @method isEql
  * @chainable
- * 
+ *
  * @param  {any} value Match value
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  *
  * var obj = {};
@@ -865,10 +865,10 @@ Inspect.prototype.isEql = function(value, message) {
  *
  * @method isNotEql
  * @chainable
- * 
+ *
  * @param  {any} value Match value
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  *
  * var obj = { bar: '' };
@@ -897,9 +897,9 @@ Inspect.prototype.isNotEql = function(value, message) {
  *
  * @method isTruthy
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isTruthy();
  *
@@ -907,7 +907,7 @@ Inspect.prototype.isNotEql = function(value, message) {
  */
 Inspect.prototype.isTruthy = function(message) {
     if (!this.inspectValue) {
-        throw new InspectionError(message || ('Typeof input should be truthy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));    
+        throw new InspectionError(message || ('Typeof input should be truthy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
     }
 
     return this;
@@ -920,9 +920,9 @@ Inspect.prototype.isTruthy = function(message) {
  *
  * @method isFalsy
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo').isFalys();
  *
@@ -930,7 +930,7 @@ Inspect.prototype.isTruthy = function(message) {
  */
 Inspect.prototype.isFalsy = function(message) {
     if (this.inspectValue) {
-        throw new InspectionError(message || ('Typeof input should be falsy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));    
+        throw new InspectionError(message || ('Typeof input should be falsy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
     }
 
     return this;
@@ -943,9 +943,9 @@ Inspect.prototype.isFalsy = function(message) {
  *
  * @method isEmpty
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('').isEmpty();
  * inspect({}).isEmpty();
@@ -968,9 +968,9 @@ Inspect.prototype.isEmpty = function(message) {
  *
  * @method isNotEmpty
  * @chainable
- * 
+ *
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('foo').isNotEmpty();
  * inspect({ foo: 'bar' }).isNotEmpty();
@@ -991,10 +991,10 @@ Inspect.prototype.isNotEmpty = function(message) {
  *
  * @method isInstanceOf
  * @chainable
- * 
+ *
  * @param  {function} proto The prototype or class object
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(foo).isInstanceOf(Foo);
  *
@@ -1013,10 +1013,10 @@ Inspect.prototype.isInstanceOf = function(proto, message) {
  *
  * @method isNotInstanceOf
  * @chainable
- * 
+ *
  * @param  {function} proto The prototype or class object
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(foo).isNotInstanceOf(Foo);
  *
@@ -1035,10 +1035,10 @@ Inspect.prototype.isNotInstanceOf = function(proto, message) {
  *
  * @method doesMatch
  * @chainable
- * 
+ *
  * @param  {regexp} reg The RegExp
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(/[a-z]+/).doesMatch('foo');
  *
@@ -1062,10 +1062,10 @@ Inspect.prototype.doesMatch = function(reg, message) {
  *
  * @method doesNotMatch
  * @chainable
- * 
+ *
  * @param  {regexp} reg The RegExp
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect(/[a-z]+/).doesNotMatch('foo');
  *
@@ -1089,10 +1089,10 @@ Inspect.prototype.doesNotMatch = function(reg, message) {
  *
  * @method doesStartWith
  * @chainable
- * 
+ *
  * @param  {string} match Match string
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo is cool').doesStartWith('Foo');
  *
@@ -1117,10 +1117,10 @@ Inspect.prototype.doesStartWith = function(match, message) {
  *
  * @method doesNotStartWith
  * @chainable
- * 
+ *
  * @param  {string} match Match string
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo is cool').doesNotStartWith('bar');
  *
@@ -1141,10 +1141,10 @@ Inspect.prototype.doesNotStartWith = function(match, message) {
  *
  * @method doesEndWith
  * @chainable
- * 
+ *
  * @param  {string} match Match string
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo is cool').doesEndWith('Foo');
  *
@@ -1169,10 +1169,10 @@ Inspect.prototype.doesEndWith = function(match, message) {
  *
  * @method doesNotEndWith
  * @chainable
- * 
+ *
  * @param  {string} match Match string
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * inspect('Foo is cool').doesNotEndWith('bar');
  *
@@ -1193,13 +1193,13 @@ Inspect.prototype.doesNotEndWith = function(match, message) {
  *
  * @method isGreaterThan
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparsion number
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3).isGreaterThan(2);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isGreaterThan = function(num, message) {
@@ -1217,13 +1217,13 @@ Inspect.prototype.isGreaterThan = function(num, message) {
  *
  * @method isGreaterOrEqual
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3).isGreaterOrEqual(3);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isGreaterOrEqual = function(num, message) {
@@ -1240,13 +1240,13 @@ Inspect.prototype.isGreaterOrEqual = function(num, message) {
  *
  * @method isLesserThan
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3).isLesserThan(4);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isLesserThan = function(num, message) {
@@ -1263,13 +1263,13 @@ Inspect.prototype.isLesserThan = function(num, message) {
  *
  * @method isLesserOrEqual
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparison number
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3).isLesserOrEqual(3);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isLesserOrEqual = function(num, message) {
@@ -1286,7 +1286,7 @@ Inspect.prototype.isLesserOrEqual = function(num, message) {
  *
  * @method hasKey
  * @chainable
- * 
+ *
  * @param  {number}  key  Comparison number
  * @param  {string} message Custom error message
  *
@@ -1295,7 +1295,7 @@ Inspect.prototype.isLesserOrEqual = function(num, message) {
  *     foo: true,
  *     bar: true
  * }).hasKey('foo');
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasKey = function(key, message) {
@@ -1312,7 +1312,7 @@ Inspect.prototype.hasKey = function(key, message) {
  *
  * @method hasNotKey
  * @chainable
- * 
+ *
  * @param  {string}  key  Comparison number
  * @param  {string} message Custom error message
  *
@@ -1321,7 +1321,7 @@ Inspect.prototype.hasKey = function(key, message) {
  *     foo: true,
  *     bar: true
  * }).hasNotKey('blub');
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotKey = function(key, message) {
@@ -1338,7 +1338,7 @@ Inspect.prototype.hasNotKey = function(key, message) {
  *
  * @method hasKeys
  * @chainable
- * 
+ *
  * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
  *
@@ -1347,7 +1347,7 @@ Inspect.prototype.hasNotKey = function(key, message) {
  *     foo: true,
  *     bar: true
  * }).hasKeys(['foo', 'bar']);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasKeys = function(keys, message) {
@@ -1364,7 +1364,7 @@ Inspect.prototype.hasKeys = function(keys, message) {
  *
  * @method hasNotKeys
  * @chainable
- * 
+ *
  * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
  *
@@ -1373,7 +1373,7 @@ Inspect.prototype.hasKeys = function(keys, message) {
  *     foo: true,
  *     bar: true
  * }).hasNotKeys(['foo', 'bar']);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotKeys = function(keys, message) {
@@ -1390,7 +1390,7 @@ Inspect.prototype.hasNotKeys = function(keys, message) {
  *
  * @method hasAnyKeys
  * @chainable
- * 
+ *
  * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
  *
@@ -1399,7 +1399,7 @@ Inspect.prototype.hasNotKeys = function(keys, message) {
  *     foo: true,
  *     bar: true
  * }).hasAnyKeys(['foo', 'bar']);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasAnyKeys = function(keys, message) {
@@ -1416,7 +1416,7 @@ Inspect.prototype.hasAnyKeys = function(keys, message) {
  *
  * @method hasNotAnyKeys
  * @chainable
- * 
+ *
  * @param  {array}  keys  Keys array
  * @param  {string} message Custom error message
  *
@@ -1425,7 +1425,7 @@ Inspect.prototype.hasAnyKeys = function(keys, message) {
  *     foo: true,
  *     bar: true
  * }).hasNotAnyKeys(['blub', 'blab']);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotAnyKeys = function(keys, message) {
@@ -1442,7 +1442,7 @@ Inspect.prototype.hasNotAnyKeys = function(keys, message) {
  *
  * @method hasProps
  * @chainable
- * 
+ *
  * @param  {object}  props  props array
  * @param  {string} message Custom error message
  *
@@ -1451,7 +1451,7 @@ Inspect.prototype.hasNotAnyKeys = function(keys, message) {
  *     foo: true,
  *     bar: true
  * }).hasProps(['foo', 'bar']);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasProps = function(props, message) {
@@ -1471,7 +1471,7 @@ Inspect.prototype.hasProps = function(props, message) {
  *
  * @method hasProp
  * @chainable
- * 
+ *
  * @param  {object}  props  props array
  * @param  {string} message Custom error message
  *
@@ -1480,7 +1480,7 @@ Inspect.prototype.hasProps = function(props, message) {
  *     foo: true,
  *     bar: true
  * }).hasProp('foo', true);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasProp = function(key, value, message) {
@@ -1501,7 +1501,7 @@ Inspect.prototype.hasProp = function(key, value, message) {
  *
  * @method hasNotProp
  * @chainable
- * 
+ *
  * @param  {object}  props  props array
  * @param  {string} message Custom error message
  *
@@ -1510,7 +1510,7 @@ Inspect.prototype.hasProp = function(key, value, message) {
  *     foo: true,
  *     bar: true
  * }).hasNotProp('foo', true);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotProp = function(key, value, message) {
@@ -1530,10 +1530,10 @@ Inspect.prototype.hasNotProp = function(key, value, message) {
  *
  * @method hasLength
  * @chainable
- * 
+ *
  * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasLength = function(len, message) {
@@ -1551,10 +1551,10 @@ Inspect.prototype.hasLength = function(len, message) {
  *
  * @method hasMinLength
  * @chainable
- * 
+ *
  * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasMinLength = function(len, message) {
@@ -1572,10 +1572,10 @@ Inspect.prototype.hasMinLength = function(len, message) {
  *
  * @method hasMaxLength
  * @chainable
- * 
+ *
  * @param  {number}  len  Expected length
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasMaxLength = function(len, message) {
@@ -1583,7 +1583,7 @@ Inspect.prototype.hasMaxLength = function(len, message) {
     if (this.inspectValue.length > len) {
         throw new InspectionError(message || ('Input should have a maximum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
     }
-    
+
     return this;
 };
 
@@ -1592,10 +1592,10 @@ Inspect.prototype.hasMaxLength = function(len, message) {
  *
  * @method hasValue
  * @chainable
- * 
+ *
  * @param  {any}  arg  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasValue = function(value, message) {
@@ -1612,10 +1612,10 @@ Inspect.prototype.hasValue = function(value, message) {
  *
  * @method hasNotValue
  * @chainable
- * 
+ *
  * @param  {any}  arg  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotValue = function(value, message) {
@@ -1632,10 +1632,10 @@ Inspect.prototype.hasNotValue = function(value, message) {
  *
  * @method hasValues
  * @chainable
- * 
+ *
  * @param  {any}  arg  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasValues = function(values, message) {
@@ -1652,10 +1652,10 @@ Inspect.prototype.hasValues = function(values, message) {
  *
  * @method hasNotValues
  * @chainable
- * 
+ *
  * @param  {any}  arg  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotValues = function(values, message) {
@@ -1672,10 +1672,10 @@ Inspect.prototype.hasNotValues = function(values, message) {
  *
  * @method hasAnyValues
  * @chainable
- * 
+ *
  * @param  {array}  values  Haystack values
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasAnyValues = function(values, message) {
@@ -1691,10 +1691,10 @@ Inspect.prototype.hasAnyValues = function(values, message) {
  *
  * @method hasNotAnyValues
  * @chainable
- * 
+ *
  * @param  {array}  values  Haystack values
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotAnyValues = function(values, message) {
@@ -1711,11 +1711,11 @@ Inspect.prototype.hasNotAnyValues = function(values, message) {
  *
  * @method isWithin
  * @chainable
- * 
+ *
  * @param  {number}  min  Min value
  * @param  {number}  max  Max value
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isWithin = function(min, max, message) {
@@ -1736,11 +1736,11 @@ Inspect.prototype.isWithin = function(min, max, message) {
  *
  * @method isNotWithin
  * @chainable
- * 
+ *
  * @param  {number}  min  Min value
  * @param  {number}  max  Max value
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotWithin = function(min, max, message) {
@@ -1761,10 +1761,10 @@ Inspect.prototype.isNotWithin = function(min, max, message) {
  *
  * @method doesThrow
  * @chainable
- * 
+ *
  * @param  {string|regexp}  [exception] Specific error exception
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesThrow = function(exception, message) {
@@ -1792,10 +1792,10 @@ Inspect.prototype.doesThrow = function(exception, message) {
  *
  * @method doesNotThrow
  * @chainable
- * 
+ *
  * @param  {string|regexp}  [exception] Specific error exception
  * @param  {string} [message] Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotThrow = function(exception, message) {
@@ -1825,10 +1825,10 @@ Inspect.prototype.doesNotThrow = function(exception, message) {
  *
  * @method doesContain
  * @chainable
- * 
+ *
  * @param  {string}  str  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesContain = function(str, message) {
@@ -1846,10 +1846,10 @@ Inspect.prototype.doesContain = function(str, message) {
  *
  * @method doesNotContain
  * @chainable
- * 
+ *
  * @param  {string}  str  description
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotContain = function(str, message) {
@@ -1867,10 +1867,10 @@ Inspect.prototype.doesNotContain = function(str, message) {
  *
  * @method hasSubset
  * @chainable
- * 
+ *
  * @param  {array}  subset  Search for subset
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasSubset = function(subset, message) {
@@ -1888,10 +1888,10 @@ Inspect.prototype.hasSubset = function(subset, message) {
  *
  * @method hasNotSubset
  * @chainable
- * 
+ *
  * @param  {array}  subset  Search for subset
  * @param  {string} message Custom error message
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotSubset = function(subset, message) {
@@ -1900,7 +1900,7 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
     if (utils.hasSubset(this.inspectValue, subset)) {
         throw new InspectionError(message || ('Input should not contain a subset, but it has!'));
     }
-    
+
     return this;
 };
 
@@ -1909,7 +1909,7 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
  *
  * @method doesIncrease
  * @chainable
- * 
+ *
  * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {num} [num] Increase amount
@@ -1922,7 +1922,7 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
  * };
  *
  * inspect(obj).onCall(fn).doesIncrease('foo', 2);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesIncrease = function(prop, num, message) {
@@ -1957,11 +1957,11 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
  *
  * @method doesDecrease
  * @chainable
- * 
+ *
  * @param  {string} prop The property who should be changed
  * @param  {num} [num] Increase amount
  * @param  {string} message Custom error message
- * 
+ *
  * @example {js}
  * var obj = { num: 1 };
  * var fn = function() {
@@ -1969,7 +1969,7 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
  * };
  *
  * inspect(obj).onCall(fn).doesIncrease('foo', 2);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesDecrease = function(prop, num, message) {
@@ -2004,7 +2004,7 @@ Inspect.prototype.doesDecrease = function(prop, num, message) {
  *
  * @method doesChange
  * @chainable
- * 
+ *
  * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {string} message Custom error message
@@ -2016,7 +2016,7 @@ Inspect.prototype.doesDecrease = function(prop, num, message) {
  * };
  *
  * inspect(obj).onCall(fn).doesChange('foo');
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesChange = function(prop, message) {
@@ -2041,7 +2041,7 @@ Inspect.prototype.doesChange = function(prop, message) {
  *
  * @method doesNotChange
  * @chainable
- * 
+ *
  * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {string} message Custom error message
@@ -2053,7 +2053,7 @@ Inspect.prototype.doesChange = function(prop, message) {
  * };
  *
  * inspect(obj).onCall(fn).doesNotChange('foo');
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotChange = function(prop, message) {
@@ -2078,7 +2078,7 @@ Inspect.prototype.doesNotChange = function(prop, message) {
  *
  * @method doesNotChange
  * @chainable
- * 
+ *
  * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {string} message Custom error message
@@ -2090,7 +2090,7 @@ Inspect.prototype.doesNotChange = function(prop, message) {
  * };
  *
  * inspect(obj).onCall(fn).doesNotChange('foo');
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotIncrease = function(prop, message) {
@@ -2115,14 +2115,14 @@ Inspect.prototype.doesNotIncrease = function(prop, message) {
  *
  * @method isCloseTo
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparsion number
  * @param  {number}  range  Allowed range
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3.001).isCloseTo(3, 0.1);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isCloseTo = function(num, range, message) {
@@ -2141,14 +2141,14 @@ Inspect.prototype.isCloseTo = function(num, range, message) {
  *
  * @method isNotCloseTo
  * @chainable
- * 
+ *
  * @param  {number}  num  Comparsion number
  * @param  {number}  range  Allowed range
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(3.001).isNotCloseTo(2, 0.1);
- * 
+ *
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotCloseTo = function(num, range, message) {
@@ -2236,7 +2236,7 @@ Inspect.prototype.toString = function(value) {
  *
  * @method validateInput
  * @private
- * 
+ *
  * @param  {string}  inputTypes  Types for input value
  * @param  {any}  value  The value
  * @param  {string}  valueTypes  Types for the  value
@@ -2260,7 +2260,7 @@ Inspect.prototype.validateInput = function(inputTypes, value, valueTypes) {
  *
  * @method getTypeNames
  * @private
- * 
+ *
  * @param  {string|array}  types  Type names
  *
  * @returns {string} Returns a readable type names string.
@@ -2306,7 +2306,7 @@ Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
     catch (err) {
         this.funcCallError = err;
     }
-    
+
     return this;
 };
 
@@ -2326,13 +2326,23 @@ module.exports = function(value) {
  */
 module.exports.print = function(str) {
     console.log(typeof str);
+
+    if (str === null) {
+        str = '[Null]';
+    }
+
+    if (str === undefined) {
+        str = '[Undefined]';
+    }
+
     if (typeof str === 'object') {
         str = JSON.stringify(str, null, '  ');
     }
-    
+
+    console.log(str);
     str = str.split(/\n/g);
     var fillLen = String(str.length).length;
-    
+
     str.forEach(function(line, index) {
         var nr = ('      ' + String(index + 1)).slice(-fillLen);
         console.log(nr + ' | ' + line);
@@ -2343,7 +2353,7 @@ module.exports.print = function(str) {
  * Let fail a test
  *
  * @method fail
- * 
+ *
  * @param  {string} message  Error message
  * @param  {any} actual   Current value
  * @param  {expected} expected Expected value
