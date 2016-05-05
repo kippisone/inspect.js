@@ -1863,6 +1863,33 @@ Inspect.prototype.doesNotContain = function(str, message) {
 };
 
 /**
+ * Inspects whether a string contains a specific value only once
+ *
+ * @method doesContainOnce
+ * @chainable
+ *
+ * @param  {string}  str  description
+ * @param  {string} message Custom error message
+ *
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesContainOnce = function(str, message) {
+    this.validateInput('string', str, 'string');
+
+    var reg = new RegExp(str.replace(/[\/\\.+*?\(\[\{\}\]\)-]/g, '\\$&'), 'g');
+    var match = this.inspectValue.match(reg);
+    if (!match) {
+        throw new InspectionError(message || ('Input does not contain `' + str + '`!'));
+    }
+
+    if (match.length > 1) {
+      throw new InspectionError(message || ('Input does contain `str` ' + match.length + ' times, but it should contain `str` only once a time!'));
+    }
+
+    return this;
+};
+
+/**
  * Inspects whether an array contains a subset of an array in the same order
  *
  * @method hasSubset
@@ -2325,8 +2352,6 @@ module.exports = function(value) {
  * @param  {string}  str  Print str to console
  */
 module.exports.print = function(str) {
-    console.log(typeof str);
-
     if (str === null) {
         str = '[Null]';
     }
@@ -2339,7 +2364,6 @@ module.exports.print = function(str) {
         str = JSON.stringify(str, null, '  ');
     }
 
-    console.log(str);
     str = str.split(/\n/g);
     var fillLen = String(str.length).length;
 

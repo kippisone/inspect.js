@@ -5,6 +5,16 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        superjoin: {
+            browserBuild: {
+                options: {
+                    umd: true,
+                    verbose: true
+                },
+                src: ['inspect.js'],
+                dest: 'browser/inspect.js'
+            }
+        },
         release: {
             options: {
                 npm: true, //default: true
@@ -23,5 +33,6 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-release');
+    grunt.loadNpmTasks('grunt-superjoin');
     grunt.registerTask('default', 'help');
 };
