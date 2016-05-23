@@ -813,7 +813,7 @@ Inspect.prototype.isEqual = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotEqual = function(value, message) {
-    if (this.inspectValue !== value) {
+    if (this.inspectValue === value) {
         throw new ComparisonError(this,
             message || (
                 'Input is equal to `value`, but it should not!'
