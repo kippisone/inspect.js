@@ -3,6 +3,43 @@ inspect.js
 
 Behavior driven test inspection library with more then 60 test methods for Node.js and Javascript.
 
+```js
+// lib/mycalss.js
+
+class TestClass {
+  constructor(conf) {
+    this.conf = conf || {};
+    this.logLevel = 'warn';
+  }
+
+  getData() {
+    return Promise.resolve({
+      foo: 'bar'
+    });
+  }
+}
+
+module.exports = TestClass;
+```
+
+```js
+// tests/myclass.spec.js
+
+let inspect = require('inspect.js');
+
+let MyClass = require('../lib/myclass');
+inspect(MyClass).isClass();
+
+let myCalss = new MyClass();
+inspect(myClass.conf).isObject();
+inspect(myClass.logLevel).isString().isEql('warn');
+inspect(myClass.getData).isFunction();
+
+let res = myClass.getData();
+inspect(res).isPromise();
+```
+
+# Methods
 
 ## isString([message])
 
@@ -413,7 +450,7 @@ A promise is identified if input type is an object and if input has a then and a
 
 ```js
 var promise = new Promise(function(resolve, reject) {
-    
+
 });
 
 inspect(promise).isPromise();
@@ -937,4 +974,3 @@ Inspects whether an array has not any of these values
 values  array   
 Haystack values
 *string* `message` Custom error message
-
