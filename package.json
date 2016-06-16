@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "description": "Powerful test inspection library",
   "main": "inspect.js",
+  "browser": "web/inspect.js",
   "scripts": {
     "test": "mocha tests/*.spec.js"
   },
