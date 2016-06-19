@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                     verbose: true
                 },
                 src: ['inspect.js'],
-                dest: 'browser/inspect.js'
+                dest: 'web/inspect.js'
             }
         },
         release: {
