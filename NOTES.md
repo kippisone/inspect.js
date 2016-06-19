@@ -15,8 +15,22 @@ Missing features
   isResolvedPromise()
   isRejectedPromise()
 
+  isPromise().isPending()
+  isPromise().isResolved()
+  isPromise().isRejected()
+
 * isPlainObject()
   inspect({}).isPlainObject();
 
 * isEmptyArray()
   inspect([]).isEmptyArray();
+
+* isRealNumber()
+
+* getItem(n) // Gets an array item by index
+
+* findItem() // Finds an array item by a filter
+  /foo/ Value must contain foo
+  "foo" Value must be foo
+  123 Value must be 123
+  { foo: 23 } Value must be an object and has a property foo with value 23
