@@ -1,8 +1,7 @@
 /**
  * Inspect.js the next generation test inspection library
  *
- * @package Inspect
- * @module inspect
+ * @module Inspect
  */
 
 'use strict';
@@ -14,13 +13,6 @@ var ComparisonError = require('./lib/errors').ComparisonError;
 var ContainmentError = require('./lib/errors').ContainmentError;
 
 /**
- * Enables debug mode
- *
- * @var {string} DEBUG
- * @default  false
- */
-
-/**
  * Inspect class
  * @constructor  Inspect
  * @param {any} input Input value
@@ -30,51 +22,18 @@ var Inspect = function(input) {
 };
 
 /**
- * Defines whether inspect.js is cool or not.
- *
- * @property {boolean} isCool
- */
-
-/**
- * Another fucking serious property
- *
- * @event is.geil
- * @param {number} 1328 Krasse Zahl
- */
-
-/**
  * Inspects whether input is a string
  *
  * @method isString
  * @chainable
  * @version  v0.1.0
- * @public
- * @unimplemented
- * @new
- * @beta
- * @deprecated
- * @async
- * @static
  * @chainable
+ * @subtype typeComparison
  *
  * @param  {string} [message] Custom error message
  *
- * @fires is.geil
- * @arg {object} req Request object
- * @arg {object} res Response object
- *
- * @fires is.geil
- * @arg {object} req Request object
- * @arg {object} res Response object
- *
  * @example {js}
  * inspect('Foo').isString();
- *
- * @example {js}
- * inspect(123).isString();
- *
- * @preview
- * <b>Foo</b>
  *
  * @returns {object} Returns `this` value Lorem ipsum Dolor do culpa est sint laboris reprehenderit exercitation Ut aliquip nostrud enim ea ullamco exercitation tempor voluptate ut laborum in fugiat labore sed officia esse ea veniam aute voluptate qui ullamco nostrud irure nostrud eiusmod velit in aliqua minim officia Ut voluptate do est eiusmod ut tempor est id eu officia sunt Ut irure adipisicing dolor dolor culpa Ut commodo nisi in dolor in dolor incididunt reprehenderit aliqua sint dolore velit culpa voluptate dolor labore exercitation quis eiusmod amet proident est cillum aliqua ut ad culpa id non amet laboris fugiat labore ex consequat occaecat in consequat elit aute quis eiusmod nostrud in velit et eu irure reprehenderit incididunt dolore laboris minim dolor quis dolore ut eiusmod enim dolor tempor aute velit eiusmod elit in ullamco cillum veniam fugiat sit sunt ex occaecat nisi adipisicing sunt reprehenderit eiusmod incididunt labore commodo.
  */

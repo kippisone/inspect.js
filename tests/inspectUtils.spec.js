@@ -82,7 +82,7 @@ describe('Utils', function() {
     });
   });
 
-  describe.only('compareValues', function() {
+  describe('compareValues', function() {
     var values = [
       { title: 'two objects',                 left: { foo: true },    right: { foo: true },   shoudFail: false },
       { title: 'two diffetent objects',       left: { foo: true },    right: { foo: false },  shoudFail: true },

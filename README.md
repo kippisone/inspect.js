@@ -1,7 +1,34 @@
 inspect.js
 ==========
 
-Behavior driven test inspection library with more then 60 test methods for Node.js and Javascript.
+Inspect.js is a powerful test framework for Node.js and the web.
+More then 70 test methods help developers to test code easily.
+Inspect.js itself is fully tested with more than 1400 unit tests.
+
+Instalation
+-----------
+
+```shell
+npm install inspect.js --save-dev
+
+```
+
+Usage
+-----
+
+Inspect.js exports an `inspect()` method. This method can be used to test any kind of data.
+
+```js
+inspect('Hello inspect.js').isString();
+inspect('Hello inspect.js').isEql('Hello inspect.js');
+```
+
+Tests if the input is type of string and if string is equal to `Hello inspect.js`.
+
+Examples
+--------
+
+Lets say our test object is a class.
 
 ```js
 // lib/mycalss.js
@@ -22,6 +49,8 @@ class TestClass {
 module.exports = TestClass;
 ```
 
+then a test could be...
+
 ```js
 // tests/myclass.spec.js
 
@@ -39,13 +68,15 @@ let res = myClass.getData();
 inspect(res).isPromise();
 ```
 
-# Methods
+### Type comparison methods
 
-## isString([message])
+---
+
+#### isString([message])
 
 Inspects whether input is a string
 
-### Params:
+##### Params:
 
 *string* `message` Custom error message
 
@@ -55,11 +86,11 @@ Inspects whether input is a string
 inspect('Foo').isString();
 ```
 
-## isNotString([message])
+#### isNotString([message])
 
 Inspects whether input is not a string
 
-### Params:
+##### Params:
 
 *string* `message` Custom error message
 
