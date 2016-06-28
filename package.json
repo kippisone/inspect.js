@@ -12,7 +12,7 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-release": "^0.13.1",
+    "grunt-release": "^0.14.0",
     "mocha": "^2.5.3"
   },
   "directories": {
