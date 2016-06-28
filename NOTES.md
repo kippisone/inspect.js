@@ -49,3 +49,7 @@ Missing features
   "foo" Value must be foo
   123 Value must be 123
   { foo: 23 } Value must be an object and has a property foo with value 23
+
+
+doesPass(fn) // Inspects value against a custom function
+doesNotPass(fn)
