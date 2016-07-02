@@ -186,13 +186,14 @@ Inspect.prototype.isNull = function(message) {
  * Inspects whether input is not null
  *
  * @method isNotNull
- * @chainable
+ * @version v1.0.0
  *
  * @param  {string} message Custom error message
  *
  * @example {js}
  * inspect(123).isNotNull();
  *
+ * @chainable
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNull = function(message) {
@@ -1563,6 +1564,36 @@ Inspect.prototype.hasProps = function(props, message) {
 };
 
 /**
+ * Inspects whether `input` has none of these properties
+ *
+ * @method hasNotProps
+ * @version v1.0.0
+ *
+ * @param  {object}  props  props array
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect({
+ *     foo: true,
+ *     bar: true
+ * }).hasNotProps(['bla', 'blub']);
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.hasNotProps = function(props, message) {
+    this.validateInput('obj-types', props, 'object');
+    if (utils.hasProps(this.inspectValue, props)) {
+        throw new ComparisonError(this, message || ('Input has one of these blacklisted properties!'),
+            this.inspectValue,
+            props
+        );
+    }
+
+    return this;
+};
+
+/**
  * Inspects whether `input` has a property with a specified value
  *
  * @method hasProp
@@ -1641,6 +1672,28 @@ Inspect.prototype.hasLength = function(len, message) {
     throw new InspectionError(message || ('Input should have a length of ' + len + ' but it has a length of ' + this.inspectValue.length));
   }
   return this;
+};
+
+/**
+ * Inspects whether input has not a specific length
+ *
+ * Accepts arrays or strings as input values
+ *
+ * @method hasNotLength
+ * @version v1.0.0
+ *
+ * @param  {number}  len  Unexpected length
+ * @param  {string} [message] Custom error message
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.hasNotLength = function(len, message) {
+    this.validateInput('array,string', len, 'number');
+    if (this.inspectValue.length === len) {
+        throw new InspectionError(message || ('Input shouldn\'t have a length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+    }
+    return this;
 };
 
 /**
@@ -2053,7 +2106,6 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
  * @method doesIncrease
  * @version v1.0.0
  *
- * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {num} [num] Increase amount
  * @param  {string} [message] Custom error message
@@ -2109,10 +2161,10 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
  * @example {js}
  * var obj = { num: 1 };
  * var fn = function() {
- *     obj.num++;
+ *     obj.num--;
  * };
  *
- * inspect(obj).onCall(fn).doesIncrease('foo', 2);
+ * inspect(obj).onCall(fn).doesDecrease('foo', 2);
  *
  * @chainable
  * @returns {object} Returns `this` value
@@ -2150,7 +2202,6 @@ Inspect.prototype.doesDecrease = function(prop, num, message) {
  * @method doesChange
  * @version v1.0.0
  *
- * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {string} [message] Custom error message
  *
@@ -2188,7 +2239,6 @@ Inspect.prototype.doesChange = function(prop, message) {
  * @method doesNotChange
  * @version v1.0.0
  *
- * @param  {obj} prop The property who should be changed
  * @param  {string} prop The property who should be changed
  * @param  {string} [message] Custom error message
  *
@@ -2537,7 +2587,7 @@ module.exports.fail = function(message, actual, expected) {
 /**
  * Enable sinon support
  *
- * @method method_name
+ * @method useSinon
  * @static
  * @version v1.0.0
  * @param {object} sinon Sinon instance
