@@ -417,4 +417,13 @@ describe('Utils', function() {
       }
     });
   });
+
+  describe.only('hasConstructor', function() {
+    it('Should have a constructor method', function() {
+      var fn = class { constructor() {}};
+      if (!utils.hasConstructor(fn)) {
+        throw new Error('Should have a constructor');
+      }
+    });
+  });
 });
