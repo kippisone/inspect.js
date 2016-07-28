@@ -18,7 +18,7 @@ var ContainmentError = require('./lib/errors').ContainmentError;
  * @param {any} input Input value
  */
 var Inspect = function(input) {
-    this.inspectValue = input;
+  this.inspectValue = input;
 };
 
 /**
@@ -36,12 +36,12 @@ var Inspect = function(input) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isString = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'string') {
-        throw new InspectionError(message || ('Typeof input should be a string. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'string') {
+    throw new InspectionError(message || ('Typeof input should be a string. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -59,12 +59,12 @@ Inspect.prototype.isString = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotString = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'string') {
-        throw new InspectionError(message || ('Typeof input should not be a string. But it is a string!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'string') {
+    throw new InspectionError(message || ('Typeof input should not be a string. But it is a string!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -82,12 +82,12 @@ Inspect.prototype.isNotString = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isArray = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'array') {
-        throw new InspectionError(message || ('Typeof input should be an array. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'array') {
+    throw new InspectionError(message || ('Typeof input should be an array. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -105,12 +105,12 @@ Inspect.prototype.isArray = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotArray = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'array') {
-        throw new InspectionError(message || ('Typeof input should not be an array. But it is an array!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'array') {
+    throw new InspectionError(message || ('Typeof input should not be an array. But it is an array!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -128,12 +128,12 @@ Inspect.prototype.isNotArray = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isObject = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'object') {
-        throw new InspectionError(message || ('Typeof input should be an object. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'object') {
+    throw new InspectionError(message || ('Typeof input should be an object. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -151,12 +151,12 @@ Inspect.prototype.isObject = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotObject = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'object') {
-        throw new InspectionError(message || ('Typeof input should not be an object. But it is an object!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'object') {
+    throw new InspectionError(message || ('Typeof input should not be an object. But it is an object!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -174,12 +174,12 @@ Inspect.prototype.isNotObject = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNull = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'null') {
-        throw new InspectionError(message || ('Typeof input should be null. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'null') {
+    throw new InspectionError(message || ('Typeof input should be null. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -197,12 +197,12 @@ Inspect.prototype.isNull = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNull = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'null') {
-        throw new InspectionError(message || ('Typeof input should not be null. But it is null!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'null') {
+    throw new InspectionError(message || ('Typeof input should not be null. But it is null!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -220,12 +220,12 @@ Inspect.prototype.isNotNull = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isUndefined = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'undefined') {
-        throw new InspectionError(message || ('Typeof input should be undefined. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'undefined') {
+    throw new InspectionError(message || ('Typeof input should be undefined. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -243,12 +243,12 @@ Inspect.prototype.isUndefined = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotUndefined = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'undefined') {
-        throw new InspectionError(message || ('Typeof input should not be undefined. But it is undefined!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'undefined') {
+    throw new InspectionError(message || ('Typeof input should not be undefined. But it is undefined!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -266,12 +266,12 @@ Inspect.prototype.isNotUndefined = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isBoolean = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'boolean') {
-        throw new InspectionError(message || ('Typeof input should be a boolean. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'boolean') {
+    throw new InspectionError(message || ('Typeof input should be a boolean. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -289,12 +289,12 @@ Inspect.prototype.isBoolean = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotBoolean = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'boolean') {
-        throw new InspectionError(message || ('Typeof input should not be a boolean. But it is a boolean!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'boolean') {
+    throw new InspectionError(message || ('Typeof input should not be a boolean. But it is a boolean!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -312,11 +312,11 @@ Inspect.prototype.isNotBoolean = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isTrue = function(message) {
-    if (this.inspectValue !== true) {
-        throw new InspectionError(message || ('Typeof input should be true. But current type is ' + utils.getTypeOf(this.inspectValue)));
-    }
+  if (this.inspectValue !== true) {
+    throw new InspectionError(message || ('Typeof input should be true. But current type is ' + utils.getTypeOf(this.inspectValue)));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -334,11 +334,11 @@ Inspect.prototype.isTrue = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotTrue = function(message) {
-    if (this.inspectValue === true) {
-        throw new InspectionError(message || ('Input value should not be exacly true. But it is true!'));
-    }
+  if (this.inspectValue === true) {
+    throw new InspectionError(message || ('Input value should not be exacly true. But it is true!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -356,11 +356,11 @@ Inspect.prototype.isNotTrue = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isFalse = function(message) {
-    if (this.inspectValue !== false) {
-        throw new InspectionError(message || ('Input value should be exacly false. But current type is ' + utils.getTypeOf(this.inspectValue)));
-    }
+  if (this.inspectValue !== false) {
+    throw new InspectionError(message || ('Input value should be exacly false. But current type is ' + utils.getTypeOf(this.inspectValue)));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -378,11 +378,11 @@ Inspect.prototype.isFalse = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotFalse = function(message) {
-    if (this.inspectValue === false) {
-        throw new InspectionError(message || ('Typeof input should not be false. But it is false!'));
-    }
+  if (this.inspectValue === false) {
+    throw new InspectionError(message || ('Typeof input should not be false. But it is false!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -400,12 +400,12 @@ Inspect.prototype.isNotFalse = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isRegExp = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'regexp') {
-        throw new InspectionError(message || ('Typeof input should be a regexp. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'regexp') {
+    throw new InspectionError(message || ('Typeof input should be a regexp. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -423,12 +423,12 @@ Inspect.prototype.isRegExp = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotRegExp = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'regexp') {
-        throw new InspectionError(message || ('Typeof input should not be a regexp. But it is a regexp!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'regexp') {
+    throw new InspectionError(message || ('Typeof input should not be a regexp. But it is a regexp!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -446,12 +446,12 @@ Inspect.prototype.isNotRegExp = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNumber = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'number') {
-        throw new InspectionError(message || ('Typeof input should be a number. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'number') {
+    throw new InspectionError(message || ('Typeof input should be a number. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -469,12 +469,12 @@ Inspect.prototype.isNumber = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNumber = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'number') {
-        throw new InspectionError(message || ('Typeof input should not be a number. But it is a number!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'number') {
+    throw new InspectionError(message || ('Typeof input should not be a number. But it is a number!'));
+  }
 
-    return this;
+  return this;
 };
 
 
@@ -493,12 +493,12 @@ Inspect.prototype.isNotNumber = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNaN = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'NaN') {
-        throw new InspectionError(message || ('Typeof input should be a NaN. But current type is ' + type + '!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'NaN') {
+    throw new InspectionError(message || ('Typeof input should be a NaN. But current type is ' + type + '!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -516,46 +516,51 @@ Inspect.prototype.isNaN = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotNaN = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'NaN') {
-        throw new InspectionError(message || ('Typeof input should not be a NaN. But it is a NaN!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'NaN') {
+    throw new InspectionError(message || ('Typeof input should not be a NaN. But it is a NaN!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
  * Inspects whether input is a class
  *
  * @method isClass
- * @unimplemented
+ * @version v1.1.0
  *
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
+ * @param  {string} [message] Custom error message
  *
  * @chainable
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isClass = function(arg) {
-    //TODO implement method
-    return this;
+Inspect.prototype.isClass = function(message) {
+  if (!utils.isClass(this.inspectValue)) {
+    var type = utils.getTypeOf(this.inspectValue);
+    throw new InspectionError(message || ('Input should be a Class but input value is ' + type));
+  }
+
+  return this;
 };
 
 /**
  * Inspects whether input is not a class
  *
  * @method isNotClass
- * @unimplemented
+ * @version v1.1.0
  *
- * @param  {any}  arg  description
- * @param  {string} message Custom error message
+ * @param  {string} [message] Custom error message
  *
  * @chainable
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isNotClass = function(arg) {
-    //TODO implement method
-    return this;
+Inspect.prototype.isNotClass = function(message) {
+  if (utils.isClass(this.inspectValue)) {
+    throw new InspectionError(message || ('Input should not be a Class but input value is a class'));
+  }
+
+  return this;
 };
 
 /**
@@ -573,12 +578,12 @@ Inspect.prototype.isNotClass = function(arg) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isFunction = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'function') {
-        throw new InspectionError(message || ('Typeof input should be a function. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'function') {
+    throw new InspectionError(message || ('Typeof input should be a function. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -596,12 +601,12 @@ Inspect.prototype.isFunction = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotFunction = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'function') {
-        throw new InspectionError(message || ('Typeof input should not be a function. But it is function!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'function') {
+    throw new InspectionError(message || ('Typeof input should not be a function. But it is function!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -621,12 +626,12 @@ Inspect.prototype.isNotFunction = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isGenerator = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type !== 'generator') {
-        throw new InspectionError(message || ('Typeof input should be a generator function. But current type is ' + type));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'generator') {
+    throw new InspectionError(message || ('Typeof input should be a generator function. But current type is ' + type));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -644,12 +649,12 @@ Inspect.prototype.isGenerator = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotGenerator = function(message) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (type === 'generator') {
-        throw new InspectionError(message || ('Typeof input should not be a generator function. But it is generator function!'));
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'generator') {
+    throw new InspectionError(message || ('Typeof input should not be a generator function. But it is generator function!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -673,13 +678,13 @@ Inspect.prototype.isNotGenerator = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isPromise = function(message) {
-    if (!utils.isPromise(this.inspectValue)) {
-        throw new InspectionError(
-            message || ('Typeof input should be a promise. But current type is ')
-        );
-    }
+  if (!utils.isPromise(this.inspectValue)) {
+    throw new InspectionError(
+      message || ('Typeof input should be a promise. But current type is ')
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -697,13 +702,13 @@ Inspect.prototype.isPromise = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotPromise = function(message) {
-    if (utils.isPromise(this.inspectValue)) {
-        throw new InspectionError(this,
-            message || ('Typeof input should not be a promise. But it is promise!')
-        );
-    }
+  if (utils.isPromise(this.inspectValue)) {
+    throw new InspectionError(this,
+      message || ('Typeof input should not be a promise. But it is promise!')
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -721,20 +726,20 @@ Inspect.prototype.isNotPromise = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isAny = function(types, message) {
-    if (typeof types === 'string') {
-        types = types.split(',').map(String.trim);
-    }
+  if (typeof types === 'string') {
+    types = types.split(',').map(String.trim);
+  }
 
-    if (!utils.isAny(this.inspectValue, types)) {
-        throw new InspectionError(
-            message || (
-                'Typeof input should be any of `' + types.join(', ') + '`. But it is ' +
-                utils.getTypeOf(this.inspectValue) + '!'
-            )
-        );
-    }
+  if (!utils.isAny(this.inspectValue, types)) {
+    throw new InspectionError(
+      message || (
+        'Typeof input should be any of `' + types.join(', ') + '`. But it is ' +
+        utils.getTypeOf(this.inspectValue) + '!'
+      )
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -752,22 +757,22 @@ Inspect.prototype.isAny = function(types, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotAny = function(types, message) {
-    if (typeof types === 'string') {
-        types = types.split(',').map(String.trim);
-    }
+  if (typeof types === 'string') {
+    types = types.split(',').map(String.trim);
+  }
 
-    if (!utils.isAny(this.inspectValue, types)) {
-        throw new InspectionError(message || ('Typeof input should not be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
-    }
+  if (!utils.isAny(this.inspectValue, types)) {
+    throw new InspectionError(message || ('Typeof input should not be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
  * Inspects whether input is a date object
  *
  * @method isDate
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -775,15 +780,20 @@ Inspect.prototype.isNotAny = function(types, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isDate = function(message) {
-    //TODO implement method
-    return this;
+  this.validateInput('object');
+
+  if (!utils.isDate(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date object, but current type is ' + utils.getTypeOf(this.inspectValue) + '!'));
+  }
+
+  return this;
 };
 
 /**
  * Inspects whether input is not a date
  *
  * @method isNotDate
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -791,15 +801,19 @@ Inspect.prototype.isDate = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotDate = function(message) {
-    //TODO implement method
-    return this;
+  if (utils.isDate(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should not be a date object, but current type is a date object!'));
+  }
+  return this;
 };
 
 /**
  * Inspects whether input is a date string
  *
+ * This can be any type of date strings.
+ *
  * @method isDateString
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -807,15 +821,38 @@ Inspect.prototype.isNotDate = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isDateString = function(message) {
-    //TODO implement method
-    return this;
+  this.validateInput('string');
+
+  if (utils.isEmpty(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but input is empty!'));
+  }
+
+  if (utils.isNumberic(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but input is a number string!'));
+  }
+
+  var isDate = false;
+
+  try {
+    let d = Date.parse(this.inspectValue);
+    isDate = !isNaN(d);
+  }
+  catch(err) {
+    // do nothing here
+  }
+
+  if (!isDate) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but current type is ' + this.getTypeOf(this.inputTypes) + '!'));
+  }
+
+  return this;
 };
 
 /**
  * Inspects whether input is not a class
  *
  * @method isNotDateString
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -823,8 +860,25 @@ Inspect.prototype.isDateString = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotDateString = function(message) {
-    //TODO implement method
+  if (utils.isEmpty(this.inspectValue) || utils.isNumberic(this.inspectValue)) {
     return this;
+  }
+
+  var isDate = false;
+
+  try {
+    let d = Date.parse(this.inspectValue);
+    isDate = !isNaN(d);
+  }
+  catch(err) {
+    // do nothing here
+  }
+
+  if (isDate) {
+    throw new InspectionError(message || ('Typeof input should not be a date string, but current type is a date string!'));
+  }
+
+  return this;
 };
 
 /**
@@ -847,17 +901,17 @@ Inspect.prototype.isNotDateString = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isEqual = function(value, message) {
-    if (this.inspectValue !== value) {
-        throw new ComparisonError(this,
-            message || (
-                'Input is not equals to `value`'
-            ),
-            this.inspectValue,
-            value
-        );
-    }
+  if (this.inspectValue !== value) {
+    throw new ComparisonError(this,
+      message || (
+        'Input is not equals to `value`'
+      ),
+      this.inspectValue,
+      value
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -880,17 +934,17 @@ Inspect.prototype.isEqual = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotEqual = function(value, message) {
-    if (this.inspectValue === value) {
-        throw new ComparisonError(this,
-            message || (
-                'Input is equal to `value`, but it should not!'
-            ),
-            this.inspectValue,
-            value
-        );
-    }
+  if (this.inspectValue === value) {
+    throw new ComparisonError(this,
+      message || (
+        'Input is equal to `value`, but it should not!'
+      ),
+      this.inspectValue,
+      value
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -913,17 +967,17 @@ Inspect.prototype.isNotEqual = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isEql = function(value, message) {
-    if (!utils.compareValues(this.inspectValue, value)) {
-        throw new ComparisonError(this,
-            message || (
-                'Input is not eql to `value`'
-            ),
-            this.inspectValue,
-            value
-        );
-    }
+  if (!utils.compareValues(this.inspectValue, value)) {
+    throw new ComparisonError(this,
+      message || (
+        'Input is not eql to `value`'
+      ),
+      this.inspectValue,
+      value
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -946,17 +1000,17 @@ Inspect.prototype.isEql = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotEql = function(value, message) {
-    if (utils.compareValues(this.inspectValue, value)) {
-        throw new ComparisonError(this,
-            message || (
-                'Input shouldn\'t be equal to value!'
-            ),
-            this.inspectValue,
-            value
-        );
-    }
+  if (utils.compareValues(this.inspectValue, value)) {
+    throw new ComparisonError(this,
+      message || (
+        'Input shouldn\'t be equal to value!'
+      ),
+      this.inspectValue,
+      value
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -976,11 +1030,11 @@ Inspect.prototype.isNotEql = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isTruthy = function(message) {
-    if (!this.inspectValue) {
-        throw new InspectionError(message || ('Typeof input should be truthy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
-    }
+  if (!this.inspectValue) {
+    throw new InspectionError(message || ('Typeof input should be truthy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1000,11 +1054,11 @@ Inspect.prototype.isTruthy = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isFalsy = function(message) {
-    if (this.inspectValue) {
-        throw new InspectionError(message || ('Typeof input should be falsy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
-    }
+  if (this.inspectValue) {
+    throw new InspectionError(message || ('Typeof input should be falsy. But current type is ' + (this.inspectValue ? 'truthy' : 'falsy')));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1026,11 +1080,11 @@ Inspect.prototype.isFalsy = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isEmpty = function(message) {
-    if (!utils.isEmpty(this.inspectValue)) {
-        throw new InspectionError(message || ('Input should be empty. But it is not empty!'));
-    }
+  if (!utils.isEmpty(this.inspectValue)) {
+    throw new InspectionError(message || ('Input should be empty. But it is not empty!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1052,11 +1106,11 @@ Inspect.prototype.isEmpty = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotEmpty = function(message) {
-    if (utils.isEmpty(this.inspectValue)) {
-        throw new InspectionError(message || ('Input should not be empty. But it is empty!'));
-    }
+  if (utils.isEmpty(this.inspectValue)) {
+    throw new InspectionError(message || ('Input should not be empty. But it is empty!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1075,11 +1129,11 @@ Inspect.prototype.isNotEmpty = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isInstanceOf = function(proto, message) {
-    if (!utils.isInstanceOf(this.inspectValue, proto)) {
-        throw new InspectionError(message || ('Input is not an instance of a specific Prototype or Class!'));
-    }
+  if (!utils.isInstanceOf(this.inspectValue, proto)) {
+    throw new InspectionError(message || ('Input is not an instance of a specific Prototype or Class!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1098,11 +1152,11 @@ Inspect.prototype.isInstanceOf = function(proto, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotInstanceOf = function(proto, message) {
-    if (utils.isInstanceOf(this.inspectValue, proto)) {
-        throw new InspectionError(message || ('Input should not be an instance of a specific Prototype or Class. But it is!'));
-    }
+  if (utils.isInstanceOf(this.inspectValue, proto)) {
+    throw new InspectionError(message || ('Input should not be an instance of a specific Prototype or Class. But it is!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1121,16 +1175,16 @@ Inspect.prototype.isNotInstanceOf = function(proto, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesMatch = function(reg, message) {
-    var type = utils.getTypeOf(reg);
-    if (type !== 'regexp') {
-        throw new InputError(this, 'First arg must be a RegExp!', reg);
-    }
+  var type = utils.getTypeOf(reg);
+  if (type !== 'regexp') {
+    throw new InputError(this, 'First arg must be a RegExp!', reg);
+  }
 
-    if (!reg.test(this.inspectValue)) {
-        throw new InspectionError(message || ('Input does not match against a regular expression!'));
-    }
+  if (!reg.test(this.inspectValue)) {
+    throw new InspectionError(message || ('Input does not match against a regular expression!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1149,16 +1203,16 @@ Inspect.prototype.doesMatch = function(reg, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotMatch = function(reg, message) {
-    var type = utils.getTypeOf(reg);
-    if (type !== 'regexp') {
-        throw new InputError(this, 'First arg must be a RegExp!', reg);
-    }
+  var type = utils.getTypeOf(reg);
+  if (type !== 'regexp') {
+    throw new InputError(this, 'First arg must be a RegExp!', reg);
+  }
 
-    if (reg.test(this.inspectValue)) {
-        throw new InspectionError(message || ('Input does match against a regular expression. But it should not!'));
-    }
+  if (reg.test(this.inspectValue)) {
+    throw new InspectionError(message || ('Input does match against a regular expression. But it should not!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1177,17 +1231,17 @@ Inspect.prototype.doesNotMatch = function(reg, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesStartWith = function(match, message) {
-    this.validateInput('string', match, 'string');
+  this.validateInput('string', match, 'string');
 
-    if (this.inspectValue.substr(0, match.length) !== match) {
-        throw new ContainmentError(this,
-            message || 'Input does not start with match!',
-            { pos: 0, len: match.length },
-            match
-        );
-    }
+  if (this.inspectValue.substr(0, match.length) !== match) {
+    throw new ContainmentError(this,
+      message || 'Input does not start with match!',
+      { pos: 0, len: match.length },
+      match
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1206,13 +1260,13 @@ Inspect.prototype.doesStartWith = function(match, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotStartWith = function(match, message) {
-    this.validateInput('string', match, 'string');
+  this.validateInput('string', match, 'string');
 
-    if (this.inspectValue.substr(0, match.length) === match) {
-        throw new InspectionError(message || ('Input starts with match, but it should not!'));
-    }
+  if (this.inspectValue.substr(0, match.length) === match) {
+    throw new InspectionError(message || ('Input starts with match, but it should not!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1231,17 +1285,17 @@ Inspect.prototype.doesNotStartWith = function(match, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesEndWith = function(match, message) {
-    this.validateInput('string', match, 'string');
+  this.validateInput('string', match, 'string');
 
-    if (this.inspectValue.substr(this.inspectValue.length - match.length) !== match) {
-        throw new ContainmentError(this,
-            message || 'Input does not end with match!',
-            { pos: this.inspectValue.length - match.length, len: match.length },
-            match
-        );
-    }
+  if (this.inspectValue.substr(this.inspectValue.length - match.length) !== match) {
+    throw new ContainmentError(this,
+      message || 'Input does not end with match!',
+      { pos: this.inspectValue.length - match.length, len: match.length },
+      match
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1260,13 +1314,13 @@ Inspect.prototype.doesEndWith = function(match, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotEndWith = function(match, message) {
-    this.validateInput('string', match, 'string');
+  this.validateInput('string', match, 'string');
 
-    if (this.inspectValue.substr(this.inspectValue.length - match.length) === match) {
-        throw new InspectionError(message || ('Input ends with match, but it should not!'));
-    }
+  if (this.inspectValue.substr(this.inspectValue.length - match.length) === match) {
+    throw new InspectionError(message || ('Input ends with match, but it should not!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1285,13 +1339,13 @@ Inspect.prototype.doesNotEndWith = function(match, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isGreaterThan = function(num, message) {
-    this.validateInput('number', num, 'number');
+  this.validateInput('number', num, 'number');
 
-    if (this.inspectValue <= num) {
-        throw new InspectionError(message || ('Input must be greater than ' + num + '! But input is ' + this.inspectValue));
-    }
+  if (this.inspectValue <= num) {
+    throw new InspectionError(message || ('Input must be greater than ' + num + '! But input is ' + this.inspectValue));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1310,12 +1364,12 @@ Inspect.prototype.isGreaterThan = function(num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isGreaterOrEqual = function(num, message) {
-    this.validateInput('number', num, 'number');
-    if (this.inspectValue < num) {
-        throw new InspectionError(message || ('Input must be greater than or equal ' + num + '! But input is ' + this.inspectValue));
-    }
+  this.validateInput('number', num, 'number');
+  if (this.inspectValue < num) {
+    throw new InspectionError(message || ('Input must be greater than or equal ' + num + '! But input is ' + this.inspectValue));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1334,12 +1388,12 @@ Inspect.prototype.isGreaterOrEqual = function(num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isLesserThan = function(num, message) {
-    this.validateInput('number', num, 'number');
-    if (this.inspectValue >= num) {
-        throw new InspectionError(message || ('Input must be lesser than ' + num + '! But input is ' + this.inspectValue));
-    }
+  this.validateInput('number', num, 'number');
+  if (this.inspectValue >= num) {
+    throw new InspectionError(message || ('Input must be lesser than ' + num + '! But input is ' + this.inspectValue));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1358,12 +1412,12 @@ Inspect.prototype.isLesserThan = function(num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isLesserOrEqual = function(num, message) {
-    this.validateInput('number', num, 'number');
-    if (this.inspectValue > num) {
-        throw new InspectionError(message || ('Input must be lesser than or equal ' + num + '! But input is ' + this.inspectValue));
-    }
+  this.validateInput('number', num, 'number');
+  if (this.inspectValue > num) {
+    throw new InspectionError(message || ('Input must be lesser than or equal ' + num + '! But input is ' + this.inspectValue));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1385,12 +1439,12 @@ Inspect.prototype.isLesserOrEqual = function(num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasKey = function(key, message) {
-    this.validateInput('obj-types', key, 'string');
-    if (!utils.hasKeys(this.inspectValue, [key])) {
-        throw new InspectionError(message || ('Input does not have any ' + key + ' property'));
-    }
+  this.validateInput('obj-types', key, 'string');
+  if (!utils.hasKeys(this.inspectValue, [key])) {
+    throw new InspectionError(message || ('Input does not have any ' + key + ' property'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1412,12 +1466,12 @@ Inspect.prototype.hasKey = function(key, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotKey = function(key, message) {
-    this.validateInput('obj-types', key, 'string');
-    if (utils.hasKeys(this.inspectValue, [key])) {
-        throw new InspectionError(message || ('Input does have a ' + key + ' property, but it should not!'));
-    }
+  this.validateInput('obj-types', key, 'string');
+  if (utils.hasKeys(this.inspectValue, [key])) {
+    throw new InspectionError(message || ('Input does have a ' + key + ' property, but it should not!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1439,12 +1493,12 @@ Inspect.prototype.hasNotKey = function(key, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasKeys = function(keys, message) {
-    this.validateInput('obj-types', keys, 'array');
-    if (!utils.hasKeys(this.inspectValue, keys)) {
-        throw new InspectionError(message || ('Input does not have any `' + keys.join('` `') + '` property'));
-    }
+  this.validateInput('obj-types', keys, 'array');
+  if (!utils.hasKeys(this.inspectValue, keys)) {
+    throw new InspectionError(message || ('Input does not have any `' + keys.join('` `') + '` property'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1466,12 +1520,12 @@ Inspect.prototype.hasKeys = function(keys, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotKeys = function(keys, message) {
-    this.validateInput('obj-types', keys, 'array');
-    if (utils.hasKeys(this.inspectValue, keys)) {
-        throw new InspectionError(message || ('Input does not have any `' + keys.join('` `') + '` property'));
-    }
+  this.validateInput('obj-types', keys, 'array');
+  if (utils.hasKeys(this.inspectValue, keys)) {
+    throw new InspectionError(message || ('Input does not have any `' + keys.join('` `') + '` property'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1493,12 +1547,12 @@ Inspect.prototype.hasNotKeys = function(keys, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasAnyKeys = function(keys, message) {
-    this.validateInput('obj-types', keys, 'array');
-    if (!utils.hasAnyKeys(this.inspectValue, keys)) {
-        throw new InspectionError(message || ('Input does not have any of this keys `' + keys.join('` `') + '` property'));
-    }
+  this.validateInput('obj-types', keys, 'array');
+  if (!utils.hasAnyKeys(this.inspectValue, keys)) {
+    throw new InspectionError(message || ('Input does not have any of this keys `' + keys.join('` `') + '` property'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1520,12 +1574,12 @@ Inspect.prototype.hasAnyKeys = function(keys, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotAnyKeys = function(keys, message) {
-    this.validateInput('obj-types', keys, 'array');
-    if (utils.hasAnyKeys(this.inspectValue, keys)) {
-        throw new InspectionError(message || ('Input has any of this keys `' + keys.join(', ') + '` properties, but it shoud has none of them!'));
-    }
+  this.validateInput('obj-types', keys, 'array');
+  if (utils.hasAnyKeys(this.inspectValue, keys)) {
+    throw new InspectionError(message || ('Input has any of this keys `' + keys.join(', ') + '` properties, but it shoud has none of them!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1547,15 +1601,15 @@ Inspect.prototype.hasNotAnyKeys = function(keys, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasProps = function(props, message) {
-    this.validateInput('obj-types', props, 'object');
-    if (!utils.hasProps(this.inspectValue, props)) {
-        throw new ComparisonError(this, message || ('Property comparison failed!'),
-            this.inspectValue,
-            props
-        );
-    }
+  this.validateInput('obj-types', props, 'object');
+  if (!utils.hasProps(this.inspectValue, props)) {
+    throw new ComparisonError(this, message || ('Property comparison failed!'),
+      this.inspectValue,
+      props
+    );
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1607,16 +1661,16 @@ Inspect.prototype.hasNotProps = function(props, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasProp = function(key, value, message) {
-    this.validateInput('obj-types', key, 'string', value, 'any');
-    if (!utils.hasDeepKey(this.inspectValue, key)) {
-        throw new InspectionError(message || 'Input has no `' + key + '` property!');
-    }
+  this.validateInput('obj-types', key, 'string', value, 'any');
+  if (!utils.hasDeepKey(this.inspectValue, key)) {
+    throw new InspectionError(message || 'Input has no `' + key + '` property!');
+  }
 
-    if (!utils.hasDeepProp(this.inspectValue, key, value)) {
-        throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
-    }
+  if (!utils.hasDeepProp(this.inspectValue, key, value)) {
+    throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1638,13 +1692,13 @@ Inspect.prototype.hasProp = function(key, value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotProp = function(key, value, message) {
-    this.validateInput('obj-types', key, 'string', value, 'any');
-    var prop = utils.hasDeepKey(this.inspectValue, key);
-    if (prop && utils.hasDeepProp(this.inspectValue, key, value)) {
-        throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
-    }
+  this.validateInput('obj-types', key, 'string', value, 'any');
+  var prop = utils.hasDeepKey(this.inspectValue, key);
+  if (prop && utils.hasDeepProp(this.inspectValue, key, value)) {
+    throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1662,11 +1716,11 @@ Inspect.prototype.hasNotProp = function(key, value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasLength = function(len, message) {
-    this.validateInput('array,string', len, 'number');
-    if (this.inspectValue.length !== len) {
-        throw new InspectionError(message || ('Input should have a length of ' + len + ' but it has a length of ' + this.inspectValue.length));
-    }
-    return this;
+  this.validateInput('array,string', len, 'number');
+  if (this.inspectValue.length !== len) {
+    throw new InspectionError(message || ('Input should have a length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+  }
+  return this;
 };
 
 /**
@@ -1706,11 +1760,11 @@ Inspect.prototype.hasNotLength = function(len, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasMinLength = function(len, message) {
-    this.validateInput('array,string', len, 'number');
-    if (this.inspectValue.length < len) {
-        throw new InspectionError(message || ('Input should have a minimum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
-    }
-    return this;
+  this.validateInput('array,string', len, 'number');
+  if (this.inspectValue.length < len) {
+    throw new InspectionError(message || ('Input should have a minimum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+  }
+  return this;
 };
 
 /**
@@ -1728,12 +1782,12 @@ Inspect.prototype.hasMinLength = function(len, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasMaxLength = function(len, message) {
-    this.validateInput('array,string', len, 'number');
-    if (this.inspectValue.length > len) {
-        throw new InspectionError(message || ('Input should have a maximum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
-    }
+  this.validateInput('array,string', len, 'number');
+  if (this.inspectValue.length > len) {
+    throw new InspectionError(message || ('Input should have a maximum length of ' + len + ' but it has a length of ' + this.inspectValue.length));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1749,12 +1803,12 @@ Inspect.prototype.hasMaxLength = function(len, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasValue = function(value, message) {
-    this.validateInput('array', value, 'any');
-    if (!utils.hasValues(this.inspectValue, [value])) {
-        throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
-    }
+  this.validateInput('array', value, 'any');
+  if (!utils.hasValues(this.inspectValue, [value])) {
+    throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1770,12 +1824,12 @@ Inspect.prototype.hasValue = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotValue = function(value, message) {
-    this.validateInput('array', value, 'any');
-    if (utils.hasValues(this.inspectValue, [value])) {
-        throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
-    }
+  this.validateInput('array', value, 'any');
+  if (utils.hasValues(this.inspectValue, [value])) {
+    throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1791,12 +1845,12 @@ Inspect.prototype.hasNotValue = function(value, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasValues = function(values, message) {
-    this.validateInput('array', values, 'array');
-    if (!utils.hasValues(this.inspectValue, values)) {
-        throw new ComparisonError(this, message || 'Input has not all of these values!', this.inspectValue, values);
-    }
+  this.validateInput('array', values, 'array');
+  if (!utils.hasValues(this.inspectValue, values)) {
+    throw new ComparisonError(this, message || 'Input has not all of these values!', this.inspectValue, values);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1812,12 +1866,12 @@ Inspect.prototype.hasValues = function(values, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotValues = function(values, message) {
-    this.validateInput('array', values, 'array');
-    if (utils.hasValues(this.inspectValue, values)) {
-        throw new ComparisonError(this, message || 'Input has any of these values, but it shoud have none of them!', this.inspectValue, values);
-    }
+  this.validateInput('array', values, 'array');
+  if (utils.hasValues(this.inspectValue, values)) {
+    throw new ComparisonError(this, message || 'Input has any of these values, but it shoud have none of them!', this.inspectValue, values);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1833,12 +1887,12 @@ Inspect.prototype.hasNotValues = function(values, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasAnyValues = function(values, message) {
-    this.validateInput('array', values, 'array');
-    if (!utils.hasAnyValues(this.inspectValue, values)) {
-        throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
-    }
+  this.validateInput('array', values, 'array');
+  if (!utils.hasAnyValues(this.inspectValue, values)) {
+    throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
+  }
 
-    return this;
+  return this;
 };
 /**
  * Inspects whether an array has not any of these values
@@ -1853,12 +1907,12 @@ Inspect.prototype.hasAnyValues = function(values, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotAnyValues = function(values, message) {
-    this.validateInput('array', values, 'array');
-    if (utils.hasAnyValues(this.inspectValue, values)) {
-        throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
-    }
+  this.validateInput('array', values, 'array');
+  if (utils.hasAnyValues(this.inspectValue, values)) {
+    throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1875,16 +1929,16 @@ Inspect.prototype.hasNotAnyValues = function(values, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isWithin = function(min, max, message) {
-    this.validateInput('number', min, 'number', max, 'number');
+  this.validateInput('number', min, 'number', max, 'number');
 
-    var a = Math.min(min, max);
-    var b = Math.max(min, max);
+  var a = Math.min(min, max);
+  var b = Math.max(min, max);
 
-    if (this.inspectValue < a || this.inspectValue > b) {
-        throw new InspectionError(message || 'Input must be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
-    }
+  if (this.inspectValue < a || this.inspectValue > b) {
+    throw new InspectionError(message || 'Input must be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1901,16 +1955,16 @@ Inspect.prototype.isWithin = function(min, max, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotWithin = function(min, max, message) {
-    this.validateInput('number', min, 'number', max, 'number');
+  this.validateInput('number', min, 'number', max, 'number');
 
-    var a = Math.min(min, max);
-    var b = Math.max(min, max);
+  var a = Math.min(min, max);
+  var b = Math.max(min, max);
 
-    if (this.inspectValue > a && this.inspectValue < b) {
-        throw new InspectionError(message || 'Input should not be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
-    }
+  if (this.inspectValue > a && this.inspectValue < b) {
+    throw new InspectionError(message || 'Input should not be within ' + a + ', and ' + b + '. But current value is ' + this.inspectValue + '!');
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1926,23 +1980,23 @@ Inspect.prototype.isNotWithin = function(min, max, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesThrow = function(exception, message) {
-    if (!this.funcCallError) {
-        throw new InspectionError(message || 'Input should throw an error, but error wasn\'t thrown!');
-    }
+  if (!this.funcCallError) {
+    throw new InspectionError(message || 'Input should throw an error, but error wasn\'t thrown!');
+  }
 
-    var type = utils.getTypeOf(exception);
-    if (type === 'string') {
-        if (this.funcCallError.message !== exception) {
-            throw new InspectionError(message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
-        }
+  var type = utils.getTypeOf(exception);
+  if (type === 'string') {
+    if (this.funcCallError.message !== exception) {
+      throw new InspectionError(message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
     }
-    else if (type === 'regexp') {
-        if (!exception.test(this.funcCallError.message)) {
-            throw new InspectionError(message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
-        }
+  }
+  else if (type === 'regexp') {
+    if (!exception.test(this.funcCallError.message)) {
+      throw new InspectionError(message || 'Input should throw an `' + exception + '` error!', exception, this.funcCallError.message);
     }
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1958,25 +2012,25 @@ Inspect.prototype.doesThrow = function(exception, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotThrow = function(exception, message) {
-    if (!exception && this.funcCallError) {
-        throw new InspectionError(message || 'Input should not throw an error, but `' + exception + '` was thrown!');
-    }
+  if (!exception && this.funcCallError) {
+    throw new InspectionError(message || 'Input should not throw an error, but `' + exception + '` was thrown!');
+  }
 
-    if (exception && this.funcCallError) {
-        var type = utils.getTypeOf(exception);
-        if (type === 'string') {
-            if (this.funcCallError.message === exception) {
-                throw new InspectionError(message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
-            }
-        }
-        else if (type === 'regexp') {
-            if (exception.test(this.funcCallError.message)) {
-                throw new InspectionError(message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
-            }
-        }
+  if (exception && this.funcCallError) {
+    var type = utils.getTypeOf(exception);
+    if (type === 'string') {
+      if (this.funcCallError.message === exception) {
+        throw new InspectionError(message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
+      }
     }
+    else if (type === 'regexp') {
+      if (exception.test(this.funcCallError.message)) {
+        throw new InspectionError(message || 'Input should not throw an `' + exception + '` error, but it has!', exception, this.funcCallError.message);
+      }
+    }
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -1992,13 +2046,13 @@ Inspect.prototype.doesNotThrow = function(exception, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesContain = function(str, message) {
-    this.validateInput('string', str, 'string');
+  this.validateInput('string', str, 'string');
 
-    if (this.inspectValue.indexOf(str) === -1) {
-        throw new InspectionError(message || ('Input does not contain `' + str + '`!'));
-    }
+  if (this.inspectValue.indexOf(str) === -1) {
+    throw new InspectionError(message || ('Input does not contain `' + str + '`!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2014,13 +2068,13 @@ Inspect.prototype.doesContain = function(str, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotContain = function(str, message) {
-    this.validateInput('string', str, 'string');
+  this.validateInput('string', str, 'string');
 
-    if (this.inspectValue.indexOf(str) !== -1) {
-        throw new InspectionError(message || ('Input should not contain `' + str + '`, but it was found!'));
-    }
+  if (this.inspectValue.indexOf(str) !== -1) {
+    throw new InspectionError(message || ('Input should not contain `' + str + '`, but it was found!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2036,19 +2090,19 @@ Inspect.prototype.doesNotContain = function(str, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesContainOnce = function(str, message) {
-    this.validateInput('string', str, 'string');
+  this.validateInput('string', str, 'string');
 
-    var reg = new RegExp(str.replace(/[\/\\.+*?\(\[\{\}\]\)-]/g, '\\$&'), 'g');
-    var match = this.inspectValue.match(reg);
-    if (!match) {
-        throw new InspectionError(message || ('Input does not contain `' + str + '`!'));
-    }
+  var reg = new RegExp(str.replace(/[\/\\.+*?\(\[\{\}\]\)-]/g, '\\$&'), 'g');
+  var match = this.inspectValue.match(reg);
+  if (!match) {
+    throw new InspectionError(message || ('Input does not contain `' + str + '`!'));
+  }
 
-    if (match.length > 1) {
-      throw new InspectionError(message || ('Input does contain `str` ' + match.length + ' times, but it should contain `str` only once a time!'));
-    }
+  if (match.length > 1) {
+   throw new InspectionError(message || ('Input does contain `str` ' + match.length + ' times, but it should contain `str` only once a time!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2064,13 +2118,13 @@ Inspect.prototype.doesContainOnce = function(str, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasSubset = function(subset, message) {
-    this.validateInput('array', subset, 'array');
+  this.validateInput('array', subset, 'array');
 
-    if (!utils.hasSubset(this.inspectValue, subset)) {
-        throw new InspectionError(message || ('Input should contain a subset, but it was not found!'));
-    }
+  if (!utils.hasSubset(this.inspectValue, subset)) {
+    throw new InspectionError(message || ('Input should contain a subset, but it was not found!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2086,13 +2140,13 @@ Inspect.prototype.hasSubset = function(subset, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.hasNotSubset = function(subset, message) {
-    this.validateInput('array', subset, 'array');
+  this.validateInput('array', subset, 'array');
 
-    if (utils.hasSubset(this.inspectValue, subset)) {
-        throw new InspectionError(message || ('Input should not contain a subset, but it has!'));
-    }
+  if (utils.hasSubset(this.inspectValue, subset)) {
+    throw new InspectionError(message || ('Input should not contain a subset, but it has!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2117,30 +2171,30 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesIncrease = function(prop, num, message) {
-    this.validateInput('object', prop, 'string');
+  this.validateInput('object', prop, 'string');
 
-    if (utils.isUndefined(this.inspectValueBefore)) {
-        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  if (utils.isUndefined(this.inspectValueBefore)) {
+    throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  }
+
+  if (isNaN(num)) {
+    message = num;
+    num = null;
+  }
+
+  var a = utils.undotify(this.inspectValueBefore, prop);
+  var b = utils.undotify(this.inspectValue, prop);
+
+  if (num) {
+    if ((a + num) !== b) {
+      throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a + num);
     }
+  }
+  else if (a >= b) {
+    throw new ComparisonError(this, message || ('Input should be increased!'), b, a + 1);
+  }
 
-    if (isNaN(num)) {
-        message = num;
-        num = null;
-    }
-
-    var a = utils.undotify(this.inspectValueBefore, prop);
-    var b = utils.undotify(this.inspectValue, prop);
-
-    if (num) {
-        if ((a + num) !== b) {
-            throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a + num);
-        }
-    }
-    else if (a >= b) {
-        throw new ComparisonError(this, message || ('Input should be increased!'), b, a + 1);
-    }
-
-    return this;
+  return this;
 };
 
 /**
@@ -2165,30 +2219,30 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesDecrease = function(prop, num, message) {
-    this.validateInput('object', prop, 'string');
+  this.validateInput('object', prop, 'string');
 
-    if (utils.isUndefined(this.inspectValueBefore)) {
-        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  if (utils.isUndefined(this.inspectValueBefore)) {
+    throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  }
+
+  if (isNaN(num)) {
+    message = num;
+    num = null;
+  }
+
+  var a = utils.undotify(this.inspectValueBefore, prop);
+  var b = utils.undotify(this.inspectValue, prop);
+
+  if (num) {
+    if (a - num !== b) {
+      throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
     }
+  }
+  else if (a <= b) {
+    throw new ComparisonError(this, message || ('Input should be increased!'), b, a - 1);
+  }
 
-    if (isNaN(num)) {
-        message = num;
-        num = null;
-    }
-
-    var a = utils.undotify(this.inspectValueBefore, prop);
-    var b = utils.undotify(this.inspectValue, prop);
-
-    if (num) {
-        if (a - num !== b) {
-            throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
-        }
-    }
-    else if (a <= b) {
-        throw new ComparisonError(this, message || ('Input should be increased!'), b, a - 1);
-    }
-
-    return this;
+  return this;
 };
 
 /**
@@ -2212,20 +2266,20 @@ Inspect.prototype.doesDecrease = function(prop, num, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesChange = function(prop, message) {
-    this.validateInput('object', prop, 'string');
+  this.validateInput('object', prop, 'string');
 
-    if (utils.isUndefined(this.inspectValueBefore)) {
-        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
-    }
+  if (utils.isUndefined(this.inspectValueBefore)) {
+    throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  }
 
-    var a = utils.undotify(this.inspectValueBefore, prop);
-    var b = utils.undotify(this.inspectValue, prop);
+  var a = utils.undotify(this.inspectValueBefore, prop);
+  var b = utils.undotify(this.inspectValue, prop);
 
-    if (utils.compareValues(a, b)) {
-        throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'));
-    }
+  if (utils.compareValues(a, b)) {
+    throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2249,20 +2303,58 @@ Inspect.prototype.doesChange = function(prop, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotChange = function(prop, message) {
-    this.validateInput('object', prop, 'string');
+  this.validateInput('object', prop, 'string');
 
-    if (utils.isUndefined(this.inspectValueBefore)) {
-        throw new InputError('This method works only together with onCall! The onCall method must be called before!');
-    }
+  if (utils.isUndefined(this.inspectValueBefore)) {
+    throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  }
 
-    var a = utils.undotify(this.inspectValueBefore, prop);
-    var b = utils.undotify(this.inspectValue, prop);
+  var a = utils.undotify(this.inspectValueBefore, prop);
+  var b = utils.undotify(this.inspectValue, prop);
 
-    if (!utils.compareValues(a, b)) {
-        throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'), b, a);
-    }
+  if (!utils.compareValues(a, b)) {
+    throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'), b, a);
+  }
 
-    return this;
+  return this;
+};
+
+/**
+ * Inspects whether an function call does not change a property
+ *
+ * @method doesNotChange
+ * @version v1.0.0
+ *
+ * @param  {obj} prop The property who should be changed
+ * @param  {string} prop The property who should be changed
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * var obj = { foo: '' };
+ * var fn = function() {
+ *     obj.otherFoo = 'bar';
+ * };
+ *
+ * inspect(obj).onCall(fn).doesNotChange('foo');
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.doesNotIncrease = function(prop, message) {
+  this.validateInput('object', prop, 'string');
+
+  if (utils.isUndefined(this.inspectValueBefore)) {
+    throw new InputError('This method works only together with onCall! The onCall method must be called before!');
+  }
+
+  var a = utils.undotify(this.inspectValueBefore, prop);
+  var b = utils.undotify(this.inspectValue, prop);
+
+  if (!utils.compareValues(a, b)) {
+    throw new ComparisonError(this, message || ('Property `' + prop + '` should not be changed!'), b, a);
+  }
+
+  return this;
 };
 
 /**
@@ -2282,14 +2374,14 @@ Inspect.prototype.doesNotChange = function(prop, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isCloseTo = function(num, range, message) {
-    var min = Math.min(num - range, num + range);
-    var max = Math.max(num - range, num + range);
+  var min = Math.min(num - range, num + range);
+  var max = Math.max(num - range, num + range);
 
-    if (this.inspectValue < min || this.inspectValue > max) {
-        throw new InspectionError(message || ('Input is not within the allowed range!'));
-    }
+  if (this.inspectValue < min || this.inspectValue > max) {
+    throw new InspectionError(message || ('Input is not within the allowed range!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2309,14 +2401,14 @@ Inspect.prototype.isCloseTo = function(num, range, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotCloseTo = function(num, range, message) {
-    var min = Math.min(num - range, num + range);
-    var max = Math.max(num - range, num + range);
+  var min = Math.min(num - range, num + range);
+  var max = Math.max(num - range, num + range);
 
-    if (this.inspectValue >= min && this.inspectValue <= max) {
-        throw new InspectionError(message || ('Input is not outside of the allowed range!'));
-    }
+  if (this.inspectValue >= min && this.inspectValue <= max) {
+    throw new InspectionError(message || ('Input is not outside of the allowed range!'));
+  }
 
-    return this;
+  return this;
 };
 
 /**
@@ -2330,13 +2422,13 @@ Inspect.prototype.isNotCloseTo = function(num, range, message) {
  * @returns {object} Returns this value
  */
 Inspect.prototype.onCall = function(fn) {
-    if (fn) {
-        this.inspectValueBefore = utils.clone(this.inspectValue);
-    }
+  if (fn) {
+    this.inspectValueBefore = utils.clone(this.inspectValue);
+  }
 
-    var args = Array.prototype.slice.call(arguments, 1);
-    this.callInputAsFunction(fn, null, args);
-    return this;
+  var args = Array.prototype.slice.call(arguments, 1);
+  this.callInputAsFunction(fn, null, args);
+  return this;
 };
 
 /**
@@ -2351,14 +2443,14 @@ Inspect.prototype.onCall = function(fn) {
  * @returns {object} Returns this value
  */
 Inspect.prototype.withArgs = function() {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (typeof this.inspectValue !== 'function') {
-        throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (typeof this.inspectValue !== 'function') {
+    throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
+  }
 
-    var args = Array.prototype.slice.call(arguments);
-    this.callInputAsFunction(null, null, args);
-    return this;
+  var args = Array.prototype.slice.call(arguments);
+  this.callInputAsFunction(null, null, args);
+  return this;
 };
 
 /**
@@ -2374,14 +2466,14 @@ Inspect.prototype.withArgs = function() {
  * @returns {object} Returns this value
  */
 Inspect.prototype.withArgsOn = function(ctx) {
-    var type = utils.getTypeOf(this.inspectValue);
-    if (typeof this.inspectValue !== 'function') {
-        throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
-    }
+  var type = utils.getTypeOf(this.inspectValue);
+  if (typeof this.inspectValue !== 'function') {
+    throw new InspectionError('Could not call `input` as a function. Input is type of ' + type + '!');
+  }
 
-    var args = Array.prototype.slice.call(arguments, 1);
-    this.callInputAsFunction(null, ctx, args);
-    return this;
+  var args = Array.prototype.slice.call(arguments, 1);
+  this.callInputAsFunction(null, ctx, args);
+  return this;
 };
 
 /**
@@ -2395,13 +2487,13 @@ Inspect.prototype.withArgsOn = function(ctx) {
  * @returns {string} Returns a readable type of input value
  */
 Inspect.prototype.toString = function(value) {
-    if (arguments.length === 0) {
-        value = this.inspectValue;
-    }
+  if (arguments.length === 0) {
+    value = this.inspectValue;
+  }
 
-    var type = utils.getTypeOf(value);
+  var type = utils.getTypeOf(value);
 
-    return '[' + type + ']';
+  return '[' + type + ']';
 };
 
 /**
@@ -2417,17 +2509,17 @@ Inspect.prototype.toString = function(value) {
  * @param  {string}  valueTypes  Types for the  value
  */
 Inspect.prototype.validateInput = function(inputTypes, value, valueTypes) {
-    if (!utils.isAny(this.inspectValue, inputTypes)) {
-        throw new InputError(this, 'Input is invalid! Input must be ' + this.getTypeNames(inputTypes));
-    }
+  if (!utils.isAny(this.inspectValue, inputTypes)) {
+    throw new InputError(this, 'Input is invalid! Input must be ' + this.getTypeNames(inputTypes));
+  }
 
-    if (arguments.length >= 2 && !utils.isAny(value, valueTypes)) {
-        throw new InputError(this, 'First value is invalid! Value must be ' + this.getTypeNames(valueTypes));
-    }
+  if (arguments.length >= 2 && !utils.isAny(value, valueTypes)) {
+    throw new InputError(this, 'First value is invalid! Value must be ' + this.getTypeNames(valueTypes));
+  }
 
-    if (arguments.length >= 4 && !utils.isAny(arguments[3], arguments[4])) {
-        throw new InputError(this, 'Second value is invalid! Value must be ' + this.getTypeNames(valueTypes));
-    }
+  if (arguments.length >= 4 && !utils.isAny(arguments[3], arguments[4])) {
+    throw new InputError(this, 'Second value is invalid! Value must be ' + this.getTypeNames(valueTypes));
+  }
 };
 
 /**
@@ -2441,24 +2533,24 @@ Inspect.prototype.validateInput = function(inputTypes, value, valueTypes) {
  * @returns {string} Returns a readable type names string.
  */
 Inspect.prototype.getTypeNames = function(types) {
-    if (typeof types === 'string') {
-        types = types.split(',').map(function(s) {
-            return s.replace(/^\s+|\s+$/g, '');
-        });
-    }
+  if (typeof types === 'string') {
+    types = types.split(',').map(function(s) {
+      return s.replace(/^\s+|\s+$/g, '');
+    });
+  }
 
-    var str;
-    if (types.length === 1) {
-        str = /^[aeiou]/i.test(types[0]) ? 'an ' : 'a ';
-    }
-    else {
-        str = 'one of `';
-    }
+  var str;
+  if (types.length === 1) {
+    str = /^[aeiou]/i.test(types[0]) ? 'an ' : 'a ';
+  }
+  else {
+    str = 'one of `';
+  }
 
-    str += types.join('` `', types);
-    str += '`';
+  str += types.join('` `', types);
+  str += '`';
 
-    return str;
+  return str;
 };
 
 /**
@@ -2473,25 +2565,25 @@ Inspect.prototype.getTypeNames = function(types) {
  * @returns {object} Returns this value
  */
 Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
-    fn = fn || this.inspectValue;
+  fn = fn || this.inspectValue;
 
-    var type = utils.getTypeOf(fn);
-    if (type !== 'function') {
-        throw new InputError('Can\'t call input as a function. Input value is ' + this.getTypeNames(type));
-    }
+  var type = utils.getTypeOf(fn);
+  if (type !== 'function') {
+    throw new InputError('Can\'t call input as a function. Input value is ' + this.getTypeNames(type));
+  }
 
-    try {
-        this.funcCallResult = fn.apply(ctx, args);
-    }
-    catch (err) {
-        this.funcCallError = err;
-    }
+  try {
+    this.funcCallResult = fn.apply(ctx, args);
+  }
+  catch (err) {
+    this.funcCallError = err;
+  }
 
-    return this;
+  return this;
 };
 
 module.exports = function(value) {
-    return new Inspect(value);
+  return new Inspect(value);
 };
 
 
@@ -2505,25 +2597,25 @@ module.exports = function(value) {
  * @param  {string}  str  Print str to console
  */
 module.exports.print = function(str) {
-    if (str === null) {
-        str = '[Null]';
-    }
+  if (str === null) {
+    str = '[Null]';
+  }
 
-    if (str === undefined) {
-        str = '[Undefined]';
-    }
+  if (str === undefined) {
+    str = '[Undefined]';
+  }
 
-    if (typeof str === 'object') {
-        str = JSON.stringify(str, null, '  ');
-    }
+  if (typeof str === 'object') {
+    str = JSON.stringify(str, null, '  ');
+  }
 
-    str = str.split(/\n/g);
-    var fillLen = String(str.length).length;
+  str = str.split(/\n/g);
+  var fillLen = String(str.length).length;
 
-    str.forEach(function(line, index) {
-        var nr = ('      ' + String(index + 1)).slice(-fillLen);
-        console.log(nr + ' | ' + line); // eslint-disable-line
-    });
+  str.forEach(function(line, index) {
+    var nr = ('      ' + String(index + 1)).slice(-fillLen);
+    console.log(nr + ' | ' + line); // eslint-disable-line
+  });
 };
 
 /**
@@ -2538,7 +2630,7 @@ module.exports.print = function(str) {
  * @param  {expected} [expected] Expected value
  */
 module.exports.fail = function(message, actual, expected) {
-    throw new InspectionError(message, actual, expected);
+  throw new InspectionError(message, actual, expected);
 };
 
 /**
@@ -2550,6 +2642,6 @@ module.exports.fail = function(message, actual, expected) {
  * @param {object} sinon Sinon instance
  */
 module.exports.useSinon = function(sinon) {
-    var sinonInspect = require('./lib/sinonInspect');
-    sinonInspect(Inspect, sinon);
+  var sinonInspect = require('./lib/sinonInspect');
+  sinonInspect(Inspect, sinon);
 };

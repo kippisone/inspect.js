@@ -19,7 +19,7 @@ Missing features
   isPromise().isResolved()
   isPromise().isRejected()
 
-* isPlainObject()
+* isPlainObject() or isJSON()
   inspect({}).isPlainObject();
 
 * isEmptyArray()
@@ -53,3 +53,8 @@ Missing features
 
 doesPass(fn) // Inspects value against a custom function
 doesNotPass(fn)
+
+
+ * isError()
+ * isTypeError()
+ * isCustomError(type)

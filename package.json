@@ -5,7 +5,7 @@
   "main": "inspect.js",
   "browser": "web/inspect.js",
   "scripts": {
-    "test": "mocha tests/*.spec.js"
+    "test": "mocha --reporter lagoon-reporter tests/*.spec.js"
   },
   "author": "Andi Heinkelein <andifeind@noname-media.com>",
   "license": "MIT",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-release": "^0.14.0",
+    "lagoon-reporter": "0.2.1",
     "mocha": "^2.5.3"
   },
   "directories": {
