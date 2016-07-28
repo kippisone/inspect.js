@@ -772,7 +772,7 @@ Inspect.prototype.isNotAny = function(types, message) {
  * Inspects whether input is a date object
  *
  * @method isDate
- * @version 1.1.0
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -793,7 +793,7 @@ Inspect.prototype.isDate = function(message) {
  * Inspects whether input is not a date
  *
  * @method isNotDate
- * @version 1.1.0
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -813,7 +813,7 @@ Inspect.prototype.isNotDate = function(message) {
  * This can be any type of date strings.
  *
  * @method isDateString
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -852,7 +852,7 @@ Inspect.prototype.isDateString = function(message) {
  * Inspects whether input is not a class
  *
  * @method isNotDateString
- * @unimplemented
+ * @version v1.2.0
  *
  * @param  {string} [message] Custom error message
  *
