@@ -772,7 +772,7 @@ Inspect.prototype.isNotAny = function(types, message) {
  * Inspects whether input is a date object
  *
  * @method isDate
- * @unimplemented
+ * @version 1.1.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -780,7 +780,12 @@ Inspect.prototype.isNotAny = function(types, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isDate = function(message) {
-  //TODO implement method
+  this.validateInput('object');
+
+  if (!utils.isDate(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date object, but current type is ' + utils.getTypeOf(this.inspectValue) + '!'));
+  }
+
   return this;
 };
 
@@ -788,7 +793,7 @@ Inspect.prototype.isDate = function(message) {
  * Inspects whether input is not a date
  *
  * @method isNotDate
- * @unimplemented
+ * @version 1.1.0
  *
  * @param  {string} [message] Custom error message
  *
@@ -796,12 +801,16 @@ Inspect.prototype.isDate = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotDate = function(message) {
-  //TODO implement method
+  if (utils.isDate(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should not be a date object, but current type is a date object!'));
+  }
   return this;
 };
 
 /**
  * Inspects whether input is a date string
+ *
+ * This can be any type of date strings.
  *
  * @method isDateString
  * @unimplemented
@@ -812,7 +821,30 @@ Inspect.prototype.isNotDate = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isDateString = function(message) {
-  //TODO implement method
+  this.validateInput('string');
+
+  if (utils.isEmpty(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but input is empty!'));
+  }
+
+  if (utils.isNumberic(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but input is a number string!'));
+  }
+
+  var isDate = false;
+
+  try {
+    let d = Date.parse(this.inspectValue);
+    isDate = !isNaN(d);
+  }
+  catch(err) {
+    // do nothing here
+  }
+
+  if (!isDate) {
+    throw new InspectionError(message || ('Typeof input should be a date string, but current type is ' + this.getTypeOf(this.inputTypes) + '!'));
+  }
+
   return this;
 };
 
@@ -828,7 +860,24 @@ Inspect.prototype.isDateString = function(message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isNotDateString = function(message) {
-  //TODO implement method
+  if (utils.isEmpty(this.inspectValue) || utils.isNumberic(this.inspectValue)) {
+    return this;
+  }
+
+  var isDate = false;
+
+  try {
+    let d = Date.parse(this.inspectValue);
+    isDate = !isNaN(d);
+  }
+  catch(err) {
+    // do nothing here
+  }
+
+  if (isDate) {
+    throw new InspectionError(message || ('Typeof input should not be a date string, but current type is a date string!'));
+  }
+
   return this;
 };
 

@@ -1884,4 +1884,86 @@ describe('Inspect', function() {
     it('Should not end with bar', shouldFail('doesNotEndWith', 'Foo is cool!', 'cool!'));
     it('Should not end with bar', shouldPass('doesNotEndWith', 'Foo is cool!', 'Match is longer then input!'));
   });
+
+  describe('isDate', function() {
+    it('should inspect that "foo" is a date object', shouldFail('isDate', 'foo'));
+    it('should inspect that "" is a date object', shouldFail('isDate', ''));
+    it('should inspect that "123" is a date object', shouldFail('isDate', '123'));
+    it('should inspect that null is not a date object', shouldFail('isDate', null));
+    it('should inspect that undefined is not a date object', shouldFail('isDate', undefined));
+    it('should inspect that true is not a date object', shouldFail('isDate', true));
+    it('should inspect that false is not a date object', shouldFail('isDate', false));
+    it('should inspect that 123 is not a date object', shouldFail('isDate', 123));
+    it('should inspect that 1.003 is not a date object', shouldFail('isDate', 1.003));
+    it('should inspect that NaN is not a date object', shouldFail('isDate', NaN));
+    it('should inspect that [] is not a date object', shouldFail('isDate', []));
+    it('should inspect that {} is not a date object', shouldFail('isDate', {}));
+    it('should inspect that function is not a date object', shouldFail('isDate', function() {}));
+    it('should inspect that generator is not a date object', shouldFail('isDate', function* () { yield;}));
+    it('should inspect that class is not a date object', shouldFail('isDate', class {}));
+    it('should inspect that /.+/ is not a date object', shouldFail('isDate', /.+/));
+    it('should inspect that new Date() is not a date object', shouldPass('isDate', new Date()));
+  });
+
+  describe('isNotDate', function() {
+    it('should inspect that "foo" is a date object', shouldPass('isNotDate', 'foo'));
+    it('should inspect that "" is a date object', shouldPass('isNotDate', ''));
+    it('should inspect that "123" is a date object', shouldPass('isNotDate', '123'));
+    it('should inspect that null is not a date object', shouldPass('isNotDate', null));
+    it('should inspect that undefined is not a date object', shouldPass('isNotDate', undefined));
+    it('should inspect that true is not a date object', shouldPass('isNotDate', true));
+    it('should inspect that false is not a date object', shouldPass('isNotDate', false));
+    it('should inspect that 123 is not a date object', shouldPass('isNotDate', 123));
+    it('should inspect that 1.003 is not a date object', shouldPass('isNotDate', 1.003));
+    it('should inspect that NaN is not a date object', shouldPass('isNotDate', NaN));
+    it('should inspect that [] is not a date object', shouldPass('isNotDate', []));
+    it('should inspect that {} is not a date object', shouldPass('isNotDate', {}));
+    it('should inspect that function is not a date object', shouldPass('isNotDate', function() {}));
+    it('should inspect that generator is not a date object', shouldPass('isNotDate', function* () { yield;}));
+    it('should inspect that class is not a date object', shouldPass('isNotDate', class {}));
+    it('should inspect that /.+/ is not a date object', shouldPass('isNotDate', /.+/));
+    it('should inspect that new Date() is not a date object', shouldFail('isNotDate', new Date()));
+  });
+
+  describe('isDateString', function() {
+    it('should inspect that "foo" is a date string', shouldFail('isDateString', 'foo'));
+    it('should inspect that "" is a date string', shouldFail('isDateString', ''));
+    it('should inspect that "123" is a date string', shouldFail('isDateString', '123'));
+    it('should inspect that null is a date string', shouldFail('isDateString', null));
+    it('should inspect that undefined is a date string', shouldFail('isDateString', undefined));
+    it('should inspect that true is a date string', shouldFail('isDateString', true));
+    it('should inspect that false is a date string', shouldFail('isDateString', false));
+    it('should inspect that 123 is a date string', shouldFail('isDateString', 123));
+    it('should inspect that 1.003 is a date string', shouldFail('isDateString', 1.003));
+    it('should inspect that NaN is a date string', shouldFail('isDateString', NaN));
+    it('should inspect that [] is a date string', shouldFail('isDateString', []));
+    it('should inspect that {} is a date string', shouldFail('isDateString', {}));
+    it('should inspect that function is a date string', shouldFail('isDateString', function() {}));
+    it('should inspect that generator is a date string', shouldFail('isDateString', function* () { yield;}));
+    it('should inspect that class is a date string', shouldFail('isDateString', class {}));
+    it('should inspect that /.+/ is a date string', shouldFail('isDateString', /.+/));
+    it('should inspect that new Date() is a date string', shouldFail('isDateString', new Date()));
+    it('should inspect that Thu, 28 Aug 2016 22:37:13 +0200 is a date string', shouldPass('isDateString', 'Thu, 28 Aug 2016 22:37:13 +0200'));
+  });
+
+  describe('isNotDateString', function() {
+    it('should inspect that "foo" is a date string', shouldPass('isNotDateString', 'foo'));
+    it('should inspect that "" is a date string', shouldPass('isNotDateString', ''));
+    it('should inspect that "123" is a date string', shouldPass('isNotDateString', '123'));
+    it('should inspect that null is not a date string', shouldPass('isNotDateString', null));
+    it('should inspect that undefined is not a date string', shouldPass('isNotDateString', undefined));
+    it('should inspect that true is not a date string', shouldPass('isNotDateString', true));
+    it('should inspect that false is not a date string', shouldPass('isNotDateString', false));
+    it('should inspect that 123 is not a date string', shouldPass('isNotDateString', 123));
+    it('should inspect that 1.003 is not a date string', shouldPass('isNotDateString', 1.003));
+    it('should inspect that NaN is not a date string', shouldPass('isNotDateString', NaN));
+    it('should inspect that [] is not a date string', shouldPass('isNotDateString', []));
+    it('should inspect that {} is not a date string', shouldPass('isNotDateString', {}));
+    it('should inspect that function is not a date string', shouldPass('isNotDateString', function() {}));
+    it('should inspect that generator is not a date string', shouldPass('isNotDateString', function* () { yield;}));
+    it('should inspect that class is not a date string', shouldPass('isNotDateString', class {}));
+    it('should inspect that /.+/ is not a date string', shouldPass('isNotDateString', /.+/));
+    it('should inspect that new Date() is not a date string', shouldPass('isNotDateString', new Date()));
+    it('should inspect that Thu, 28 Aug 2016 22:37:13 +0200 is not a date string', shouldFail('isNotDateString', 'Thu, 28 Aug 2016 22:37:13 +0200'));
+  });
 });
