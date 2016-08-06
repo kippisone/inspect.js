@@ -9,11 +9,13 @@
   },
   "author": "Andi Heinkelein <andifeind@noname-media.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "superstorage": "^0.1.0"
+  },
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-release": "^0.14.0",
-    "lagoon-reporter": "0.2.1",
+    "lagoon-reporter": "0.3.3",
     "mocha": "^2.5.3"
   },
   "directories": {

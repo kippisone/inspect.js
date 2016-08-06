@@ -12,6 +12,12 @@ var InputError = require('./lib/errors').InputError;
 var ComparisonError = require('./lib/errors').ComparisonError;
 var ContainmentError = require('./lib/errors').ContainmentError;
 
+var superstorage = require('superstorage')
+var sharedState = superstorage('inspectjs-shared-state');
+if (!sharedState.has('counter')) {
+  sharedState.set('counter', 0);
+}
+
 /**
  * Inspect class
  * @constructor  Inspect
@@ -2581,6 +2587,22 @@ Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
 
   return this;
 };
+
+var setCounter = function(origFn) {
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    sharedState.inc('counter');
+    return origFn.apply(this, Array.prototype.slice.call(args));
+  };
+};
+for (var fn in Inspect.prototype) {
+  if (Inspect.prototype.hasOwnProperty(fn)) {
+    if (/^(has|does|is)/.test(fn)) {
+      var origFn = Inspect.prototype[fn];
+      Inspect.prototype[fn] = setCounter(origFn);
+    }
+  }
+}
 
 module.exports = function(value) {
   return new Inspect(value);
