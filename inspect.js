@@ -1986,6 +1986,10 @@ Inspect.prototype.isNotWithin = function(min, max, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesThrow = function(exception, message) {
+  if (!this.funcCalled) {
+    this.callInputAsFunction(this.inspectValue);
+  }
+
   if (!this.funcCallError) {
     throw new InspectionError(message || 'Input should throw an error, but error wasn\'t thrown!');
   }
@@ -2018,6 +2022,10 @@ Inspect.prototype.doesThrow = function(exception, message) {
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.doesNotThrow = function(exception, message) {
+  if (!this.funcCalled) {
+    this.callInputAsFunction(this.inspectValue);
+  }
+
   if (!exception && this.funcCallError) {
     throw new InspectionError(message || 'Input should not throw an error, but `' + exception + '` was thrown!');
   }
@@ -2577,6 +2585,12 @@ Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
   if (type !== 'function') {
     throw new InputError('Can\'t call input as a function. Input value is ' + this.getTypeNames(type));
   }
+
+  if (this.funcCalled) {
+    return this;
+  }
+
+  this.funcCalled = true;
 
   try {
     this.funcCallResult = fn.apply(ctx, args);
