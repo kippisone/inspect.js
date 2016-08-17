@@ -2602,6 +2602,86 @@ Inspect.prototype.callInputAsFunction = function(fn, ctx, args) {
   return this;
 };
 
+/**
+ * Inspects whether input has a specific method
+ *
+ * @method hasMethod
+ * @version v1.3.0
+ *
+ * @param {string} name Method name
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(obj).hasMethod('foo');
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.hasMethod = function(name, message) {
+  var type = utils.getTypeOf(this.inspectValue[name]);
+  if (type !== 'function') {
+    throw new InspectionError(message || ('Input should have a method called ' + name + '. But method doesn\'t exists'));
+  }
+
+  return this;
+};
+
+/**
+ * Inspects whether input has not a specific method
+ *
+ * @method hasNotMethod
+ * @version v1.3.0
+ *
+ * @param {string} name Method name
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(obj).hasNotMethod('foo');
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.hasNotMethod = function(name, message) {
+  var type = utils.getTypeOf(this.inspectValue[name]);
+  if (type === 'function') {
+    throw new InspectionError(message || ('Input shouldn\'t have a method called ' + name + '. But method does exists'));
+  }
+
+  return this;
+};
+
+/**
+ * Inspects whether input has not a specific method
+ *
+ * @method isInheritedBy
+ * @version v1.3.0
+ *
+ * @param {string} name Method name
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(obj).isInheritedBy('foo');
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isInheritedBy = function(obj, message) {
+  var _constructor = this.inspectValue;
+  var beer = 'full';
+  while (beer !== 'empty') {
+    if (_constructor.isPrototypeOf(obj)) {
+      return this;
+    }
+
+    _constructor = _constructor.__proto__;
+    if (!_constructor) {
+      break;
+    }
+  }
+
+  throw new InspectionError(message || ('Input should be inherited by ' + (obj.prototype.constructor.name || 'a specific object') + '. But it doesn\'t'));
+};
+
 var setCounter = function(origFn) {
   return function() {
     var args = Array.prototype.slice.call(arguments);
