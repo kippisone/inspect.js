@@ -910,7 +910,7 @@ Inspect.prototype.isEqual = function(value, message) {
   if (this.inspectValue !== value) {
     throw new ComparisonError(this,
       message || (
-        'Input is not equals to `value`'
+        'Input does not equals to expected value'
       ),
       this.inspectValue,
       value
@@ -976,7 +976,7 @@ Inspect.prototype.isEql = function(value, message) {
   if (!utils.compareValues(this.inspectValue, value)) {
     throw new ComparisonError(this,
       message || (
-        'Input is not eql to `value`'
+        'Input does not eql\'s to expected value'
       ),
       this.inspectValue,
       value
@@ -2651,35 +2651,53 @@ Inspect.prototype.hasNotMethod = function(name, message) {
 };
 
 /**
- * Inspects whether input has not a specific method
+ * Inspects whether input has been inherited by a specific object
  *
  * @method isInheritedBy
  * @version v1.3.0
  *
- * @param {string} name Method name
+ * @param {string} obj Inheritance object
  * @param  {string} [message] Custom error message
  *
  * @example {js}
- * inspect(obj).isInheritedBy('foo');
+ * inspect(MyClass).isInheritedBy(OtherClass);
  *
  * @chainable
  * @returns {object} Returns `this` value
  */
 Inspect.prototype.isInheritedBy = function(obj, message) {
-  var _constructor = this.inspectValue;
-  var beer = 'full';
-  while (beer !== 'empty') {
-    if (_constructor.isPrototypeOf(obj)) {
-      return this;
-    }
-
-    _constructor = _constructor.__proto__;
-    if (!_constructor) {
-      break;
+  for (var el in obj.prototype) {
+    if (this.inspectValue.prototype[el] !== obj.prototype[el]) {
+      throw new InspectionError(message || ('Input should be inherited by ' + (obj.prototype.constructor.name || 'a specific object') + '. But it doesn\'t'));
     }
   }
 
-  throw new InspectionError(message || ('Input should be inherited by ' + (obj.prototype.constructor.name || 'a specific object') + '. But it doesn\'t'));
+  return this;
+};
+
+/**
+ * Inspects whether input has not been inherited by a specific object
+ *
+ * @method isNotInheritedBy
+ * @version v1.3.0
+ *
+ * @param {string} obj Inheritance object
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(MyClass).isNotInheritedBy(String);
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotInheritedBy = function(obj, message) {
+  for (var el in obj.prototype) {
+    if (this.inspectValue.prototype[el] === obj.prototype[el]) {
+      throw new InspectionError(message || ('Input should not be inherited by ' + (obj.prototype.constructor.name || 'a specific object') + '. But it is'));
+    }
+  }
+
+  return this;
 };
 
 var setCounter = function(origFn) {
@@ -2701,8 +2719,6 @@ for (var fn in Inspect.prototype) {
 module.exports = function(value) {
   return new Inspect(value);
 };
-
-
 
 /**
  * Prints a string to the console
