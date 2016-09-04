@@ -2777,3 +2777,5 @@ module.exports.useSinon = function(sinon) {
   var sinonInspect = require('./lib/sinonInspect');
   sinonInspect(Inspect, sinon);
 };
+
+module.exports.match = require('./lib/matcher');
