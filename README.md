@@ -7,8 +7,6 @@ Inspect.js itself is fully tested with more than 1600 unit tests.
 
 Try it, codetesting is a pure pleasure.
 
-Instalation
------------
 
 ```shell
 npm install inspect.js --save-dev
