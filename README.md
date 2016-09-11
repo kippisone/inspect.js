@@ -2,11 +2,11 @@ inspect.js
 ==========
 
 Inspect.js is a powerful test framework for Node.js and the web.
-More then 90 test methods help developers to test code easily.
+More then 115 test methods help developers to test code easily.
 Inspect.js itself is fully tested with more than 1600 unit tests.
 
-Instalation
------------
+Installation
+------------
 
 ```shell
 npm install inspect.js --save-dev
