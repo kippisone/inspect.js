@@ -2164,6 +2164,24 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
 };
 
 /**
+ * Returns an array element by a given index
+ *
+ * @method getItem
+ * @version v1.4.0
+ *
+ * @param  {number}  index  Sets the index
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.getItem = function(index) {
+  this.validateInput('array', index, 'number');
+  this.inspectValue = this.inspectValue[index];
+
+  return this;
+};
+
+/**
  * Inspects whether an function call increases a property
  *
  * @method doesIncrease
