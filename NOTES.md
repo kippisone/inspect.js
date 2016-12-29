@@ -58,3 +58,10 @@ doesNotPass(fn)
  * isError()
  * isTypeError()
  * isCustomError(type)
+
+Fancy Node stuff
+
+ * isFile()
+ * isDir()
+ * fileContains()
+ * fileEquals()

@@ -686,7 +686,7 @@ Inspect.prototype.isNotGenerator = function(message) {
 Inspect.prototype.isPromise = function(message) {
   if (!utils.isPromise(this.inspectValue)) {
     throw new InspectionError(
-      message || ('Typeof input should be a promise. But current type is ')
+      message || ('Typeof input should be a promise. But current type is ' + utils.getTypeOf(this.inspectValue))
     );
   }
 
@@ -2159,6 +2159,24 @@ Inspect.prototype.hasNotSubset = function(subset, message) {
   if (utils.hasSubset(this.inspectValue, subset)) {
     throw new InspectionError(message || ('Input should not contain a subset, but it has!'));
   }
+
+  return this;
+};
+
+/**
+ * Returns an array element by a given index
+ *
+ * @method getItem
+ * @version v1.4.0
+ *
+ * @param  {number}  index  Sets the index
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.getItem = function(index) {
+  this.validateInput('array', index, 'number');
+  this.inspectValue = this.inspectValue[index];
 
   return this;
 };

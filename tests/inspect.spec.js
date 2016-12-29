@@ -1966,4 +1966,22 @@ describe('Inspect', function() {
     it('should inspect that new Date() is not a date string', shouldPass('isNotDateString', new Date()));
     it('should inspect that Thu, 28 Aug 2016 22:37:13 +0200 is not a date string', shouldFail('isNotDateString', 'Thu, 28 Aug 2016 22:37:13 +0200'));
   });
+
+  describe('getItem', function() {
+    it('Should return a specific array item', function() {
+      let arr = [1, 2, '3', 4];
+      inspect(arr).getItem(1).isNumber();
+      inspect(arr).getItem(2).isString();
+      inspect(arr).getItem(5).isUndefined();
+
+      inspect(() => {
+        inspect('str').getItem('1');
+      }).onCall().doesThrow(/Input must be an array/);
+
+      inspect(() => {
+        inspect(arr).getItem('1');
+      }).onCall().doesThrow(/must be a number/);
+    });
+  });
+
 });

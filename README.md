@@ -1,16 +1,17 @@
 inspect.js
 ==========
 
-Inspect.js is a powerful test framework for Node.js and the web.
-More then 90 test methods help developers to test code easily.
-Inspect.js itself is fully tested with more than 1600 unit tests.
+[![Build Status](https://travis-ci.org/Andifeind/inspect.js.svg?branch=develop)](https://travis-ci.org/Andifeind/inspect.js)
 
-Instalation
------------
+Inspect.js is a modern test framework for Node.js and the web.
+It comes with more then 120 test methods and helpers.
+Inspect.js itself is fully tested with more than 1600 unit tests.  
+
+Try it, codetesting is a pure pleasure.
+
 
 ```shell
 npm install inspect.js --save-dev
-
 ```
 
 Usage
@@ -28,7 +29,7 @@ Tests if the input is type of string and if string is equal to `Hello inspect.js
 Examples
 --------
 
-Lets say our test object is a class.
+Lets say our test object is a class and we're using [Mocha](https://mochajs.org/) as Test Suite.
 
 ```js
 // lib/mycalss.js
@@ -55,17 +56,35 @@ then a test could be...
 // tests/myclass.spec.js
 
 let inspect = require('inspect.js');
-
 let MyClass = require('../lib/myclass');
-inspect(MyClass).isClass();
 
-let myCalss = new MyClass();
-inspect(myClass.conf).isObject();
-inspect(myClass.logLevel).isString().isEql('warn');
-inspect(myClass.getData).isFunction();
+describe('MyClass', function() {
+  it('first unit test')
+    inspect(MyClass).isClass();
 
-let res = myClass.getData();
-inspect(res).isPromise();
+    let myCalss = new MyClass();
+    inspect(myClass.conf).isObject();
+    inspect(myClass.logLevel).isString().isEql('warn');
+    inspect(myClass.getData).isFunction();
+
+    let res = myClass.getData();
+    inspect(res).isPromise();
+});
+```
+
+Sinon.js support
+----------------
+
+Inspect.js supports the sinon.js framework and has its own test methods.
+If you need sinon, just activate it.
+
+```js
+let inspect = require('inspect.js');
+let sinon = require('sinon');
+inspect.useSinon(sinon);
+
+// check if a stub was called
+inspect(myStub).wasCalledOnce();
 ```
 
 See our [API documentation](https://inspectjs.com/docs.html) for a full list of all inspection methods.
