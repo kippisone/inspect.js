@@ -1,7 +1,7 @@
 inspect.js
 ==========
 
-[![Travis Build Status](https://travis-ci.org/andifeind/inspect.js.svg)](https://travis-ci.org/andifeind/inspect.js)
+[![Build Status](https://travis-ci.org/Andifeind/inspect.js.svg?branch=develop)](https://travis-ci.org/Andifeind/inspect.js)
 
 Inspect.js is a modern test framework for Node.js and the web.
 It comes with more then 120 test methods and helpers.
