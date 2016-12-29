@@ -686,7 +686,7 @@ Inspect.prototype.isNotGenerator = function(message) {
 Inspect.prototype.isPromise = function(message) {
   if (!utils.isPromise(this.inspectValue)) {
     throw new InspectionError(
-      message || ('Typeof input should be a promise. But current type is ')
+      message || ('Typeof input should be a promise. But current type is ' + utils.getTypeOf(this.inspectValue))
     );
   }
 
