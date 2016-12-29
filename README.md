@@ -1,6 +1,8 @@
 inspect.js
 ==========
 
+[![Travis Build Status](https://travis-ci.org/andifeind/inspect.js.svg)](https://travis-ci.org/andifeind/inspect.js)
+
 Inspect.js is a modern test framework for Node.js and the web.
 It comes with more then 120 test methods and helpers.
 Inspect.js itself is fully tested with more than 1600 unit tests.  
@@ -68,6 +70,21 @@ describe('MyClass', function() {
     let res = myClass.getData();
     inspect(res).isPromise();
 });
+```
+
+Sinon.js support
+----------------
+
+Inspect.js supports the sinon.js framework and has its own test methods.
+If you need sinon, just activate it.
+
+```js
+let inspect = require('inspect.js');
+let sinon = require('sinon');
+inspect.useSinon(sinon);
+
+// check if a stub was called
+inspect(myStub).wasCalledOnce();
 ```
 
 See our [API documentation](https://inspectjs.com/docs.html) for a full list of all inspection methods.
