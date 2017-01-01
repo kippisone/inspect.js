@@ -42,8 +42,6 @@ Missing features
   .rtrim()
 * isRealNumber()
 
-* getItem(n) // Gets an array item by index
-
 * findItem() // Finds an array item by a filter
   /foo/ Value must contain foo
   "foo" Value must be foo
