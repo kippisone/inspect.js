@@ -5,7 +5,9 @@ let expections = require('./expections/tests');
 
 function runTest(test) {
   try {
-    let i = inspect(test.input);
+    let value;
+    eval('value = ' + test.input + ';');
+    let i = inspect(value);
     i[test.method].apply(i, test.args);
     return { state: 'pass' };
   } catch (err) {
@@ -16,36 +18,12 @@ function runTest(test) {
   }
 }
 
-function readable(type) {
-  if (type === null) {
-    return '[null]';
-  }
-
-  if (type === undefined) {
-    return '[undefined]';
-  }
-
-  if (Array.isArray()) {
-    return '[array Array]';
-  }
-
-  if (typeof type === 'object') {
-    return JSON.stringify(type);
-  }
-
-  if (typeof type === 'string') {
-    return '"' + type + '"';
-  }
-
-  return String(type);
-}
-
 describe('Expections tests', function() {
   Object.keys(expections).forEach((key) => {
     describe(key, () => {
       expections[key].forEach((test) => {
         test.method = key;
-        it(`with input ${readable(test.input)} should ${test.result}`, () => {
+        it(`with input ${test.input} should ${test.result}`, () => {
           let result = runTest(test);
 
           if (result.state === 'pass' && test.result === 'fail') {
