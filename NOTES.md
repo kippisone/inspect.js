@@ -63,3 +63,10 @@ Fancy Node stuff
  * isDir()
  * fileContains()
  * fileEquals()
+
+Bugs:
+ - isEql() doesn't show missing props
+
+    isEql({
+      foo: undefined
+    });
