@@ -57,6 +57,9 @@ doesNotPass(fn)
  * isTypeError()
  * isCustomError(type)
 
+ * isAsync() // checks for ES7 async await functions
+ * isNotAsync()
+
 Fancy Node stuff
 
  * isFile()
