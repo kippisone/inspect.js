@@ -826,7 +826,7 @@ Inspect.prototype.isNotAny = function(types, message) {
     types = types.split(',').map(String.trim);
   }
 
-  if (!utils.isAny(this.inspectValue, types)) {
+  if (utils.isAny(this.inspectValue, types)) {
     throw new InspectionError(message || ('Typeof input should not be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
   }
 
@@ -897,6 +897,11 @@ Inspect.prototype.isDateString = function(message) {
   }
 
   var isDate = false;
+  var type = utils.getTypeOf(this.inspectValue);
+
+  if (type !== 'string') {
+    throw new InspectionError(message || ('Typeof input should not be a date string, but current type is ' + type + '!'));
+  }
 
   try {
     let d = Date.parse(this.inspectValue);
@@ -930,13 +935,16 @@ Inspect.prototype.isNotDateString = function(message) {
   }
 
   var isDate = false;
+  var type = utils.getTypeOf(this.inspectValue);
 
-  try {
-    let d = Date.parse(this.inspectValue);
-    isDate = !isNaN(d);
-  }
-  catch(err) {
-    // do nothing here
+  if (type === 'string') {
+    try {
+      let d = Date.parse(this.inspectValue);
+      isDate = !isNaN(d);
+    }
+    catch(err) {
+      // do nothing here
+    }
   }
 
   if (isDate) {
