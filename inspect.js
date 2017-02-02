@@ -767,7 +767,7 @@ Inspect.prototype.isNotAny = function(types, message) {
     types = types.split(',').map(String.trim);
   }
 
-  if (!utils.isAny(this.inspectValue, types)) {
+  if (utils.isAny(this.inspectValue, types)) {
     throw new InspectionError(message || ('Typeof input should not be any of `' + types.join(', ') + '`. But it is ' + utils.getTypeOf(this.inspectValue) + '!'));
   }
 
