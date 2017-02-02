@@ -183,12 +183,17 @@ Inspect.prototype.isNotObject = function(message) {
  */
 Inspect.prototype.isJSON = function(message) {
   var type = utils.getTypeOf(this.inspectValue);
-  if (type !== 'object') {
+  if (type !== 'object' && type !== 'array') {
     throw new InspectionError(message || ('Typeof input should be a JSON object. But current type is ' + type));
   }
 
+  if (utils.isDate(this.inspectValue)) {
+    throw new InspectionError(message || ('Typeof input should be a JSON object. But current type is a Date object'));
+  }
+
+
   try {
-    JSON.stringify(this.inspectValue);
+    JSON.parse(JSON.stringify(this.inspectValue));
   } catch (err) {
     throw new InspectionError(message || ('Typeof input should be a JSON object! ' + err.message));
   }
@@ -210,14 +215,82 @@ Inspect.prototype.isJSON = function(message) {
  * @chainable
  * @returns {object} Returns `this` value
  */
-Inspect.prototype.isJSON = function(message) {
+Inspect.prototype.isNotJSON = function(message) {
   var type = utils.getTypeOf(this.inspectValue);
-  if (type === 'object') {
+  var isJSON = false;
+  if ((type === 'object' || type === 'array') && !utils.isDate(this.inspectValue)) {
     try {
       JSON.stringify(this.inspectValue);
-      throw new InspectionError(message || ('Typeof input should not be a JSON object, but it is!'));
+      isJSON = true;
     } catch (err) {
       // do nothing
+    }
+
+    if (isJSON) {
+      throw new InspectionError(message || ('Typeof input should not be a JSON object, but it is!'));
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Inspects whether input is a valid JSON string
+ *
+ * @method isJSONString
+ * @version v1.5.0
+ *
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect('{"foo":"bar"}').isJSONString();
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isJSONString = function(message) {
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'string') {
+    throw new InspectionError(message || ('Typeof input should be a JSON string. But current type is ' + type));
+  }
+
+  try {
+    JSON.parse(this.inspectValue);
+  } catch (err) {
+    throw new InspectionError(message || ('Typeof input should be a JSON string! ' + err.message));
+  }
+
+  return this;
+};
+
+/**
+ * Inspects whether input is not a valid JSON string
+ *
+ * @method isNotJSONString
+ * @version v1.5.0
+ *
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(123).isNotJSONString();
+ * inspect({foo: 'bar'}).isNotJSONString();
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotJSONString = function(message) {
+  var type = utils.getTypeOf(this.inspectValue);
+  var isJSON = false;
+  if (type === 'string') {
+    try {
+      JSON.parse(this.inspectValue);
+      isJSON = true;
+    } catch (err) {
+      // do nothing
+    }
+
+    if (isJSON) {
+      throw new InspectionError(message || ('Typeof input should not be a JSON object, but it is!'));
     }
   }
 
@@ -2515,7 +2588,7 @@ Inspect.prototype.isNotCloseTo = function(num, range, message) {
  *
  * @method onCall
  * @version v1.0.0
- * @param  {function}  fn  Caller function
+ * @param  {function} [fn] Caller function, if not set input value will be called
  *
  * @chainable
  * @returns {object} Returns this value
@@ -2657,6 +2730,7 @@ Inspect.prototype.getTypeNames = function(types) {
  *
  * @method callInputAsFunction
  * @version v1.0.0
+ * @private
  *
  * @param  {object}  thisValue  This value
  *
