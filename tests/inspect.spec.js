@@ -109,7 +109,7 @@ describe('Inspect', function() {
     ];
 
     let getTest = function(type, arr) {
-      return arr.indexOf(type) === -1 ? shouldFail : shouldPass;
+      return arr.indexOf(type) === -1 ? shouldPass : shouldFail;
     };
 
     for (let type of typesConf) {
