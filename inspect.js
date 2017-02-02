@@ -238,7 +238,7 @@ Inspect.prototype.isNotJSON = function(message) {
  * Inspects whether input is a valid JSON string
  *
  * @method isJSONString
- * @version v1.5.0
+ * @version v1.4.1
  *
  * @param  {string} [message] Custom error message
  *
@@ -267,7 +267,7 @@ Inspect.prototype.isJSONString = function(message) {
  * Inspects whether input is not a valid JSON string
  *
  * @method isNotJSONString
- * @version v1.5.0
+ * @version v1.4.1
  *
  * @param  {string} [message] Custom error message
  *
