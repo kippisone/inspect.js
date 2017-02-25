@@ -25,6 +25,9 @@ Missing features
 * isEmptyArray()
   inspect([]).isEmptyArray();
 
+* Values
+  isOneOf(['foo', 'bar', matcher.regexp]);
+
 * Data type converters
   inspect({ foo: 'bar' }).asString().isEql("{"foo":"bar"});
 
