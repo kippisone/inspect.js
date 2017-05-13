@@ -1319,4 +1319,12 @@ describe('Inspect', function() {
     });
   });
 
+  describe('getRange', () => {
+    it('Returns a range array', () => {
+      const range = inspect.getRange(1, 9);
+      inspect(range).isArray();
+      inspect(range).isEql([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    });
+  });
+
 });

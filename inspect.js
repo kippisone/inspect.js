@@ -2937,4 +2937,28 @@ module.exports.useSinon = function(sinon) {
   sinonInspect(Inspect, sinon);
 };
 
+/**
+ * Returns a number range array
+ *
+ * @method getRange
+ * @static
+ * @version v1.5.0
+ *
+ * @param  {number} from Start at
+ * @param  {number} to Stop at
+ *
+ * @return {array} Returns a number array
+ */
+module.exports.getRange = function(from, to) {
+  from = from || 0;
+  to = to || 99;
+  var res = [];
+
+  for (var i = from; i <= to; i++) {
+    res.push(i);
+  }
+
+  return res;
+}
+
 module.exports.match = require('./lib/matcher');
