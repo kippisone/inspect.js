@@ -2962,3 +2962,9 @@ module.exports.getRange = function(from, to) {
 }
 
 module.exports.match = require('./lib/matcher');
+
+// load node.js extras
+if (typeof(window) === 'undefined' && typeof(global) === 'object') { // eslint-disable-line
+  var nodeExtras = require('./lib/nodeExtras');
+  nodeExtras(Inspect)
+}

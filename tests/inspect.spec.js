@@ -1,7 +1,7 @@
 'use strict';
 
 var inspect = require('../inspect');
-var classMethod;
+var classMethod; // eslint-disable-line no-unused-vars
 
 try {
   classMethod = class {
