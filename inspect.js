@@ -44,10 +44,10 @@ var Inspect = function(input) {
 Inspect.prototype.isString = function(message) {
   var type = utils.getTypeOf(this.inspectValue);
   if (type !== 'string') {
-    throw new InspectionError(message || ('Typeof input should be a string. But current type is ' + type));
+    this.fail(message || ('Typeof input should be a string. But current type is ' + type));
   }
 
-  return this;
+  return this.pass();
 };
 
 /**
@@ -2859,6 +2859,48 @@ Inspect.prototype.isNotInheritedBy = function(obj, message) {
   return this;
 };
 
+
+
+/**
+ * Fails a test
+ *
+ * @method fail
+ * @chainable
+ * @version v1.6.0
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ *
+ * @param  {string} message  Error message
+ * @param  {any} [actual]   Current value
+ * @param  {expected} [expected] Expected value
+ */
+Inspect.prototype.fail = function(message, actual, expected) {
+  if (!this.isInverted) {
+    throw new InspectionError(message, actual, expected);
+  }
+
+  return this;
+};
+
+/**
+ * Pass a test if it is not in invertion mode
+ *
+ * @method pass
+ * @chainable
+ * @version v1.6.0
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.pass = function() {
+  if (this.isInverted) {
+    throw new InspectionError('Test should fail, but it passed!');
+  }
+
+  return this;
+};
+
 var setCounter = function(origFn) {
   return function() {
     var args = Array.prototype.slice.call(arguments);
@@ -2922,6 +2964,22 @@ module.exports.print = function(str) {
  */
 module.exports.fail = function(message, actual, expected) {
   throw new InspectionError(message, actual, expected);
+};
+
+/**
+ * Inverts a test
+ *
+ * @method invert
+ * @static
+ * @version v1.6.0
+ *
+ * @param  {any} value Inspection value
+ */
+module.exports.invert = function(value) {
+  var inspect = new Inspect(value);
+  inspect.isInverted = true;
+
+  return inspect;
 };
 
 /**

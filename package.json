@@ -15,8 +15,9 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-release": "^0.14.0",
-    "lagoon-reporter": "0.3.3",
-    "mocha": "^2.5.3"
+    "lagoon-reporter": "^0.3.4",
+    "mocha": "^3.4.2",
+    "superimport": "^1.0.0"
   },
   "directories": {
     "test": "tests"
