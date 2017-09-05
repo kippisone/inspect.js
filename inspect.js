@@ -850,6 +850,52 @@ Inspect.prototype.isNotPromise = function(message) {
 };
 
 /**
+ * Inspects whether input is an async function
+ *
+ * @method isAsync
+ * @version v1.7.0
+ *
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(function).isAsync();
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isAsync = function(message) {
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type !== 'async') {
+    throw new InspectionError(message || ('Typeof input should be an async function. But current type is ' + type));
+  }
+
+  return this;
+};
+
+/**
+ * Inspects whether input is not an async function
+ *
+ * @method isNotAsync
+ * @version v1.7.0
+ *
+ * @param  {string} [message] Custom error message
+ *
+ * @example {js}
+ * inspect(true).isNotAsync();
+ *
+ * @chainable
+ * @returns {object} Returns `this` value
+ */
+Inspect.prototype.isNotAsync = function(message) {
+  var type = utils.getTypeOf(this.inspectValue);
+  if (type === 'async') {
+    throw new InspectionError(message || ('Typeof input should not be an async function. But it is async-function!'));
+  }
+
+  return this;
+};
+
+/**
  * Inspects whether input is one of these `types`.
  *
  * `types` could be `string` `number` `array` `null` `object` `boolean` `true` `false` `function` `promise` `class` or `undefined`

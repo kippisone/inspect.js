@@ -5,9 +5,16 @@ var inspect = require('../inspect');
 var expections = require('./loadExpections');
 
 function runTest(test) {
+  var value;
   try {
-    var value;
     eval('value = ' + test.input + ';');
+  } catch (err) {
+    return {
+      state: 'unsupported',
+      error: err
+    }
+  }
+  try {
     var i = inspect(value);
     i[test.method].apply(i, test.args);
     return { state: 'pass' };
@@ -19,7 +26,7 @@ function runTest(test) {
   }
 }
 
-describe.only('Inspection method', function() {
+describe('Inspection method', function() {
   Object.keys(expections).forEach((key) => {
     describe(key, function() {
       var testArray = expections[key].tests || expections[key];
@@ -28,6 +35,12 @@ describe.only('Inspection method', function() {
         test.title = test.title || 'with input ' + test.input + ' should ' + test.result;
         it(test.title, function testFn() {
           var result = runTest(test);
+
+          if (result.state === 'unsupported') {
+            this.test.title = '(Unsupported by current JS version!) ' + this.test.title;
+            this.skip();
+            return;
+          }
 
           if (result.state === 'pass' && test.result === 'fail') {
             throw new Error('Test failed, but it should pass!');
