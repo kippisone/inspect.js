@@ -451,7 +451,8 @@ Inspect.prototype.isNotBoolean = function(message) {
  */
 Inspect.prototype.isTrue = function(message) {
   if (this.inspectValue !== true) {
-    throw new InspectionError(message || ('Typeof input should be true. But current type is ' + utils.getTypeOf(this.inspectValue)));
+    var type = this.inspectValue === false ? 'false' : utils.getTypeOf(this.inspectValue);
+    throw new InspectionError(message || ('Typeof input should be true. But current type is ' + type));
   }
 
   return this;
@@ -495,7 +496,8 @@ Inspect.prototype.isNotTrue = function(message) {
  */
 Inspect.prototype.isFalse = function(message) {
   if (this.inspectValue !== false) {
-    throw new InspectionError(message || ('Input value should be exacly false. But current type is ' + utils.getTypeOf(this.inspectValue)));
+    var type = this.inspectValue === true ? 'true' : utils.getTypeOf(this.inspectValue);
+    throw new InspectionError(message || ('Input value should be exacly false. But current type is ' + type));
   }
 
   return this;
