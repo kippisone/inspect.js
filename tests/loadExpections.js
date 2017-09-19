@@ -23,7 +23,7 @@ function testFn(name, tests, options) {
   }
 }
 
-superimport.importAll(path.join(__dirname, './methods/')).forEach(function(fn) {
+superimport.importAll(path.join(__dirname, './methods/'), true).forEach(function(fn) {
   try {
     fn(testFn);
   } catch (err) {
