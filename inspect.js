@@ -3070,5 +3070,7 @@ module.exports.match = require('./lib/matcher');
 // load node.js extras
 if (typeof(window) === 'undefined' && typeof(global) === 'object') { // eslint-disable-line
   var nodeExtras = require('./lib/nodeExtras');
+  var nodeStatics = require('./lib/nodeStatics');
   nodeExtras(Inspect)
+  nodeStatics(module.exports)
 }
