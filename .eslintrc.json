@@ -1,0 +1,19 @@
+{
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": false,
+    "es6": false
+  },
+  "rules": {
+    "no-console": 1,
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}]
+  },
+  "globals": {
+    "require": false,
+    "module": false
+  }
+}

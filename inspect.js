@@ -9,8 +9,7 @@
 var utils = require('./lib/inspectUtils');
 var InspectionError = require('./lib/inspectionError');
 var InputError = require('./lib/errors').InputError;
-var ComparisonError = require('./lib/errors').ComparisonError;
-var ContainmentError = require('./lib/errors').ContainmentError;
+var AssertionError = require('./lib/errors').AssertionError;
 
 var superstorage = require('superstorage')
 var sharedState = superstorage('inspectjs-shared-state');
@@ -1096,7 +1095,7 @@ Inspect.prototype.isNotDateString = function(message) {
  */
 Inspect.prototype.isEqual = function(value, message) {
   if (this.inspectValue !== value) {
-    throw new ComparisonError(this,
+    throw new AssertionError(this,
       message || (
         'Input does not equals to expected value'
       ),
@@ -1129,7 +1128,7 @@ Inspect.prototype.isEqual = function(value, message) {
  */
 Inspect.prototype.isNotEqual = function(value, message) {
   if (this.inspectValue === value) {
-    throw new ComparisonError(this,
+    throw new AssertionError(this,
       message || (
         'Input is equal to `value`, but it should not!'
       ),
@@ -1162,7 +1161,7 @@ Inspect.prototype.isNotEqual = function(value, message) {
  */
 Inspect.prototype.isEql = function(value, message) {
   if (!utils.compareValues(this.inspectValue, value)) {
-    throw new ComparisonError(this,
+    throw new AssertionError(this,
       message || (
         'Input does not eql\'s to expected value'
       ),
@@ -1195,7 +1194,7 @@ Inspect.prototype.isEql = function(value, message) {
  */
 Inspect.prototype.isNotEql = function(value, message) {
   if (utils.compareValues(this.inspectValue, value)) {
-    throw new ComparisonError(this,
+    throw new AssertionError(this,
       message || (
         'Input shouldn\'t be equal to value!'
       ),
@@ -1428,7 +1427,7 @@ Inspect.prototype.doesStartWith = function(match, message) {
   this.validateInput('string', match, 'string');
 
   if (this.inspectValue.substr(0, match.length) !== match) {
-    throw new ContainmentError(this,
+    throw new AssertionError(this,
       message || 'Input does not start with match!',
       { pos: 0, len: match.length },
       match
@@ -1482,7 +1481,7 @@ Inspect.prototype.doesEndWith = function(match, message) {
   this.validateInput('string', match, 'string');
 
   if (this.inspectValue.substr(this.inspectValue.length - match.length) !== match) {
-    throw new ContainmentError(this,
+    throw new AssertionError(this,
       message || 'Input does not end with match!',
       { pos: this.inspectValue.length - match.length, len: match.length },
       match
@@ -1797,7 +1796,7 @@ Inspect.prototype.hasNotAnyKeys = function(keys, message) {
 Inspect.prototype.hasProps = function(props, message) {
   this.validateInput('obj-types', props, 'object');
   if (!utils.hasProps(this.inspectValue, props)) {
-    throw new ComparisonError(this, message || ('Property comparison failed!'),
+    throw new AssertionError(this, message || ('Property comparison failed!'),
       this.inspectValue,
       props
     );
@@ -1827,7 +1826,7 @@ Inspect.prototype.hasProps = function(props, message) {
 Inspect.prototype.hasNotProps = function(props, message) {
     this.validateInput('obj-types', props, 'object');
     if (utils.hasProps(this.inspectValue, props)) {
-        throw new ComparisonError(this, message || ('Input has one of these blacklisted properties!'),
+        throw new AssertionError(this, message || ('Input has one of these blacklisted properties!'),
             this.inspectValue,
             props
         );
@@ -1861,7 +1860,7 @@ Inspect.prototype.hasProp = function(key, value, message) {
   }
 
   if (!utils.hasDeepProp(this.inspectValue, key, value)) {
-    throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
+    throw new AssertionError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
   }
 
   return this;
@@ -1889,7 +1888,7 @@ Inspect.prototype.hasNotProp = function(key, value, message) {
   this.validateInput('obj-types', key, 'string', value, 'any');
   var prop = utils.hasDeepKey(this.inspectValue, key);
   if (prop && utils.hasDeepProp(this.inspectValue, key, value)) {
-    throw new ComparisonError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
+    throw new AssertionError(this, message || ('Property comparison failed!'), utils.undotify(this.inspectValue, key), value);
   }
 
   return this;
@@ -1999,7 +1998,7 @@ Inspect.prototype.hasMaxLength = function(len, message) {
 Inspect.prototype.hasValue = function(value, message) {
   this.validateInput('array', value, 'any');
   if (!utils.hasValues(this.inspectValue, [value])) {
-    throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
+    throw new AssertionError(this, message || 'Input has not all of these value!', this.inspectValue, value);
   }
 
   return this;
@@ -2020,7 +2019,7 @@ Inspect.prototype.hasValue = function(value, message) {
 Inspect.prototype.hasNotValue = function(value, message) {
   this.validateInput('array', value, 'any');
   if (utils.hasValues(this.inspectValue, [value])) {
-    throw new ComparisonError(this, message || 'Input has not all of these value!', this.inspectValue, value);
+    throw new AssertionError(this, message || 'Input has not all of these value!', this.inspectValue, value);
   }
 
   return this;
@@ -2041,7 +2040,7 @@ Inspect.prototype.hasNotValue = function(value, message) {
 Inspect.prototype.hasValues = function(values, message) {
   this.validateInput('array', values, 'array');
   if (!utils.hasValues(this.inspectValue, values)) {
-    throw new ComparisonError(this, message || 'Input has not all of these values!', this.inspectValue, values);
+    throw new AssertionError(this, message || 'Input has not all of these values!', this.inspectValue, values);
   }
 
   return this;
@@ -2062,7 +2061,7 @@ Inspect.prototype.hasValues = function(values, message) {
 Inspect.prototype.hasNotValues = function(values, message) {
   this.validateInput('array', values, 'array');
   if (utils.hasValues(this.inspectValue, values)) {
-    throw new ComparisonError(this, message || 'Input has any of these values, but it shoud have none of them!', this.inspectValue, values);
+    throw new AssertionError(this, message || 'Input has any of these values, but it shoud have none of them!', this.inspectValue, values);
   }
 
   return this;
@@ -2083,7 +2082,7 @@ Inspect.prototype.hasNotValues = function(values, message) {
 Inspect.prototype.hasAnyValues = function(values, message) {
   this.validateInput('array', values, 'array');
   if (!utils.hasAnyValues(this.inspectValue, values)) {
-    throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
+    throw new AssertionError(this, message || 'Input has not any of these values!', this.inspectValue, values);
   }
 
   return this;
@@ -2103,7 +2102,7 @@ Inspect.prototype.hasAnyValues = function(values, message) {
 Inspect.prototype.hasNotAnyValues = function(values, message) {
   this.validateInput('array', values, 'array');
   if (utils.hasAnyValues(this.inspectValue, values)) {
-    throw new ComparisonError(this, message || 'Input has not any of these values!', this.inspectValue, values);
+    throw new AssertionError(this, message || 'Input has not any of these values!', this.inspectValue, values);
   }
 
   return this;
@@ -2407,11 +2406,11 @@ Inspect.prototype.doesIncrease = function(prop, num, message) {
 
   if (num) {
     if ((a + num) !== b) {
-      throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a + num);
+      throw new AssertionError(this, message || ('Input should be increased by ' + num + '!'), b, a + num);
     }
   }
   else if (a >= b) {
-    throw new ComparisonError(this, message || ('Input should be increased!'), b, a + 1);
+    throw new AssertionError(this, message || ('Input should be increased!'), b, a + 1);
   }
 
   return this;
@@ -2455,11 +2454,11 @@ Inspect.prototype.doesDecrease = function(prop, num, message) {
 
   if (num) {
     if (a - num !== b) {
-      throw new ComparisonError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
+      throw new AssertionError(this, message || ('Input should be increased by ' + num + '!'), b, a - num);
     }
   }
   else if (a <= b) {
-    throw new ComparisonError(this, message || ('Input should be increased!'), b, a - 1);
+    throw new AssertionError(this, message || ('Input should be increased!'), b, a - 1);
   }
 
   return this;
@@ -2496,7 +2495,7 @@ Inspect.prototype.doesChange = function(prop, message) {
   var b = utils.undotify(this.inspectValue, prop);
 
   if (utils.compareValues(a, b)) {
-    throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'));
+    throw new AssertionError(this, message || ('Property `' + prop + '` should be changed!'));
   }
 
   return this;
@@ -2533,7 +2532,7 @@ Inspect.prototype.doesNotChange = function(prop, message) {
   var b = utils.undotify(this.inspectValue, prop);
 
   if (!utils.compareValues(a, b)) {
-    throw new ComparisonError(this, message || ('Property `' + prop + '` should be changed!'), b, a);
+    throw new AssertionError(this, message || ('Property `' + prop + '` should be changed!'), b, a);
   }
 
   return this;
@@ -2571,7 +2570,7 @@ Inspect.prototype.doesNotIncrease = function(prop, message) {
   var b = utils.undotify(this.inspectValue, prop);
 
   if (!utils.compareValues(a, b)) {
-    throw new ComparisonError(this, message || ('Property `' + prop + '` should not be changed!'), b, a);
+    throw new AssertionError(this, message || ('Property `' + prop + '` should not be changed!'), b, a);
   }
 
   return this;
