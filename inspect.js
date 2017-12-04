@@ -7,8 +7,8 @@
 'use strict';
 
 var utils = require('./lib/inspectUtils');
-var InspectionError = require('./lib/inspectionError');
-var InputError = require('./lib/errors').InputError;
+var InspectionError = require('./lib/errors/InspectionError');
+var InputError = require('./lib/errors/InputError');
 
 var superstorage = require('superstorage')
 var sharedState = superstorage('inspectjs-shared-state');
