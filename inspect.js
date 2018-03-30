@@ -9,6 +9,7 @@
 var utils = require('./lib/inspectUtils');
 var InspectionError = require('./lib/errors/InspectionError');
 var InputError = require('./lib/errors/InputError');
+var TestRunner = require('./lib/TestRunner');
 
 var superstorage = require('superstorage')
 var sharedState = superstorage('inspectjs-shared-state');
@@ -3074,3 +3075,14 @@ if (typeof(window) === 'undefined' && typeof(global) === 'object') { // eslint-d
   nodeExtras(Inspect)
   nodeStatics(module.exports)
 }
+
+// load test runner
+const testRunner = new TestRunner()
+
+module.exports.test = function(title, fn) {
+  return testRunner.test(title, fn);
+};
+
+module.exports.run = function() {
+  return testRunner.run();
+};
